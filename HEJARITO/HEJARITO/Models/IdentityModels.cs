@@ -16,6 +16,7 @@ namespace HEJARITO.Models
         [StringLength(100, ErrorMessage = "Förnamn måste bestå av minst {2} tecken.", MinimumLength = 2)]
         [Display(Name = "Förnamn")]
         public string FirstName { get; set; }
+
         [Required]
         [DataType(DataType.Text)]
         [StringLength(100, ErrorMessage = "Efternamn måste bestå av minst {2} tecken.", MinimumLength = 2)]
@@ -46,5 +47,13 @@ namespace HEJARITO.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<HEJARITO.Models.ActivityType> ActivityTypes { get; set; }
+
+        public System.Data.Entity.DbSet<HEJARITO.Models.Activity> Activities { get; set; }
+
+        public System.Data.Entity.DbSet<HEJARITO.Models.Module> Modules { get; set; }
+
+        public System.Data.Entity.DbSet<HEJARITO.Models.Course> Courses { get; set; }
     }
 }

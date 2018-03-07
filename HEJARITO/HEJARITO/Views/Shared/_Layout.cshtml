@@ -24,16 +24,16 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Courses", "Index", "Courses")</li>
+                    <li>@Html.ActionLink("Modules", "Index", "Modules")</li>
+                    <li>@Html.ActionLink("Activities", "Index", "Activities")</li>
+                    <li>@Html.ActionLink("ActivityTypes", "Index", "ActivityTypes")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        Hej, Janne är på G!
-        Hej Och Hå, Rickard är redo!
-        @*Henrik Gahn*@ 
-        @* Tomas Mayer *@
+    <div class="container body-content"
         @RenderBody()
         <hr />
         <footer>
