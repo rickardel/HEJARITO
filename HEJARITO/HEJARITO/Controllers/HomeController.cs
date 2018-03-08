@@ -26,5 +26,32 @@ namespace HEJARITO.Controllers
 
             return View();
         }
+
+        public ActionResult SelectStartView()
+        {
+            if (User.IsInRole("Teacher"))
+            {
+                return RedirectToAction("Teacher");
+            }
+            if (User.IsInRole("Student"))
+            {
+                return RedirectToAction("Student");
+            }
+            return View();
+        }
+
+        public ActionResult Teacher()
+        {
+            ViewBag.Message = "Teacher's start page.";
+
+            return View();
+        }
+
+        public ActionResult Student()
+        {
+            ViewBag.Message = "Student's start page.";
+
+            return View();
+        }
     }
 }
