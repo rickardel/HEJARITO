@@ -48,3 +48,84 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+
+<div>
+    <h4>Modules</h4>
+    <ul class="alist" id="CourseModuleList">
+        @foreach (var module in Model.Modules)
+        {
+            <li>
+                @module.StartDate.ToString("dd/MM hh:mm") >> @module.EndDate.ToString("dd/MM")
+                <strong>
+                    @module.Name
+                </strong>
+            </li>
+        }
+    </ul>
+    <input type="text" id="NewModuleName" value="Ny Module" />
+    <input type="datetime-local" id="NewModuleStartDate" value="2018-06-06 08:30:00" />
+    <input type="datetime-local" id="NewModuleEndDate" value="2018-06-06 17:00:00" />
+    <button id="addCourseModuleBtn" class="btn btn-default btn-xs">Lägg till Modul</button>
+</div>
+
+<div>
+    <h4>Students</h4>
+    <ul class="slist" id="CourseStudentList">
+        @foreach (var student in Model.ApplicationUsers)
+        {
+            <li>
+                <strong>
+                    @student.FirstName @student.LastName
+                </strong>
+                @student.Email
+                ( @student.PhoneNumber )
+            </li>
+        }
+    </ul>
+    <input type="text" id="NewStudentFirstName" value="Förnamn" />
+    <input type="text" id="NewStudentLastName" value="Efternamn" />
+    <input type="text" id="NewStudentEmail" value="Epostadress" />
+    <input type="text" id="NewStudentPhoneNumber" value="Telefonnummer" />
+    <input type="text" id="NewStudentPassword" value="Lösenord" />
+
+    <button id="addCourseStudentBtn" class="btn btn-default btn-xs">Lägg till Student</button>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+
+        $(document).ready(function () {
+            $("#addCourseModuleBtn").on('click', function () {
+                $.post('/api/CourseAPI', {
+                    CourseId: @Model.Id, StartDate: $("#NewModuleStartDate").val(), EndDate: $("#NewModuleEndDate").val(), Name: $("#NewModuleName").val()
+                })
+                    .done(function (m) {
+                        let tmpStartDate = m.StartDate.substring(8, 10) + "-" + m.StartDate.substring(5, 7) + " " + m.StartDate.substring(11, 13) + ":" + m.StartDate.substring(14, 16);
+                        let tmpEndDate = m.EndDate.substring(8, 10) + "-" + m.EndDate.substring(5, 7);
+                        $("<li>" + tmpStartDate + " >> " + tmpEndDate + "<strong> " + m.Name + "</strong></li>").appendTo(".alist");
+                    })
+                    .fail(function () {
+                        alert("Något gick fel vid tillägg av modul");
+                    });
+            });
+            $("#addCourseStudentBtn").on('click', function () {
+                $.post('/api/CourseStudentAPI', {
+                    CourseId: @Model.Id, FirstName: $("#NewStudentFirstName").val(), LastName: $("#NewStudentLastName").val(), Email: $("#NewStudentEmail").val(), PhoneNumber: $("#NewStudentPhoneNumber").val(), Password: $("#NewStudentPassword").val()
+                })
+                    .done(function (s) {
+                        $("<li><strong>"+s.FirstName+" "+s.LastName+"</strong> "+s.Email+"( "+s.PhoneNumber+" )</li>").appendTo(".slist");
+
+                    })
+                    .fail(function () {
+                        alert("Något gick fel vid tillägg av student");
+                    });
+            });
+        });
+
+
+    </script>
+}

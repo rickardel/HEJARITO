@@ -38,7 +38,12 @@ namespace HEJARITO.Controllers
         // GET: Courses/Create
         public ActionResult Create()
         {
-            return View();
+            Course tmpCourse = new Course()
+            {
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now
+            };
+            return View(tmpCourse);
         }
 
         // POST: Courses/Create
@@ -46,7 +51,7 @@ namespace HEJARITO.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,StartDate")] Course course)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,StartDate,EndDate")] Course course)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +83,7 @@ namespace HEJARITO.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,StartDate")] Course course)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,StartDate,EndDate")] Course course)
         {
             if (ModelState.IsValid)
             {
