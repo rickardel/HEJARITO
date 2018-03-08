@@ -9,7 +9,7 @@ namespace HEJARITO.Models
     public class Course
     {
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "En kurs måste ha ett namn")]
         [DataType(DataType.Text)]
         [StringLength(100, ErrorMessage = "Namn måste bestå av minst {2} tecken.", MinimumLength = 2)]
         [Display(Name = "Kursnamn")]
@@ -19,10 +19,15 @@ namespace HEJARITO.Models
         [Display(Name = "Beskrivning")]
         public string Description { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "En kurs måste ha ett startdatum")]
         [DataType(DataType.DateTime)]
         [Display(Name = "Startdatum")]
         public DateTime StartDate { get; set; }
+
+        [Required(ErrorMessage = "En kurs måste ha ett slutdatum")]
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Slutdatum")]
+        public DateTime EndDate { get; set; }
 
         public virtual ICollection<ApplicationUser> ApplicationUsers { get; set; }
 

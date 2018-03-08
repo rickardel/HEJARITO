@@ -199,17 +199,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803071101026_init and Entities and 1st seed.cs" />
-    <Compile Include="Migrations\201803071101026_init and Entities and 1st seed.Designer.cs">
-      <DependentUpon>201803071101026_init and Entities and 1st seed.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803071434210_Added Validation Attributes.cs" />
-    <Compile Include="Migrations\201803071434210_Added Validation Attributes.Designer.cs">
-      <DependentUpon>201803071434210_Added Validation Attributes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803071454322_validation attribute on activity Type.cs" />
-    <Compile Include="Migrations\201803071454322_validation attribute on activity Type.Designer.cs">
-      <DependentUpon>201803071454322_validation attribute on activity Type.cs</DependentUpon>
+    <Compile Include="Migrations\201803080901093_initial ERD &amp; Seed.cs" />
+    <Compile Include="Migrations\201803080901093_initial ERD &amp; Seed.Designer.cs">
+      <DependentUpon>201803080901093_initial ERD &amp; Seed.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -318,14 +310,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803071101026_init and Entities and 1st seed.resx">
-      <DependentUpon>201803071101026_init and Entities and 1st seed.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803071434210_Added Validation Attributes.resx">
-      <DependentUpon>201803071434210_Added Validation Attributes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803071454322_validation attribute on activity Type.resx">
-      <DependentUpon>201803071454322_validation attribute on activity Type.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803080901093_initial ERD &amp; Seed.resx">
+      <DependentUpon>201803080901093_initial ERD &amp; Seed.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

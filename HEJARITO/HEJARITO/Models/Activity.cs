@@ -10,7 +10,7 @@ namespace HEJARITO.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "En aktivitet måste ha ett namn")]
         [DataType(DataType.Text)]
         [StringLength(100, ErrorMessage = "Namn måste bestå av minst {2} tecken.", MinimumLength = 2)]
         [Display(Name = "Aktivitetsnamn")]
@@ -24,7 +24,7 @@ namespace HEJARITO.Models
         [Display(Name = "Beskrivning")]
         public string Description { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "En aktivitet måste ha ett startdatum")]
         [DataType(DataType.DateTime)]
         [Display(Name = "Startdatum")]
         public DateTime StartDate { get; set; }
@@ -33,7 +33,7 @@ namespace HEJARITO.Models
         [Display(Name = "Deadlinedatum")]
         public DateTime DeadlineDate { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "En aktivitet måste ha ett slutdatum")]
         [DataType(DataType.DateTime)]
         [Display(Name = "Slutdatum")]
         public DateTime EndDate { get; set; }
