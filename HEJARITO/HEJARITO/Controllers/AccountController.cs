@@ -449,7 +449,7 @@ namespace HEJARITO.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("SelectStartView", "Home");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
