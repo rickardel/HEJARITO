@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HEJARITO.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,9 @@ namespace HEJARITO.Controllers
 {
     public class HomeController : Controller
     {
+        //TM 2018-03-09 15:09 Genom raden nedan får vi tillgång till vår databas
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         public ActionResult Index()
         {
             return View();
@@ -48,10 +52,19 @@ namespace HEJARITO.Controllers
         }
 
         public ActionResult Student()
+        //TM 2018-03-09 Sidan dit en nyss inloggad elev hamnar
         {
             ViewBag.Message = "Student's start page.";
 
-            return View();
+            var studentViewModel = new StudentViewModel();
+
+            studentViewModel.Courses = db.Courses.ToList();
+
+            studentViewModel.Modules = db.Modules.ToList();
+
+            studentViewModel.Activities = db.Activities.ToList();
+
+            return View(studentViewModel);
         }
     }
 }

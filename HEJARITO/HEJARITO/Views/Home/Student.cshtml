@@ -1,7 +1,16 @@
-﻿
+﻿@model HEJARITO.Models.StudentViewModel
 @{
     ViewBag.Title = "Student";
 }
 
-<h2>Student</h2>
+<h3>Elev</h3>
+
+<h2>Kurser</h2>
+
+@foreach (var item in Model.Courses)
+{
+    @Html.DisplayFor(modelItem => item.Name)
+    @Html.DisplayFor(modelItem => item.StartDate)
+}
+
 
