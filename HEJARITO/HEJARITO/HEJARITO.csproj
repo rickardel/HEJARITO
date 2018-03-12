@@ -251,10 +251,7 @@
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Content\dataTables.bootstrap.min.css" />
-    <Content Include="Scripts\contactstable.js" />
-    <Content Include="Scripts\coursetable.js" />
     <Content Include="Scripts\dataTables.bootstrap.min.js" />
-    <Content Include="Scripts\eventstable.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-3.2.1.slim.min" />
@@ -269,6 +266,7 @@
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\teachertables.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -9,7 +9,10 @@ namespace HEJARITO
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        // JG 2018-03-12: Scripts for rendering the Teacher tables.
+                        "~/Scripts/jquery.dataTables.min.js",
+                        "~/Scripts/dataTables.bootstrap.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -24,9 +27,11 @@ namespace HEJARITO
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/bootstrap.css",
+                      "~/Content/site.css",
+                      // JG 2018-03-12: Styling for rendering the Teacher tables.
                       "~/Content/bootstrap.min.css",
-                      "~/Content/site.css"
-                      ));
+                      "~/Content/dataTables.bootstrap.min.css"));
         }
     }
 }
