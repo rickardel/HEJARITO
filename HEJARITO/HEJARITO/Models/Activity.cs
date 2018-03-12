@@ -17,6 +17,7 @@ namespace HEJARITO.Models
         public string Name { get; set; }
 
         [Required]
+        [Display(Name = "Aktivitetstyp")]
         public int ActivityTypeId { get; set; }
         public virtual ActivityType ActivityType { get; set; }
 

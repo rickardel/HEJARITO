@@ -46,27 +46,55 @@ namespace HEJARITO.Controllers
             return View();
         }
 
+        //JG 2018-03-12 Sidan som en nyss inloggad lärare hamnar på
         public ActionResult Teacher()
         {
             ViewBag.Message = "Teacher's start page.";
 
             TeacherViewModel teacherViewModel = new TeacherViewModel();
 
-            //var allCourses = db.Courses.ToList();
-            //var allActivities = new List<Activity>();
-            //foreach (var course in allCourses)
-            //{
-            //    var courseModules = course.Modules.ToList();
-            //    foreach (var module in courseModules)
-            //    {
-            //        var moduleActivities = module.Activities.ToList();
-            //        foreach(var activity in moduleActivities)
-            //        {
-            //            allActivities.Add(activity);
-            //        }
-            //    }
-            //}
-            teacherViewModel.Activities = db.Activities.ToList();
+            DateTime today = DateTime.Now;
+
+            int start = 0;
+            int stop = 0;
+            if (today.DayOfWeek == DayOfWeek.Monday)
+            {
+                start = 0; stop = 5;
+            }
+            if (today.DayOfWeek == DayOfWeek.Tuesday)
+            {
+                start = -1; stop = 4;
+            }
+            if (today.DayOfWeek == DayOfWeek.Wednesday)
+            {
+                start = -2; stop = 3;
+            }
+            if (today.DayOfWeek == DayOfWeek.Thursday)
+            {
+                start = -3; stop = 2;
+            }
+            if (today.DayOfWeek == DayOfWeek.Friday)
+            {
+                start = -4; stop = 1;
+            }
+            if (today.DayOfWeek == DayOfWeek.Saturday)
+            {
+                start = -5; stop = 0;
+            }
+            if (today.DayOfWeek == DayOfWeek.Sunday)
+            {
+                start = -6; stop = -1;
+            }
+
+            TimeSpan startOffset = new System.TimeSpan(start, 0, 0, 0);
+            TimeSpan stopOffset = new System.TimeSpan(stop, 0, 0, 0);
+            DateTime startDate = DateTime.Now.Add(startOffset).Date;
+            DateTime stopDate = DateTime.Now.Add(stopOffset).Date;
+
+            // To do: Discuss valid dates!
+            teacherViewModel.Activities = db.Activities.Where(d => d.StartDate >= startDate && d.StartDate <= stopDate).ToList();
+
+            //teacherViewModel.Activities = db.Activities.ToList();
 
             teacherViewModel.Courses = db.Courses.ToList();
 
