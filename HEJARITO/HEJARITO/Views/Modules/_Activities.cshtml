@@ -15,13 +15,13 @@
 
 @foreach (var item in Model) {
     <tr>
-        @* //TM 2018-03-09 12:46 Endast datumdelen av DateTime-värdena ska visas *@
+        @* //TM 2018-03-09 12:46 Endast datumdelen av DateTime-värdena borde visas - kvarstår!!! *@
         <td>@Html.DisplayFor(modelItem => item.Name)</td>
         <td>@Html.DisplayFor(modelItem => item.ActivityType.Name)</td>
-        <td>@Html.DisplayFor(modelItem => item.StartDate.Date)</td>
-        <td>@Html.DisplayFor(modelItem => item.EndDate.Date)</td>
+        <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+        <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
         <td>@Html.DisplayFor(modelItem => item.Description)</td>
-        <td>@Html.DisplayFor(modelItem => item.DeadlineDate.Value.Date)</td>
+        <td>@Html.DisplayFor(modelItem => item.DeadlineDate)</td>
     </tr>
 }
 
