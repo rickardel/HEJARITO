@@ -31,7 +31,9 @@ namespace HEJARITO.Models
 
         [DataType(DataType.DateTime)]
         [Display(Name = "Deadlinedatum")]
-        public DateTime DeadlineDate { get; set; }
+        
+        //TM 2018-03-09 10:04 Nullable DateTime!
+        public Nullable<DateTime> DeadlineDate { get; set; }
 
         [Required(ErrorMessage = "En aktivitet måste ha ett slutdatum")]
         [DataType(DataType.DateTime)]
