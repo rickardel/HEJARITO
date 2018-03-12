@@ -203,6 +203,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\ActivityTypesController.cs" />
+    <Compile Include="Controllers\CourseActivityAPIController.cs" />
     <Compile Include="Controllers\CourseAPIController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\CourseStudentAPIController.cs" />

@@ -56,10 +56,20 @@
         @foreach (var module in Model.Modules)
         {
             <li>
-                @module.StartDate.ToString("dd/MM hh:mm") >> @module.EndDate.ToString("dd/MM")
                 <strong>
+                    @module.StartDate.ToString("dd/MM") >> @module.EndDate.ToString("dd/MM")
                     @module.Name
                 </strong>
+                <ul class="alist@{@module.Id} ">
+                    @foreach (var activity in module.Activities)
+                    {
+                        <li>
+                            @activity.StartDate.ToString("dd/MM") >> @activity.EndDate.ToString("dd/MM")
+                            @activity.Name
+                        </li>
+                    }
+                </ul>
+
             </li>
         }
     </ul>
@@ -68,6 +78,20 @@
     <input type="datetime-local" id="NewModuleEndDate" value="2018-06-06 17:00:00" />
     <button id="addCourseModuleBtn" class="btn btn-default btn-xs">Lägg till Modul</button>
 </div>
+
+
+<div>
+    <h4>Lägg till @Html.DropDownList("NewActivityActivityType", null, htmlAttributes: new { @class = "form-control" }) Till @Html.DropDownList("NewActivityModule", null, htmlAttributes: new { @class = "form-control" })</h4>
+                                           
+    <input type="text" id="NewActivityName" value="Namn" />
+    <input type="text" id="NewActivityDescription" value="Beskrivning" />
+    <input type="datetime-local" id="NewActivityStartDate" value="Startdatum" />
+    <input type="datetime-local" id="NewActivityDeadlineDate" value="Startdatum" />
+    <input type="datetime-local" id="NewActivityEndDate" value="Slutdatum" />
+    <button id="addModuleActivityBtn" class="btn btn-default btn-xs">Lägg till Aktivitet</button>
+</div>
+
+
 
 <div>
     <h4>Students</h4>
@@ -104,12 +128,29 @@
                     CourseId: @Model.Id, StartDate: $("#NewModuleStartDate").val(), EndDate: $("#NewModuleEndDate").val(), Name: $("#NewModuleName").val()
                 })
                     .done(function (m) {
-                        let tmpStartDate = m.StartDate.substring(8, 10) + "-" + m.StartDate.substring(5, 7) + " " + m.StartDate.substring(11, 13) + ":" + m.StartDate.substring(14, 16);
+                        let tmpStartDate = m.StartDate.substring(8, 10) + "-" + m.StartDate.substring(5, 7);
                         let tmpEndDate = m.EndDate.substring(8, 10) + "-" + m.EndDate.substring(5, 7);
-                        $("<li>" + tmpStartDate + " >> " + tmpEndDate + "<strong> " + m.Name + "</strong></li>").appendTo(".alist");
+                        let tmpId = m.Id;
+                        let tmpName = m.Name;
+                        $("<li><strong>" + tmpStartDate + " >> " + tmpEndDate + " " + tmpName + "</strong><ul class=alist" + tmpId + "></ul></li>").appendTo(".alist");
+                        $('#NewActivityModule').append($('<option>', {value: tmpId,text: tmpName}));   
                     })
                     .fail(function () {
                         alert("Något gick fel vid tillägg av modul");
+                    });
+            });
+            $("#addModuleActivityBtn").on('click', function () {
+                $.post('/api/CourseActivityAPI', {
+                    CourseId: @Model.Id, Name: $("#NewActivityName").val(), Description: $("#NewActivityDescription").val(), ActivityTypeId: $("#NewActivityActivityType").val(), ModuleId: $("#NewActivityModule").val() , EndDate: $("#NewActivityEndDate").val(), DeadlineDate: $("#NewActivityDeadlineDate").val(), StartDate: $("#NewActivityStartDate").val()
+                })
+                    .done(function (a) {
+                        let tmpStartDate = a.StartDate.substring(8, 10) + "-" + a.StartDate.substring(5, 7);
+                        let tmpEndDate = a.EndDate.substring(8, 10) + "-" + a.EndDate.substring(5, 7);
+                        let targetElement = ".alist" + a.ModuleId;
+                        $("<li>" + tmpStartDate + " >> " + tmpEndDate + " " + a.Name + "</li>").appendTo(targetElement);
+                    })
+                    .fail(function () {
+                        alert("Något gick fel vid tillägg av activitet");
                     });
             });
             $("#addCourseStudentBtn").on('click', function () {

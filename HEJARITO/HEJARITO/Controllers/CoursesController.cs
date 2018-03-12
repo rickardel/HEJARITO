@@ -28,6 +28,8 @@ namespace HEJARITO.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Course course = db.Courses.Find(id);
+            ViewBag.newActivityActivityType = new SelectList(db.ActivityTypes, "Id", "Name");
+            ViewBag.newActivityModule = new SelectList(course.Modules, "Id", "Name");
             if (course == null)
             {
                 return HttpNotFound();
