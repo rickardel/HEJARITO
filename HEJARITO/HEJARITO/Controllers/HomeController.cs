@@ -46,6 +46,7 @@ namespace HEJARITO.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:38
         public ActionResult Teacher()
         {
             ViewBag.Message = "Teacher's start page.";
@@ -75,6 +76,7 @@ namespace HEJARITO.Controllers
             return View(teacherViewModel);
         }
 
+        [Authorize(Roles = "Student")] //TM 2018-03-12 13:38
         public ActionResult Student()
         //TM 2018-03-09 23:24 Sidan som en nyss inloggad elev hamnar i
         {

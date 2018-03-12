@@ -10,6 +10,7 @@ using HEJARITO.Models;
 
 namespace HEJARITO.Controllers
 {
+    [Authorize] //TM 2018-03-12 13:33
     public class ActivitiesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -37,6 +38,7 @@ namespace HEJARITO.Controllers
         }
 
         // GET: Activities/Create
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:34
         public ActionResult Create()
         {
             ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "Id", "Name");
@@ -47,6 +49,7 @@ namespace HEJARITO.Controllers
         // POST: Activities/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:34
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,ActivityTypeId,Description,StartDate,DeadlineDate,EndDate,ModuleId")] Activity activity)
@@ -64,6 +67,7 @@ namespace HEJARITO.Controllers
         }
 
         // GET: Activities/Edit/5
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:37
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -83,6 +87,7 @@ namespace HEJARITO.Controllers
         // POST: Activities/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:37
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,ActivityTypeId,Description,StartDate,DeadlineDate,EndDate,ModuleId")] Activity activity)
@@ -99,6 +104,7 @@ namespace HEJARITO.Controllers
         }
 
         // GET: Activities/Delete/5
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:37
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -114,6 +120,7 @@ namespace HEJARITO.Controllers
         }
 
         // POST: Activities/Delete/5
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:37
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
