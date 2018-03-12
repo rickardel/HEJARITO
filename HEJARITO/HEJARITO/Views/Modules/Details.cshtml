@@ -4,35 +4,41 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+@if (User.Identity.IsAuthenticated) //TM 2018-03-12 15:44
+{
+    <h2>Details</h2>
 
-<div>
-    <h4>Module</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>@Html.DisplayNameFor(model => model.Course.Name)</dt>
-        <dd>@Html.DisplayFor(model => model.Course.Name)</dd>
+    <div>
+        <h4>Module</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>@Html.DisplayNameFor(model => model.Course.Name)</dt>
+            <dd>@Html.DisplayFor(model => model.Course.Name)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.Name)</dt>
-        <dd>@Html.DisplayFor(model => model.Name)</dd>
+            <dt>@Html.DisplayNameFor(model => model.Name)</dt>
+            <dd>@Html.DisplayFor(model => model.Name)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.Description)</dt>
-        <dd>@Html.DisplayFor(model => model.Description)</dd>
+            <dt>@Html.DisplayNameFor(model => model.Description)</dt>
+            <dd>@Html.DisplayFor(model => model.Description)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.StartDate)</dt>
-        <dd>@Html.DisplayFor(model => model.StartDate)</dd>
+            <dt>@Html.DisplayNameFor(model => model.StartDate)</dt>
+            <dd>@Html.DisplayFor(model => model.StartDate)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.EndDate)</dt>
-        <dd>@Html.DisplayFor(model => model.EndDate)</dd>
+            <dt>@Html.DisplayNameFor(model => model.EndDate)</dt>
+            <dd>@Html.DisplayFor(model => model.EndDate)</dd>
 
-        @* //TM 2018-03-09 11:58 Lista alla aktiviteter inom aktuell module *@
-        @* //TM 2018-03-09 12:57 OBS!!! Bakgrundsfärg hårdkodad! *@
-        <dd id="list-activities" style="background-color: beige;">
-            @Html.Partial("_Activities", Model.Activities)
-        </dd>
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+            @* //TM 2018-03-09 11:58 Lista alla aktiviteter inom aktuell modul *@
+            @* //TM 2018-03-09 12:57 OBS!!! Bakgrundsfärg hårdkodad! *@
+            <dd id="list-activities" style="background-color: beige;">
+                @Html.Partial("_Activities", Model.Activities)
+            </dd>
+        </dl>
+    </div>
+    <p>
+        @if (User.IsInRole("Teacher")) //TM 2018-03-12 15:42
+        {
+            @Html.ActionLink("Edit | ", "Edit", new { id = Model.Id })
+        }
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

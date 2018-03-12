@@ -2,27 +2,32 @@
 
 @model IEnumerable<HEJARITO.Models.Activity>
 
-<table class="table">
-    <tr>
-        @* //TM 2018-03-09 12:45 Egna rubriktexter *@
-        <th>aktivitet</th>
-        <th>typ</th>
-        <th>start</th>
-        <th>slut</th>
-        <th>beskrivning</th>
-        <th>deadline</th>
-    </tr>
+@if (User.Identity.IsAuthenticated) //TM 2018-03-12 16:43
+{
 
-@foreach (var item in Model) {
-    <tr>
-        @* //TM 2018-03-09 12:46 Endast datumdelen av DateTime-värdena borde visas - kvarstår!!! *@
-        <td>@Html.DisplayFor(modelItem => item.Name)</td>
-        <td>@Html.DisplayFor(modelItem => item.ActivityType.Name)</td>
-        <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
-        <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
-        <td>@Html.DisplayFor(modelItem => item.Description)</td>
-        <td>@Html.DisplayFor(modelItem => item.DeadlineDate)</td>
-    </tr>
+    <table class="table">
+        <tr>
+            @* //TM 2018-03-09 12:45 Egna rubriktexter *@
+            <th>aktivitet</th>
+            <th>typ</th>
+            <th>start</th>
+            <th>slut</th>
+            <th>beskrivning</th>
+            <th>deadline</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                @* //TM 2018-03-09 12:46 Endast datumdelen av DateTime-värdena borde visas - kvarstår!!! *@
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.ActivityType.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                <td>@Html.DisplayFor(modelItem => item.DeadlineDate)</td>
+            </tr>
+        }
+
+    </table>
 }
-
-</table>

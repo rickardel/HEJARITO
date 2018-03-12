@@ -4,123 +4,128 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+@if (User.Identity.IsAuthenticated) //TM 2018-03-12 16:37
+{
+    <h2>Details</h2>
 
-<div>
-    <h4>Course</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    <div>
+        <h4>Course</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.StartDate)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.EndDate)
+            </dd>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
-
-
-<div>
-    <h4>Modules</h4>
-    <ul class="alist" id="CourseModuleList">
-        @foreach (var module in Model.Modules)
+        </dl>
+    </div>
+    <p>
+        @if (User.IsInRole("Teacher")) //TM 2018-03-12 16:37
         {
-            <li>
-                <strong>
-                    @module.StartDate.ToString("dd/MM") >> @module.EndDate.ToString("dd/MM")
-                    @module.Name
-                </strong>
-                <ul class="alist@{@module.Id} ">
-                    @foreach (var activity in module.Activities)
-                    {
-                        <li>
-                            @activity.StartDate.ToString("dd/MM") >> @activity.EndDate.ToString("dd/MM")
-                            @activity.Name
-                        </li>
-                    }
-                </ul>
-
-            </li>
+            @Html.ActionLink("Edit | ", "Edit", new { id = Model.Id })
         }
-    </ul>
-    <input type="text" id="NewModuleName" value="Ny Module" />
-    <input type="datetime-local" id="NewModuleStartDate" value="2018-06-06 08:30:00" />
-    <input type="datetime-local" id="NewModuleEndDate" value="2018-06-06 17:00:00" />
-    <button id="addCourseModuleBtn" class="btn btn-default btn-xs">Lägg till Modul</button>
-</div>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 
 
-<div>
-    <h4>Lägg till @Html.DropDownList("NewActivityActivityType", null, htmlAttributes: new { @class = "form-control" }) Till @Html.DropDownList("NewActivityModule", null, htmlAttributes: new { @class = "form-control" })</h4>
-                                           
-    <input type="text" id="NewActivityName" value="Namn" />
-    <input type="text" id="NewActivityDescription" value="Beskrivning" />
-    <input type="datetime-local" id="NewActivityStartDate" value="Startdatum" />
-    <input type="datetime-local" id="NewActivityDeadlineDate" value="Startdatum" />
-    <input type="datetime-local" id="NewActivityEndDate" value="Slutdatum" />
-    <button id="addModuleActivityBtn" class="btn btn-default btn-xs">Lägg till Aktivitet</button>
-</div>
+    <div>
+        <h4>Modules</h4>
+        <ul class="alist" id="CourseModuleList">
+            @foreach (var module in Model.Modules)
+            {
+                <li>
+                    <strong>
+                        @module.StartDate.ToString("dd/MM") >> @module.EndDate.ToString("dd/MM")
+                        @module.Name
+                    </strong>
+                    <ul class="alist@{@module.Id} ">
+                        @foreach (var activity in module.Activities)
+                        {
+                            <li>
+                                @activity.StartDate.ToString("dd/MM") >> @activity.EndDate.ToString("dd/MM")
+                                @activity.Name
+                            </li>
+                        }
+                    </ul>
+
+                </li>
+    }
+        </ul>
+        <input type="text" id="NewModuleName" value="Ny Module" />
+        <input type="datetime-local" id="NewModuleStartDate" value="2018-06-06 08:30:00" />
+        <input type="datetime-local" id="NewModuleEndDate" value="2018-06-06 17:00:00" />
+        <button id="addCourseModuleBtn" class="btn btn-default btn-xs">Lägg till Modul</button>
+    </div>
+
+
+    <div>
+        <h4>Lägg till @Html.DropDownList("NewActivityActivityType", null, htmlAttributes: new { @class = "form-control" }) Till @Html.DropDownList("NewActivityModule", null, htmlAttributes: new { @class = "form-control" })</h4>
+
+        <input type="text" id="NewActivityName" value="Namn" />
+        <input type="text" id="NewActivityDescription" value="Beskrivning" />
+        <input type="datetime-local" id="NewActivityStartDate" value="Startdatum" />
+        <input type="datetime-local" id="NewActivityDeadlineDate" value="Startdatum" />
+        <input type="datetime-local" id="NewActivityEndDate" value="Slutdatum" />
+        <button id="addModuleActivityBtn" class="btn btn-default btn-xs">Lägg till Aktivitet</button>
+    </div>
 
 
 
-<div>
-    <h4>Students</h4>
-    <ul class="slist" id="CourseStudentList">
-        @foreach (var student in Model.ApplicationUsers)
-        {
-            <li>
-                <strong>
-                    @student.FirstName @student.LastName
-                </strong>
-                @student.Email
-                ( @student.PhoneNumber )
-            </li>
-        }
-    </ul>
-    <input type="text" id="NewStudentFirstName" value="Förnamn" />
-    <input type="text" id="NewStudentLastName" value="Efternamn" />
-    <input type="text" id="NewStudentEmail" value="Epostadress" />
-    <input type="text" id="NewStudentPhoneNumber" value="Telefonnummer" />
-    <input type="text" id="NewStudentPassword" value="Lösenord" />
+    <div>
+        <h4>Students</h4>
+        <ul class="slist" id="CourseStudentList">
+            @foreach (var student in Model.ApplicationUsers)
+            {
+                <li>
+                    <strong>
+                        @student.FirstName @student.LastName
+                    </strong>
+                    @student.Email
+                    ( @student.PhoneNumber )
+                </li>
+            }
+        </ul>
+        <input type="text" id="NewStudentFirstName" value="Förnamn" />
+        <input type="text" id="NewStudentLastName" value="Efternamn" />
+        <input type="text" id="NewStudentEmail" value="Epostadress" />
+        <input type="text" id="NewStudentPhoneNumber" value="Telefonnummer" />
+        <input type="text" id="NewStudentPassword" value="Lösenord" />
 
-    <button id="addCourseStudentBtn" class="btn btn-default btn-xs">Lägg till Student</button>
-</div>
+        <button id="addCourseStudentBtn" class="btn btn-default btn-xs">Lägg till Student</button>
+    </div>
 
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
 
-    <script>
+        <script>
 
         $(document).ready(function () {
             $("#addCourseModuleBtn").on('click', function () {
@@ -133,7 +138,7 @@
                         let tmpId = m.Id;
                         let tmpName = m.Name;
                         $("<li><strong>" + tmpStartDate + " >> " + tmpEndDate + " " + tmpName + "</strong><ul class=alist" + tmpId + "></ul></li>").appendTo(".alist");
-                        $('#NewActivityModule').append($('<option>', {value: tmpId,text: tmpName}));   
+                        $('#NewActivityModule').append($('<option>', {value: tmpId,text: tmpName}));
                     })
                     .fail(function () {
                         alert("Något gick fel vid tillägg av modul");
@@ -168,5 +173,6 @@
         });
 
 
-    </script>
-}
+        </script>
+    }
+    }

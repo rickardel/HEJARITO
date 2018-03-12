@@ -5,27 +5,30 @@
     ViewBag.Title = "Student";
 }
 
-<h2>Elev</h2>
+@if (User.IsInRole("Student")) //TM 2018-03-12 16:41
+{
+    <h2>Elev</h2>
 
-<h2>Kurser</h2>
+    <h2>Kurser</h2>
 
-<table class="table" style="background-color:antiquewhite">
-    <tr>
-        @* //TM 2018-03-09 22:54 Egna rubriktexter *@
-        <th>kurs</th>
-        <th>start</th>
-        <th>slut</th>
-        <th>beskrivning</th>
-    </tr>
+    <table class="table" style="background-color:antiquewhite">
+        <tr>
+            @* //TM 2018-03-09 22:54 Egna rubriktexter *@
+            <th>kurs</th>
+            <th>start</th>
+            <th>slut</th>
+            <th>beskrivning</th>
+        </tr>
 
-    @foreach (var item in Model.Courses)
-    {
-    <tr>
-        @* //TM 2018-03-09 23:00 Endast datumdelen av DateTime-värdena ska visas *@
-        <td>@Html.DisplayFor(modelItem => item.Name)</td>
-        <td>@Html.DisplayFor(modelItem => item.StartDate.Date)</td>
-        <td>@Html.DisplayFor(modelItem => item.EndDate.Date)</td>
-        <td>@Html.DisplayFor(modelItem => item.Description)</td>
-    </tr>
-    }
-</table>
+        @foreach (var item in Model.Courses)
+        {
+            <tr>
+                @* //TM 2018-03-12 16:40 Endast datumdelen av DateTime-värdena borde visas - kvarstår!!! *@
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+            </tr>
+        }
+    </table>
+}
