@@ -31,7 +31,10 @@ namespace HEJARITO.Models
         public int CourseId { get; set; }
 
         public virtual Course Course { get; set; }
-        public virtual ICollection<Activity> Activities { get; set; }
+
+        //TM 2018-03-09 11:51 Navigational property för att kunna lista alla aktiviteter inom aktuell modul
+        public virtual ICollection<Activity> Activities { get; set; } //TM (denna NP har funnits redan från början)
+
         //public virtual ICollection<Document> Documents { get; set; }
     }
 }

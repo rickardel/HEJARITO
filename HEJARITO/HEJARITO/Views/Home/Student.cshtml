@@ -1,7 +1,31 @@
-﻿
+﻿@* //TM 2018-03-09 22:47 Detta är vyn som en nyss inloggad elev hamnar i *@
+
+@model HEJARITO.Models.StudentViewModel
 @{
     ViewBag.Title = "Student";
 }
 
-<h2>Student</h2>
+<h2>Elev</h2>
 
+<h2>Kurser</h2>
+
+<table class="table" style="background-color:antiquewhite">
+    <tr>
+        @* //TM 2018-03-09 22:54 Egna rubriktexter *@
+        <th>kurs</th>
+        <th>start</th>
+        <th>slut</th>
+        <th>beskrivning</th>
+    </tr>
+
+    @foreach (var item in Model.Courses)
+    {
+    <tr>
+        @* //TM 2018-03-09 23:00 Endast datumdelen av DateTime-värdena ska visas *@
+        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+        <td>@Html.DisplayFor(modelItem => item.StartDate.Date)</td>
+        <td>@Html.DisplayFor(modelItem => item.EndDate.Date)</td>
+        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+    </tr>
+    }
+</table>

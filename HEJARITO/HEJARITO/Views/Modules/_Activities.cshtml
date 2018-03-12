@@ -1,0 +1,28 @@
+﻿@* //TM 2018-03-09 12:25 Partial View för att kunna lista alla aktiviteter inom aktuell modul *@
+
+@model IEnumerable<HEJARITO.Models.Activity>
+
+<table class="table">
+    <tr>
+        @* //TM 2018-03-09 12:45 Egna rubriktexter *@
+        <th>aktivitet</th>
+        <th>typ</th>
+        <th>start</th>
+        <th>slut</th>
+        <th>beskrivning</th>
+        <th>deadline</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        @* //TM 2018-03-09 12:46 Endast datumdelen av DateTime-värdena ska visas *@
+        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+        <td>@Html.DisplayFor(modelItem => item.ActivityType.Name)</td>
+        <td>@Html.DisplayFor(modelItem => item.StartDate.Date)</td>
+        <td>@Html.DisplayFor(modelItem => item.EndDate.Date)</td>
+        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+        <td>@Html.DisplayFor(modelItem => item.DeadlineDate.Value.Date)</td>
+    </tr>
+}
+
+</table>
