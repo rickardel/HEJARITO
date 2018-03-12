@@ -8,8 +8,8 @@ namespace HEJARITO.Models
 {
     public class StudentViewModel
     {
-        public ICollection<Course>      Courses     { get; set; }
-        public ICollection<Module>      Modules     { get; set; }
-        public ICollection<Activity>    Activities  { get; set; }
+        public IList<Course>      Courses     { get; set; }
+        public IList<Module>      Modules     { get; set; }
+        public IList<Activity>    Activities  { get; set; }
     }
 }

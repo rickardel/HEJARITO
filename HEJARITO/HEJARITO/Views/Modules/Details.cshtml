@@ -25,14 +25,14 @@
         <dt>@Html.DisplayNameFor(model => model.EndDate)</dt>
         <dd>@Html.DisplayFor(model => model.EndDate)</dd>
 
-        @* //TM 2018-03-09 11:58 Lista alla aktiviteter inom aktuell kurs *@
+        @* //TM 2018-03-09 11:58 Lista alla aktiviteter inom aktuell module *@
         @* //TM 2018-03-09 12:57 OBS!!! Bakgrundsfärg hårdkodad! *@
-                <dd id="list-activities" style="background-color: beige;">
-                    @Html.Partial("_Activities", Model.Activities)
-                </dd>
-            </dl>
-        </div>
-        <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-            @Html.ActionLink("Back to List", "Index")
-        </p>
+        <dd id="list-activities" style="background-color: beige;">
+            @Html.Partial("_Activities", Model.Activities)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

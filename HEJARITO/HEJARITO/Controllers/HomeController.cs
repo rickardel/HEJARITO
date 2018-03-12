@@ -1,4 +1,6 @@
 ﻿using HEJARITO.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,13 +54,27 @@ namespace HEJARITO.Controllers
         }
 
         public ActionResult Student()
-        //TM 2018-03-09 Sidan dit en nyss inloggad elev hamnar
+        //TM 2018-03-09 23:24 Sidan som en nyss inloggad elev hamnar i
         {
             ViewBag.Message = "Student's start page.";
 
             var studentViewModel = new StudentViewModel();
 
-            studentViewModel.Courses = db.Courses.ToList();
+            //TM 2018-03-10 02:16 Utan dessa 2 rader kraschar .Add(myCourse) !!!
+            studentViewModel.Courses = db.Courses.ToList(); //!!! #1
+            studentViewModel.Courses.Clear();               //!!! #2
+
+            var myCourseId = db.Users.Find(User.Identity.GetUserId()).CourseId;
+
+            if (myCourseId != null)
+            {
+                var myCourse = db.Courses.Find(myCourseId);
+
+                if (myCourse != null)
+                {
+                    studentViewModel.Courses.Add(myCourse); //!!! #3
+                }
+            }
 
             studentViewModel.Modules = db.Modules.ToList();
 
