@@ -49,6 +49,7 @@ namespace HEJARITO.Controllers
             }
         }
 
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:38
         //JG 2018-03-12 Sidan som en nyss inloggad lärare hamnar på
         public ActionResult Teacher()
         {
@@ -109,6 +110,7 @@ namespace HEJARITO.Controllers
             return View(teacherViewModel);
         }
 
+        [Authorize(Roles = "Student")] //TM 2018-03-12 13:38
         public ActionResult Student()
         //TM 2018-03-09 23:24 Sidan som en nyss inloggad elev hamnar i
         {
@@ -132,9 +134,59 @@ namespace HEJARITO.Controllers
                 }
             }
 
-            studentViewModel.Modules = db.Modules.ToList();
+            //TM 2018-03-13 15:44 Genom denna loop skapas listan av de moduler som ingår i elevens kurs!
+            //TM 2018-03-13 15:53 Utan dessa 2 rader kraschar .Add(mm) !!!
+            studentViewModel.Modules = db.Modules.ToList(); //!!! #1
+            studentViewModel.Modules.Clear();               //!!! #2
 
-            studentViewModel.Activities = db.Activities.ToList();
+            var myModuleList = db.Modules.ToList();
+
+            foreach (var mm in myModuleList)
+            {
+                if (mm.CourseId == myCourseId)
+                {
+                    studentViewModel.Modules.Add(mm);       //!!! #3
+                }
+            }
+
+            //TM 2018-03-13 15:38 Genom denna dubbelloop skapas listan av de aktiviteter som ingår i någon modul som i sin tur ingår i elevens kurs!
+            //TM 2018-03-13 15:53 Utan dessa 2 rader kraschar .Add(a) !!!
+            studentViewModel.Activities = db.Activities.ToList(); //!!! #1
+            studentViewModel.Activities.Clear();                  //!!! #2
+
+            var myActivityList = db.Activities.ToList();
+
+            foreach (var m in studentViewModel.Modules)
+            {
+                if (m.CourseId == myCourseId)
+                {
+                    foreach (var a in myActivityList)
+                    {
+                        if (a.ModuleId == m.Id)
+                        {
+                            studentViewModel.Activities.Add(a);   //!!! #3
+                        }
+                    }
+                }
+            }
+
+            //TM 2018-03-13 15:49 Genom denna loop skapas listan av elevens kurskamrater!
+            //TM 2018-03-13 15:56 Utan dessa 2 rader kraschar .Add(u) !!!
+            studentViewModel.Users = db.Users.ToList(); //!!! #1
+            studentViewModel.Users.Clear();                  //!!! #2
+
+            var myUserList = db.Users.ToList();
+
+            foreach (var u in myUserList)
+            {
+                if (u.CourseId != null)
+                {
+                    if (u.CourseId == myCourseId && (u.Id != User.Identity.GetUserId()))
+                    {
+                        studentViewModel.Users.Add(u);                //!!! #3
+                    }
+                }
+            }
 
             return View(studentViewModel);
         }

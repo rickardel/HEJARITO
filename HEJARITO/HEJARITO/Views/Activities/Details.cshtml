@@ -4,71 +4,77 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+@if (User.Identity.IsAuthenticated) //TM 2018-03-13 05:47
+{
+    <h2>Details</h2>
 
-<div>
-    <h4>Activity</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ActivityType.Name)
-        </dt>
+    <div>
+        <h4>Activity</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ActivityType.Name)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ActivityType.Name)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ActivityType.Name)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Module.Name)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Module.Name)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Module.Name)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Module.Name)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.StartDate)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DeadlineDate)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.DeadlineDate)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.DeadlineDate)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.DeadlineDate)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.EndDate)
+            </dd>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+        </dl>
+    </div>
+    <p>
+        @if (User.IsInRole("Teacher")) //TM 2018-03-12 15:34
+        {
+            @Html.ActionLink("Edit | ", "Edit", new { id = Model.Id })
+        }
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

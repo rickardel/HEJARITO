@@ -221,10 +221,6 @@
     <Compile Include="Migrations\201803090909037_Test av Nullable DateTime i Activity.DeadlineDate.Designer.cs">
       <DependentUpon>201803090909037_Test av Nullable DateTime i Activity.DeadlineDate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803121022350_Efter alla ändringar som vi 4 gjorde.cs" />
-    <Compile Include="Migrations\201803121022350_Efter alla ändringar som vi 4 gjorde.Designer.cs">
-      <DependentUpon>201803121022350_Efter alla ändringar som vi 4 gjorde.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -351,9 +347,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803090909037_Test av Nullable DateTime i Activity.DeadlineDate.resx">
       <DependentUpon>201803090909037_Test av Nullable DateTime i Activity.DeadlineDate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803121022350_Efter alla ändringar som vi 4 gjorde.resx">
-      <DependentUpon>201803121022350_Efter alla ändringar som vi 4 gjorde.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
