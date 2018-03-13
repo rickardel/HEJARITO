@@ -28,10 +28,12 @@ namespace HEJARITO
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css",
+
                       // JG 2018-03-12: Styling for rendering the Teacher tables.
                       "~/Content/bootstrap.min.css",
-                      "~/Content/dataTables.bootstrap.min.css"));
+                      "~/Content/dataTables.bootstrap.min.css",
+
+                      "~/Content/site.css"));
         }
     }
 }

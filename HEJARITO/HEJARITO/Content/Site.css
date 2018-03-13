@@ -23,6 +23,10 @@ textarea {
     max-width: 280px;
 }
 
+/* Padding removed from the logotype*/
+.navbar-brand {
+    padding: 0px;
+}
 
 /* Sticky footer styles
 -------------------------------------------------- */

@@ -27,6 +27,7 @@ namespace HEJARITO.Models
 
         [Required(ErrorMessage = "En aktivitet måste ha ett startdatum")]
         [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         [Display(Name = "Startdatum")]
         public DateTime StartDate { get; set; }
 
@@ -38,6 +39,7 @@ namespace HEJARITO.Models
 
         [Required(ErrorMessage = "En aktivitet måste ha ett slutdatum")]
         [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         [Display(Name = "Slutdatum")]
         public DateTime EndDate { get; set; }
 

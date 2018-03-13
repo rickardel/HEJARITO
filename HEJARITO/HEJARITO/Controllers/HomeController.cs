@@ -53,48 +53,51 @@ namespace HEJARITO.Controllers
 
             TeacherViewModel teacherViewModel = new TeacherViewModel();
 
+            // Calculating the start and end dates of the current week
             DateTime today = DateTime.Now;
-
             int start = 0;
-            int stop = 0;
+            int end = 0;
             if (today.DayOfWeek == DayOfWeek.Monday)
             {
-                start = 0; stop = 5;
+                start = 0; end = 6;
             }
             if (today.DayOfWeek == DayOfWeek.Tuesday)
             {
-                start = -1; stop = 4;
+                start = -1; end = 5;
             }
             if (today.DayOfWeek == DayOfWeek.Wednesday)
             {
-                start = -2; stop = 3;
+                start = -2; end = 4;
             }
             if (today.DayOfWeek == DayOfWeek.Thursday)
             {
-                start = -3; stop = 2;
+                start = -3; end = 3;
             }
             if (today.DayOfWeek == DayOfWeek.Friday)
             {
-                start = -4; stop = 1;
+                start = -4; end = 2;
             }
             if (today.DayOfWeek == DayOfWeek.Saturday)
             {
-                start = -5; stop = 0;
+                start = -5; end = 1;
             }
             if (today.DayOfWeek == DayOfWeek.Sunday)
             {
-                start = -6; stop = -1;
+                start = -6; end = 0;
             }
-
-            TimeSpan startOffset = new System.TimeSpan(start, 0, 0, 0);
-            TimeSpan stopOffset = new System.TimeSpan(stop, 0, 0, 0);
+            TimeSpan startOffset = new TimeSpan(start, 0, 0, 0);
+            TimeSpan endOffset = new TimeSpan(end, 0, 0, 0);
             DateTime startDate = DateTime.Now.Add(startOffset).Date;
-            DateTime stopDate = DateTime.Now.Add(stopOffset).Date;
+            DateTime endDate = DateTime.Now.Add(endOffset).Date;
 
-            // To do: Discuss valid dates!
-            teacherViewModel.Activities = db.Activities.Where(d => d.StartDate >= startDate && d.StartDate <= stopDate).ToList();
-
-            //teacherViewModel.Activities = db.Activities.ToList();
+            // Intermediate decision: show starting and ending activities, and deadlines for the current week
+            List<Activity> startingActivities = new List<Activity>();
+            List<Activity> endingActivities = new List<Activity>();
+            List<Activity> deadLines = new List<Activity>();
+            startingActivities = db.Activities.Where(d => d.StartDate >= startDate && d.StartDate <= endDate).ToList();
+            endingActivities = db.Activities.Where(d => d.EndDate >= startDate && d.EndDate <= endDate).ToList();
+            deadLines = db.Activities.Where(d => d.DeadlineDate >= startDate && d.DeadlineDate <= endDate).ToList();
+            teacherViewModel.Activities = startingActivities.Concat(endingActivities).Concat(deadLines).ToList();
 
             teacherViewModel.Courses = db.Courses.ToList();
 
