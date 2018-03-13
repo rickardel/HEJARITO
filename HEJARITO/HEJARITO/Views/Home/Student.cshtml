@@ -101,27 +101,29 @@
             <tr>
                 <th>Förnamn</th>
                 <th>Efternamn</th>
-                <th>Email</th>
+                <th>e-post</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
                 <th>Förnamn</th>
                 <th>Efternamn</th>
+                <th>e-post</th>
             </tr>
         </tfoot>
         <tbody>
             @foreach (var item in Model.Users)
             {
-               <tr>
-                    <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
-                    <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Email)</td>
 
-                    @*
-                        //TM 2018-03-13 06:30 OBS!!! Kraschar!
-                        <td>@Html.ActionLink("Details", "Details", new { id = item.Id })</td>
-                    *@
-                </tr>
+                @*
+        //TM 2018-03-13 06:30 OBS!!! Kraschar!
+        <td>@Html.ActionLink("Details", "Details", new { id = item.Id })</td>
+                *@
+            </tr>
             }
         </tbody>
     </table>

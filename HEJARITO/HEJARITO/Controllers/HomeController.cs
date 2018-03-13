@@ -149,13 +149,53 @@ namespace HEJARITO.Controllers
                 }
             }
 
-            //TM 2018-03-13 15:38 Genom denna dubbelloop skapas listan av de aktiviteter som ingår i någon modul som i sin tur ingår i elevens kurs!
+            //TM 2018-03-13 23:05 Räkna fram aktuell veckas start- och slutdatum
+
+            DateTime today = DateTime.Now;
+            int start;
+            int end = 0;
+
+            switch (today.DayOfWeek)
+            {
+                case DayOfWeek.Monday:
+                    end = 6;
+                    break;
+                case DayOfWeek.Tuesday:
+                    end = 5;
+                    break;
+                case DayOfWeek.Wednesday:
+                    end = 4;
+                    break;
+                case DayOfWeek.Thursday:
+                    end = 3;
+                    break;
+                case DayOfWeek.Friday:
+                    end = 2;
+                    break;
+                case DayOfWeek.Saturday:
+                    end = 1;
+                    break;
+                case DayOfWeek.Sunday:
+                    end = 0;
+                    break;
+                default:
+                    break;
+            }
+
+            start = end - 6;
+
+            TimeSpan startOffset = new TimeSpan(start, 0, 0, 0);
+            TimeSpan endOffset = new TimeSpan(end, 0, 0, 0);
+            DateTime thisMonday = DateTime.Now.Add(startOffset).Date;
+            DateTime thisSunday = DateTime.Now.Add(endOffset).Date;
+
             //TM 2018-03-13 15:53 Utan dessa 2 rader kraschar .Add(a) !!!
-            studentViewModel.Activities = db.Activities.ToList(); //!!! #1
-            studentViewModel.Activities.Clear();                  //!!! #2
+            studentViewModel.Activities = db.Activities.ToList();   //!!! #1
+            studentViewModel.Activities.Clear();                    //!!! #2
 
             var myActivityList = db.Activities.ToList();
 
+            //TM 2018-03-13 23:18 Genom denna dubbelloop skapas listan av de veckoaktuella aktiviteter som ingår i någon modul som i sin tur ingår i elevens kurs!
             foreach (var m in studentViewModel.Modules)
             {
                 if (m.CourseId == myCourseId)
@@ -164,7 +204,11 @@ namespace HEJARITO.Controllers
                     {
                         if (a.ModuleId == m.Id)
                         {
-                            studentViewModel.Activities.Add(a);   //!!! #3
+                            //TM 2018-03-13 23:16 Aktuell vecka berörs av aktiviteten
+                            if (a.StartDate <= thisSunday && ((a.EndDate >= thisMonday) || (a.DeadlineDate >= thisMonday)))
+                            {
+                                studentViewModel.Activities.Add(a); //!!! #3
+                            }
                         }
                     }
                 }
