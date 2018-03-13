@@ -100,12 +100,59 @@ namespace HEJARITO.Controllers
                 }
             }
 
-            studentViewModel.Modules    = db.Modules.ToList();
+            //TM 2018-03-13 15:44 Genom denna loop skapas listan av de moduler som ingår i elevens kurs!
+            //TM 2018-03-13 15:53 Utan dessa 2 rader kraschar .Add(mm) !!!
+            studentViewModel.Modules = db.Modules.ToList(); //!!! #1
+            studentViewModel.Modules.Clear();               //!!! #2
 
-            studentViewModel.Activities = db.Activities.ToList();
+            var myModuleList = db.Modules.ToList();
 
-            //TM 2018-03-13 05:25 Inlagd för att kunna visas
-            studentViewModel.Users      = db.Users.ToList();
+            foreach (var mm in myModuleList)
+            {
+                if (mm.CourseId == myCourseId)
+                {
+                    studentViewModel.Modules.Add(mm);       //!!! #3
+                }
+            }
+
+            //TM 2018-03-13 15:38 Genom denna dubbelloop skapas listan av de aktiviteter som ingår i någon modul som i sin tur ingår i elevens kurs!
+            //TM 2018-03-13 15:53 Utan dessa 2 rader kraschar .Add(a) !!!
+            studentViewModel.Activities = db.Activities.ToList(); //!!! #1
+            studentViewModel.Activities.Clear();                  //!!! #2
+
+            var myActivityList = db.Activities.ToList();
+
+            foreach (var m in studentViewModel.Modules)
+            {
+                if (m.CourseId == myCourseId)
+                {
+                    foreach (var a in myActivityList)
+                    {
+                        if (a.ModuleId == m.Id)
+                        {
+                            studentViewModel.Activities.Add(a);   //!!! #3
+                        }
+                    }
+                }
+            }
+
+            //TM 2018-03-13 15:49 Genom denna loop skapas listan av elevens kurskamrater!
+            //TM 2018-03-13 15:56 Utan dessa 2 rader kraschar .Add(u) !!!
+            studentViewModel.Users = db.Users.ToList(); //!!! #1
+            studentViewModel.Users.Clear();                  //!!! #2
+
+            var myUserList = db.Users.ToList();
+
+            foreach (var u in myUserList)
+            {
+                if (u.CourseId != null)
+                {
+                    if (u.CourseId == myCourseId && (u.Id != User.Identity.GetUserId()))
+                    {
+                        studentViewModel.Users.Add(u);                //!!! #3
+                    }
+                }
+            }
 
             return View(studentViewModel);
         }
