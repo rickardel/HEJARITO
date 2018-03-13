@@ -43,7 +43,10 @@ namespace HEJARITO.Controllers
             {
                 return RedirectToAction("Student");
             }
-            return View();
+            else
+            {
+                return RedirectToAction("About");
+            }
         }
 
         //JG 2018-03-12 Sidan som en nyss inloggad lärare hamnar på

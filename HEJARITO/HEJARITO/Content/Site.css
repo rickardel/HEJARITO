@@ -28,6 +28,11 @@ textarea {
     padding: 0px;
 }
 
+/* Navbar background color according to Lexicon*/
+.navbar-default {
+    background-color: RGB(21, 40, 68);
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -47,7 +52,8 @@ body {
     /* Set the fixed height of the footer here */
     height: 60px;
     line-height: 60px; /* Vertically center the text there */
-    background-color: #f5f5f5;
+    background-color: RGB(21, 40, 68);
+    color: white;
 }
 
 

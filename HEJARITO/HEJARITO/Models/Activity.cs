@@ -32,6 +32,7 @@ namespace HEJARITO.Models
         public DateTime StartDate { get; set; }
 
         [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         [Display(Name = "Deadlinedatum")]
         
         //TM 2018-03-09 10:04 Nullable DateTime!
