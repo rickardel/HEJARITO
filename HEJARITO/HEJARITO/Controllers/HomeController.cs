@@ -100,9 +100,12 @@ namespace HEJARITO.Controllers
                 }
             }
 
-            studentViewModel.Modules = db.Modules.ToList();
+            studentViewModel.Modules    = db.Modules.ToList();
 
             studentViewModel.Activities = db.Activities.ToList();
+
+            //TM 2018-03-13 05:25 Inlagd för att kunna visas
+            studentViewModel.Users      = db.Users.ToList();
 
             return View(studentViewModel);
         }

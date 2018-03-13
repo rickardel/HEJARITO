@@ -4,7 +4,7 @@
     ViewBag.Title = "Details";
 }
 
-@if (User.IsInRole("Teacher") || User.IsInRole("Student")) //TM 2018-03-12 15:32
+@if (User.Identity.IsAuthenticated) //TM 2018-03-13 05:47
 {
     <h2>Details</h2>
 
