@@ -28,7 +28,7 @@ namespace HEJARITO.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Vår kontaktsida";
 
             return View();
         }
@@ -217,7 +217,7 @@ namespace HEJARITO.Controllers
             //TM 2018-03-13 15:49 Genom denna loop skapas listan av elevens kurskamrater!
             //TM 2018-03-13 15:56 Utan dessa 2 rader kraschar .Add(u) !!!
             studentViewModel.Users = db.Users.ToList(); //!!! #1
-            studentViewModel.Users.Clear();                  //!!! #2
+            studentViewModel.Users.Clear();             //!!! #2
 
             var myUserList = db.Users.ToList();
 
@@ -227,7 +227,7 @@ namespace HEJARITO.Controllers
                 {
                     if (u.CourseId == myCourseId && (u.Id != User.Identity.GetUserId()))
                     {
-                        studentViewModel.Users.Add(u);                //!!! #3
+                        studentViewModel.Users.Add(u);  //!!! #3
                     }
                 }
             }
