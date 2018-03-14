@@ -117,7 +117,7 @@
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
                 <td>@Html.DisplayFor(modelItem => item.LastName)</td>
-                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                <td><a href="mailto:@Html.DisplayFor(modelItem => item.Email)">@Html.DisplayFor(modelItem => item.Email)</a></td>
 
                 @*
         //TM 2018-03-13 06:30 OBS!!! Kraschar!
