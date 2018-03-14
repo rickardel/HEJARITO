@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace HEJARITO.Controllers
 {
+    [Authorize] //TM 2018-03-12 13:38
     public class CoursesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -41,6 +42,7 @@ namespace HEJARITO.Controllers
         }
 
         // GET: Courses/Create
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:38
         public ActionResult Create()
         {
             Course tmpCourse = new Course()
@@ -54,6 +56,7 @@ namespace HEJARITO.Controllers
         // POST: Courses/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:38
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Description,StartDate,EndDate")] Course course)
@@ -120,6 +123,7 @@ namespace HEJARITO.Controllers
         }
 
         // GET: Courses/Edit/5
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:38
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -137,6 +141,7 @@ namespace HEJARITO.Controllers
         // POST: Courses/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:38
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Description,StartDate,EndDate")] Course course)
@@ -151,6 +156,7 @@ namespace HEJARITO.Controllers
         }
 
         // GET: Courses/Delete/5
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:38
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -166,6 +172,7 @@ namespace HEJARITO.Controllers
         }
 
         // POST: Courses/Delete/5
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:38
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

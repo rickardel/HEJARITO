@@ -17,6 +17,7 @@ namespace HEJARITO.Models
         public string Name { get; set; }
 
         [Required(ErrorMessage = "En aktivitet måste ha en aktivitetstyp")]
+        [Display(Name = "Aktivitetstyp")]
         public int ActivityTypeId { get; set; }
         public virtual ActivityType ActivityType { get; set; }
 
@@ -26,10 +27,12 @@ namespace HEJARITO.Models
 
         [Required(ErrorMessage = "En aktivitet måste ha ett startdatum")]
         [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         [Display(Name = "Startdatum")]
         public DateTime StartDate { get; set; }
 
         [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         [Display(Name = "Deadlinedatum")]
         
         //TM 2018-03-09 10:04 Nullable DateTime!
@@ -37,6 +40,7 @@ namespace HEJARITO.Models
 
         [Required(ErrorMessage = "En aktivitet måste ha ett slutdatum")]
         [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         [Display(Name = "Slutdatum")]
         public DateTime EndDate { get; set; }
 

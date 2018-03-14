@@ -1,109 +1,119 @@
 ﻿@model HEJARITO.Models.TeacherViewModel
 
 @{
-    ViewBag.Title = "Teacher";
+    ViewBag.Title = "Lärare";
 }
 
-<h2>Teacher</h2>
+<h2>Lärare</h2>
 
-<h2>Events</h2>
-<table width="100%" class="table table-striped table-bordered" id="eventsstable" cellspacing="0">
+@*JG 2018-03-12: This page uses Bootstrap 3 Datatables functionality: https://datatables.net/.
+    Input comes in the form of a "TecherViewModel" with the lists Activities, Courses and Users.*@
+
+<h2>Denna veckas viktiga händelser: aktiviteter som börjar eller slutar samt deadlines</h2>
+<table width="100%" class="table table-striped table-bordered" id="activitiestable" cellspacing="0">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Activity Type</th>
-            <th>Description</th>
-            <th>Start Date</th>
-            <th>Deadline Date</th>
-            <th>End Date</th>
-            <th>Details</th>
+            <th>@Html.DisplayNameFor(model => model.Activities.First().Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Activities.First().ActivityTypeId)</th>
+            <th>@Html.DisplayNameFor(model => model.Activities.First().Description)</th>
+            <th>@Html.DisplayNameFor(model => model.Activities.First().StartDate)</th>
+            <th>@Html.DisplayNameFor(model => model.Activities.First().DeadlineDate)</th>
+            <th>@Html.DisplayNameFor(model => model.Activities.First().EndDate)</th>
+            <th>Detaljer</th>
         </tr>
     </thead>
     <tfoot>
         <tr>
-            <th>Name</th>
-            <th>Activity Type</th>
-            <th>Description</th>
-            <th>Start Date</th>
-            <th>Deadline Date</th>
-            <th>End Date</th>
-            <th>Details</th>
+            <th>@Html.DisplayNameFor(model => model.Activities.First().Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Activities.First().ActivityTypeId)</th>
+            <th>@Html.DisplayNameFor(model => model.Activities.First().Description)</th>
+            <th>@Html.DisplayNameFor(model => model.Activities.First().StartDate)</th>
+            <th>@Html.DisplayNameFor(model => model.Activities.First().DeadlineDate)</th>
+            <th>@Html.DisplayNameFor(model => model.Activities.First().EndDate)</th>
+            <th>Detaljer</th>
         </tr>
     </tfoot>
-    @foreach (var item in Model.Activities)
-    {
-        <tbody>
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                <td>@Html.DisplayFor(modelItem => item.ActivityType.Name)</td>
-                <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
-                <td>@Html.DisplayFor(modelItem => item.DeadlineDate)</td>
-                <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
-                <td>@Html.ActionLink("Details", "Details", new { id = item.Id })</td>
-            </tr>
-        </tbody>
-    }
+    <tbody>
+        @foreach (var item in Model.Activities)
+        {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.ActivityType.Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.Description)</td>
+            <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+            <td>@Html.DisplayFor(modelItem => item.DeadlineDate)</td>
+            <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+            <td>@Html.ActionLink("Detaljer", "Details", "Activities", new { id = item.Id }, null)</td>
+        </tr>
+
+        }
+    </tbody>
 </table>
 
-<h2>Courses</h2>
+<h2>Kurser</h2>
 <table width="100%" class="table table-striped table-bordered" id="coursestable" cellspacing="0">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Details</th>
+            <th>@Html.DisplayNameFor(model => model.Courses.First().Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Courses.First().Description)</th>
+            <th>@Html.DisplayNameFor(model => model.Courses.First().StartDate)</th>
+            <th>@Html.DisplayNameFor(model => model.Courses.First().EndDate)</th>
+            <th>Detaljer</th>
         </tr>
     </thead>
     <tfoot>
         <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Details</th>
+            <th>@Html.DisplayNameFor(model => model.Courses.First().Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Courses.First().Description)</th>
+            <th>@Html.DisplayNameFor(model => model.Courses.First().StartDate)</th>
+            <th>@Html.DisplayNameFor(model => model.Courses.First().EndDate)</th>
+            <th>Detaljer</th>
         </tr>
     </tfoot>
-    @foreach (var item in Model.Courses)
-    {
-        <tbody>
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
-                <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
-                <td>@Html.ActionLink("Details", "Details", new { id = item.Id })</td>
-            </tr>
-        </tbody>
-    }
+    <tbody>
+        @foreach (var item in Model.Courses)
+        {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.Description)</td>
+            <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+            <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+            <td>@Html.ActionLink("Detaljer", "Details", "Courses", new { id = item.Id }, null)</td>
+        </tr>
+        }
+    </tbody>
 </table>
 
-<h2>Contacts</h2>
-<table width="100%" class="table table-striped table-bordered" id="coursestable" cellspacing="0">
+<h2>Kontaktlista</h2>
+<table width="100%" class="table table-striped table-bordered" id="contactstable" cellspacing="0">
     <thead>
         <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Details</th>
+            <th>@Html.DisplayNameFor(model => model.Users.First().FirstName)</th>
+            <th>@Html.DisplayNameFor(model => model.Users.First().LastName)</th>
+            <th>@Html.DisplayNameFor(model => model.Users.First().Email)</th>
         </tr>
     </thead>
     <tfoot>
         <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Details</th>
+            <th>@Html.DisplayNameFor(model => model.Users.First().FirstName)</th>
+            <th>@Html.DisplayNameFor(model => model.Users.First().LastName)</th>
+            <th>@Html.DisplayNameFor(model => model.Users.First().Email)</th>
         </tr>
     </tfoot>
-    @foreach (var item in Model.Users)
-    {
-        <tbody>
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
-                <td>@Html.DisplayFor(modelItem => item.LastName)</td>
-                <td>@Html.ActionLink("Details", "Details", new { id = item.Id })</td>
-            </tr>
-        </tbody>
-    }
+    <tbody>
+        @foreach (var item in Model.Users)
+        {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+            <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+            <td>@Html.DisplayFor(modelItem => item.Email)</td>
+        </tr>
+        }
+    </tbody>
 </table>
+
+@*JG 2018-03-12: Script for rendering the tables.*@
+@section Scripts
+    {
+    <script src="~/Scripts/teachertables.js"></script>
+}

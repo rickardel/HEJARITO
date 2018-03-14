@@ -1,31 +1,134 @@
 ﻿@* //TM 2018-03-09 22:47 Detta är vyn som en nyss inloggad elev hamnar i *@
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.Owin;
 
 @model HEJARITO.Models.StudentViewModel
 @{
     ViewBag.Title = "Student";
 }
 
-<h2>Elev</h2>
+@if (User.IsInRole("Student")) //TM 2018-03-12 16:41
+{
+    @*//TM 2018-03-13 13:33 - This page uses Bootstrap 3 Datatables functionality: https://datatables.net/.
+        Input comes in the form of a "StudentViewModel" with the lists of Activities, Courses and Users.*@
+    <h2>
+        Elev: 
+        @User.Identity.Name
+    </h2>
+    <h2>Denna veckas aktiviteter</h2>
+    <table width="100%" class="table table-striped table-bordered" id="activitiestable" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Namn</th>
+                <th>Aktivitetstyp</th>
+                <th>Beskrivning</th>
+                <th>Startdatum</th>
+                <th>"Deadline"</th>
+                <th>Slutdatum</th>
+                <th>Detaljer</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Namn</th>
+                <th>Aktivitetstyp</th>
+                <th>Beskrivning</th>
+                <th>Startdatum</th>
+                <th>"Deadline"</th>
+                <th>Slutdatum</th>
+                <th>Detaljer</th>
+            </tr>
+        </tfoot>
+        <tbody>
+            @foreach (var item in Model.Activities)
+            {
 
-<h2>Kurser</h2>
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ActivityType.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                    <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DeadlineDate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
 
-<table class="table" style="background-color:antiquewhite">
-    <tr>
-        @* //TM 2018-03-09 22:54 Egna rubriktexter *@
-        <th>kurs</th>
-        <th>start</th>
-        <th>slut</th>
-        <th>beskrivning</th>
-    </tr>
+                    @*//TM 2018-03-13 13:12 "Nu blir det ingen krasch *@
+                    <td>@Html.ActionLink("Detaljer", "Details", "Activities", new { id = item.Id }, null)</td>
+                </tr>
 
-    @foreach (var item in Model.Courses)
+            }
+        </tbody>
+    </table>
+
+    <h2>Kurser</h2>
+    <table width="100%" class="table table-striped table-bordered" id="coursestable" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Namn</th>
+                <th>Beskrivning</th>
+                <th>Startdatum</th>
+                <th>Slutdatum</th>
+                <th>Detaljer</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Namn</th>
+                <th>Beskrivning</th>
+                <th>Startdatum</th>
+                <th>Slutdatum</th>
+                <th>Detaljer</th>
+            </tr>
+        </tfoot>
+        <tbody>
+            @foreach (var item in Model.Courses)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                    <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+
+                    @*//TM 2018-03-13 13:12 "Nu blir det ingen krasch *@
+                    <td>@Html.ActionLink("Detaljer", "Details", "Courses", new { id = item.Id }, null)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h2>Kontaktlista</h2>
+    <table width="100%" class="table table-striped table-bordered" id="contactstable" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Förnamn</th>
+                <th>Efternamn</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Förnamn</th>
+                <th>Efternamn</th>
+            </tr>
+        </tfoot>
+        <tbody>
+            @foreach (var item in Model.Users)
+            {
+               <tr>
+                    <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+
+                    @*
+                        //TM 2018-03-13 06:30 OBS!!! Kraschar!
+                        <td>@Html.ActionLink("Details", "Details", new { id = item.Id })</td>
+                    *@
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @*JG 2018-03-12: Script for rendering the tables.*@
+    @section Scripts
     {
-    <tr>
-        @* //TM 2018-03-09 23:00 Endast datumdelen av DateTime-värdena ska visas *@
-        <td>@Html.DisplayFor(modelItem => item.Name)</td>
-        <td>@Html.DisplayFor(modelItem => item.StartDate.Date)</td>
-        <td>@Html.DisplayFor(modelItem => item.EndDate.Date)</td>
-        <td>@Html.DisplayFor(modelItem => item.Description)</td>
-    </tr>
+        <script src="~/Scripts/teachertables.js"></script>
     }
-</table>
+}

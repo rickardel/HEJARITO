@@ -10,6 +10,7 @@ using HEJARITO.Models;
 
 namespace HEJARITO.Controllers
 {
+    [Authorize] //TM 2018-03-12 13:38
     public class ActivityTypesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -36,6 +37,7 @@ namespace HEJARITO.Controllers
         }
 
         // GET: ActivityTypes/Create
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:38
         public ActionResult Create()
         {
             return View();
@@ -44,6 +46,7 @@ namespace HEJARITO.Controllers
         // POST: ActivityTypes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:38
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Description")] ActivityType activityType)
@@ -59,6 +62,7 @@ namespace HEJARITO.Controllers
         }
 
         // GET: ActivityTypes/Edit/5
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:38
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -76,6 +80,7 @@ namespace HEJARITO.Controllers
         // POST: ActivityTypes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:38
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Description")] ActivityType activityType)
@@ -90,6 +95,7 @@ namespace HEJARITO.Controllers
         }
 
         // GET: ActivityTypes/Delete/5
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:38
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -105,6 +111,7 @@ namespace HEJARITO.Controllers
         }
 
         // POST: ActivityTypes/Delete/5
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:38
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

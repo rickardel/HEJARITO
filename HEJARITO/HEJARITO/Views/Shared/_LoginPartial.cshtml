@@ -6,10 +6,10 @@
     @Html.AntiForgeryToken()
 
     <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        <li style="font-weight: bold" class="active">
+            @Html.ActionLink("Välkommen " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <li style="font-weight: bold" class="active"><a href="javascript:document.getElementById('logoutForm').submit()">Logga ut</a></li>
     </ul>
     }
 }
@@ -18,6 +18,6 @@ else
     <ul class="nav navbar-nav navbar-right">
         @*To do: Remove the "Register" actionlink below:
         <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li style="font-weight: bold" class="active">@Html.ActionLink("Logga in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }

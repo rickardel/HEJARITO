@@ -43,30 +43,65 @@ namespace HEJARITO.Controllers
             {
                 return RedirectToAction("Student");
             }
-            return View();
+            else
+            {
+                return RedirectToAction("About");
+            }
         }
 
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:38
+        //JG 2018-03-12 Sidan som en nyss inloggad lärare hamnar på
         public ActionResult Teacher()
         {
             ViewBag.Message = "Teacher's start page.";
 
             TeacherViewModel teacherViewModel = new TeacherViewModel();
 
-            //var allCourses = db.Courses.ToList();
-            //var allActivities = new List<Activity>();
-            //foreach (var course in allCourses)
-            //{
-            //    var courseModules = course.Modules.ToList();
-            //    foreach (var module in courseModules)
-            //    {
-            //        var moduleActivities = module.Activities.ToList();
-            //        foreach(var activity in moduleActivities)
-            //        {
-            //            allActivities.Add(activity);
-            //        }
-            //    }
-            //}
-            teacherViewModel.Activities = db.Activities.ToList();
+            // Calculating the start and end dates of the current week
+            DateTime today = DateTime.Now;
+            int start = 0;
+            int end = 0;
+            if (today.DayOfWeek == DayOfWeek.Monday)
+            {
+                start = 0; end = 6;
+            }
+            if (today.DayOfWeek == DayOfWeek.Tuesday)
+            {
+                start = -1; end = 5;
+            }
+            if (today.DayOfWeek == DayOfWeek.Wednesday)
+            {
+                start = -2; end = 4;
+            }
+            if (today.DayOfWeek == DayOfWeek.Thursday)
+            {
+                start = -3; end = 3;
+            }
+            if (today.DayOfWeek == DayOfWeek.Friday)
+            {
+                start = -4; end = 2;
+            }
+            if (today.DayOfWeek == DayOfWeek.Saturday)
+            {
+                start = -5; end = 1;
+            }
+            if (today.DayOfWeek == DayOfWeek.Sunday)
+            {
+                start = -6; end = 0;
+            }
+            TimeSpan startOffset = new TimeSpan(start, 0, 0, 0);
+            TimeSpan endOffset = new TimeSpan(end, 0, 0, 0);
+            DateTime startDate = DateTime.Now.Add(startOffset).Date;
+            DateTime endDate = DateTime.Now.Add(endOffset).Date;
+
+            // Intermediate decision: show starting and ending activities, and deadlines for the current week
+            List<Activity> startingActivities = new List<Activity>();
+            List<Activity> endingActivities = new List<Activity>();
+            List<Activity> deadLines = new List<Activity>();
+            startingActivities = db.Activities.Where(d => d.StartDate >= startDate && d.StartDate <= endDate).ToList();
+            endingActivities = db.Activities.Where(d => d.EndDate >= startDate && d.EndDate <= endDate).ToList();
+            deadLines = db.Activities.Where(d => d.DeadlineDate >= startDate && d.DeadlineDate <= endDate).ToList();
+            teacherViewModel.Activities = startingActivities.Concat(endingActivities).Concat(deadLines).ToList();
 
             teacherViewModel.Courses = db.Courses.ToList();
 
@@ -75,6 +110,7 @@ namespace HEJARITO.Controllers
             return View(teacherViewModel);
         }
 
+        [Authorize(Roles = "Student")] //TM 2018-03-12 13:38
         public ActionResult Student()
         //TM 2018-03-09 23:24 Sidan som en nyss inloggad elev hamnar i
         {
@@ -98,9 +134,59 @@ namespace HEJARITO.Controllers
                 }
             }
 
-            studentViewModel.Modules = db.Modules.ToList();
+            //TM 2018-03-13 15:44 Genom denna loop skapas listan av de moduler som ingår i elevens kurs!
+            //TM 2018-03-13 15:53 Utan dessa 2 rader kraschar .Add(mm) !!!
+            studentViewModel.Modules = db.Modules.ToList(); //!!! #1
+            studentViewModel.Modules.Clear();               //!!! #2
 
-            studentViewModel.Activities = db.Activities.ToList();
+            var myModuleList = db.Modules.ToList();
+
+            foreach (var mm in myModuleList)
+            {
+                if (mm.CourseId == myCourseId)
+                {
+                    studentViewModel.Modules.Add(mm);       //!!! #3
+                }
+            }
+
+            //TM 2018-03-13 15:38 Genom denna dubbelloop skapas listan av de aktiviteter som ingår i någon modul som i sin tur ingår i elevens kurs!
+            //TM 2018-03-13 15:53 Utan dessa 2 rader kraschar .Add(a) !!!
+            studentViewModel.Activities = db.Activities.ToList(); //!!! #1
+            studentViewModel.Activities.Clear();                  //!!! #2
+
+            var myActivityList = db.Activities.ToList();
+
+            foreach (var m in studentViewModel.Modules)
+            {
+                if (m.CourseId == myCourseId)
+                {
+                    foreach (var a in myActivityList)
+                    {
+                        if (a.ModuleId == m.Id)
+                        {
+                            studentViewModel.Activities.Add(a);   //!!! #3
+                        }
+                    }
+                }
+            }
+
+            //TM 2018-03-13 15:49 Genom denna loop skapas listan av elevens kurskamrater!
+            //TM 2018-03-13 15:56 Utan dessa 2 rader kraschar .Add(u) !!!
+            studentViewModel.Users = db.Users.ToList(); //!!! #1
+            studentViewModel.Users.Clear();                  //!!! #2
+
+            var myUserList = db.Users.ToList();
+
+            foreach (var u in myUserList)
+            {
+                if (u.CourseId != null)
+                {
+                    if (u.CourseId == myCourseId && (u.Id != User.Identity.GetUserId()))
+                    {
+                        studentViewModel.Users.Add(u);                //!!! #3
+                    }
+                }
+            }
 
             return View(studentViewModel);
         }

@@ -19,11 +19,13 @@ namespace HEJARITO.Models
 
         [Required(ErrorMessage = "En modul måste ha ett startdatum")]
         [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         [Display(Name = "Startdatum")]
         public DateTime StartDate { get; set; }
 
         [Required(ErrorMessage = "En modul måste ha ett slutdatum")]
         [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         [Display(Name = "Slutdatum")]
         public DateTime EndDate { get; set; }
 

@@ -10,6 +10,7 @@ using HEJARITO.Models;
 
 namespace HEJARITO.Controllers
 {
+    [Authorize] //TM 2018-03-12 13:39
     public class ModulesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -37,6 +38,7 @@ namespace HEJARITO.Controllers
         }
 
         // GET: Modules/Create
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:39
         public ActionResult Create()
         {
             ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name");
@@ -46,6 +48,7 @@ namespace HEJARITO.Controllers
         // POST: Modules/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:39
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Description,StartDate,EndDate,CourseId")] Module module)
@@ -76,6 +79,7 @@ namespace HEJARITO.Controllers
         }
 
         // GET: Modules/Edit/5
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:39
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -94,6 +98,7 @@ namespace HEJARITO.Controllers
         // POST: Modules/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:39
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Description,StartDate,EndDate,CourseId")] Module module)
@@ -109,6 +114,7 @@ namespace HEJARITO.Controllers
         }
 
         // GET: Modules/Delete/5
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:39
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -124,6 +130,7 @@ namespace HEJARITO.Controllers
         }
 
         // POST: Modules/Delete/5
+        [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:39
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
