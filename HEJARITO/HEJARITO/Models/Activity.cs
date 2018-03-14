@@ -16,7 +16,7 @@ namespace HEJARITO.Models
         [Display(Name = "Aktivitetsnamn")]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "En aktivitet måste ha en aktivitetstyp")]
         public int ActivityTypeId { get; set; }
         public virtual ActivityType ActivityType { get; set; }
 

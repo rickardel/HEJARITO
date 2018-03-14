@@ -1,0 +1,180 @@
+﻿@model HEJARITO.Models.CourseEditor
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Course</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Course.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Course.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Course.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Course.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Course.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Course.StartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Course.EndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Course.EndDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Course.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+
+<div id="ModuleListing">
+    <h4>Modules</h4>
+
+    <div id="divCourseModules">
+        @{ Html.RenderPartial("_CourseModules", Model.Course.Modules.OrderBy(m => m.StartDate).ToList()); }
+    </div>
+
+    @*@using (Html.BeginForm())*@
+
+    <div id="divCreateCourseModule">
+        @{ Html.RenderPartial("_CreateCourseModule", Model); }
+    </div>
+    <div id="divCreateModuleActivity">
+        @{ Html.RenderPartial("_CreateModuleActivity", Model); }
+    </div>
+
+
+
+
+
+
+    @*@{ Html.RenderPartial("_CreateCourseModule", Model.Module); }*@
+
+
+    @*<input type="text" id="NewModuleName" value="Ny Module" />
+        <input type="datetime-local" id="NewModuleStartDate" value="2018-06-06 08:30:00" />
+        <input type="datetime-local" id="NewModuleEndDate" value="2018-06-06 17:00:00" />
+        <button id="addCourseModuleBtn" class="btn btn-default btn-xs">Lägg till Modul</button>*@
+</div>
+
+
+<div>
+    @*<h4>Lägg till @Html.DropDownList("NewActivityActivityType", null, htmlAttributes: new { @class = "form-control" }) Till @Html.DropDownList("NewActivityModule", null, htmlAttributes: new { @class = "form-control" })</h4>
+        <input type="text" id="NewActivityName" value="Namn" />
+        <input type="text" id="NewActivityDescription" value="Beskrivning" />
+        <input type="datetime-local" id="NewActivityStartDate" value="Startdatum" />
+        <input type="datetime-local" id="NewActivityDeadlineDate" value="Startdatum" />
+        <input type="datetime-local" id="NewActivityEndDate" value="Slutdatum" />
+        <button id="addModuleActivityBtn" class="btn btn-default btn-xs">Lägg till Aktivitet</button>*@
+</div>
+
+
+
+<div>
+    <h4>Students</h4>
+    <div id="divCourseStudents">
+        @{ Html.RenderPartial("_CourseStudents", Model.Course.ApplicationUsers); }
+    </div>
+    <div id="divCreateCourseStudent">
+        @{ Html.RenderPartial("_CreateCourseStudent", Model); }
+    </div>
+    @*<input type="text" id="NewStudentFirstName" value="Förnamn" />
+        <input type="text" id="NewStudentLastName" value="Efternamn" />
+        <input type="text" id="NewStudentEmail" value="Epostadress" />
+        <input type="text" id="NewStudentPhoneNumber" value="Telefonnummer" />
+        <input type="text" id="NewStudentPassword" value="Lösenord" />
+        <button id="addCourseStudentBtn" class="btn btn-default btn-xs">Lägg till Student</button>*@
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+
+        $(document).ready(function () {
+
+
+
+            $("#btnCreateModule").on('click', function () {
+                //alert($('<option>', { value: $("#Module_CourseId").val(), text: $("#Module_Name").val() }));
+                //$('#Activity_ModuleId').append($('<option>', { value: $("#Module_CourseId").val(), text: $("#Module_Name").val() }));
+                let q = $("#Module_Name").val()!="";
+                if (q) location.reload();
+
+                @*$("#divCreateModuleActivity").load('@(Url.Action("GetActivityForm","Activities",null, Request.Url.Scheme))');*@
+            });
+
+
+
+
+            @*$("#addCourseModuleBtn").on('click', function () {
+                $.post('/api/CourseAPI', {
+                    CourseId: @Model.Course.Id, StartDate: $("#NewModuleStartDate").val(), EndDate: $("#NewModuleEndDate").val(), Name: $("#NewModuleName").val()
+                })
+                    .done(function (m) {
+                        let tmpStartDate = m.StartDate.substring(8, 10) + "-" + m.StartDate.substring(5, 7);
+                        let tmpEndDate = m.EndDate.substring(8, 10) + "-" + m.EndDate.substring(5, 7);
+                        let tmpId = m.Id;
+                        let tmpName = m.Name;
+                        $("<li><strong>" + tmpStartDate + " >> " + tmpEndDate + " " + tmpName + "</strong><ul class=alist" + tmpId + "></ul></li>").appendTo(".alist");
+                        $('#NewActivityModule').append($('<option>', {value: tmpId,text: tmpName}));
+                    })
+                    .fail(function () {
+                        alert("Något gick fel vid tillägg av modul");
+                    });
+            });
+            $("#addModuleActivityBtn").on('click', function () {
+                $.post('/api/CourseActivityAPI', {
+                    CourseId: @Model.Course.Id, Name: $("#NewActivityName").val(), Description: $("#NewActivityDescription").val(), ActivityTypeId: $("#NewActivityActivityType").val(), ModuleId: $("#NewActivityModule").val() , EndDate: $("#NewActivityEndDate").val(), DeadlineDate: $("#NewActivityDeadlineDate").val(), StartDate: $("#NewActivityStartDate").val()
+                })
+                    .done(function (a) {
+                        let tmpStartDate = a.StartDate.substring(8, 10) + "-" + a.StartDate.substring(5, 7);
+                        let tmpEndDate = a.EndDate.substring(8, 10) + "-" + a.EndDate.substring(5, 7);
+                        let targetElement = ".alist" + a.ModuleId;
+                        $("<li>" + tmpStartDate + " >> " + tmpEndDate + " " + a.Name + "</li>").appendTo(targetElement);
+                    })
+                    .fail(function () {
+                        alert("Något gick fel vid tillägg av activitet");
+                    });
+            });
+            $("#addCourseStudentBtn").on('click', function () {
+                $.post('/api/CourseStudentAPI', {
+                    CourseId: @Model.Course.Id, FirstName: $("#NewStudentFirstName").val(), LastName: $("#NewStudentLastName").val(), Email: $("#NewStudentEmail").val(), PhoneNumber: $("#NewStudentPhoneNumber").val(), Password: $("#NewStudentPassword").val()
+                })
+                    .done(function (s) {
+                        $("<li><strong>"+s.FirstName+" "+s.LastName+"</strong> "+s.Email+"( "+s.PhoneNumber+" )</li>").appendTo(".slist");
+
+                    })
+                    .fail(function () {
+                        alert("Något gick fel vid tillägg av student");
+                    });
+            });*@
+        });
+
+
+    </script>
+}

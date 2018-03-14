@@ -62,6 +62,27 @@ namespace HEJARITO.Controllers
             ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name", activity.ModuleId);
             return View(activity);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public PartialViewResult CreateAjax([Bind(Include = "Id,Name,ActivityTypeId,Description,StartDate,DeadlineDate,EndDate,ModuleId")] Activity activity)
+        {
+            Module module = db.Modules.Find(activity.ModuleId);
+            if (module != null && ModelState.IsValid)
+            {
+                db.Activities.Add(activity);
+                db.SaveChanges();
+                return PartialView("_CourseModules", module.Course.Modules.OrderBy(m => m.StartDate).ToList());
+            }
+            ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "Id", "Name", activity.ActivityTypeId);
+            ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name", activity.ModuleId);
+            return PartialView("Error");
+        }
+
+
+        public PartialViewResult GetActivityForm()
+        {
+            return PartialView("_CreateModuleActivity");
+        }
 
         // GET: Activities/Edit/5
         public ActionResult Edit(int? id)

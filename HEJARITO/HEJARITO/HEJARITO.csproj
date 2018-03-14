@@ -226,6 +226,7 @@
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\ActivityType.cs" />
     <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\CourseEditor.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Module.cs" />
@@ -259,6 +260,8 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -323,6 +326,12 @@
     <Content Include="Views\Home\Teacher.cshtml" />
     <Content Include="Views\Home\Student.cshtml" />
     <Content Include="Views\Modules\_Activities.cshtml" />
+    <Content Include="Views\Shared\_CourseModules.cshtml" />
+    <Content Include="Views\Shared\_CreateCourseModule.cshtml" />
+    <Content Include="Views\Courses\CourseEditor.cshtml" />
+    <Content Include="Views\Shared\_CreateModuleActivity.cshtml" />
+    <Content Include="Views\Shared\_CreateCourseStudent.cshtml" />
+    <Content Include="Views\Shared\_CourseStudents.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

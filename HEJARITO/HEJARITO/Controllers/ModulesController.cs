@@ -60,6 +60,20 @@ namespace HEJARITO.Controllers
             ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name", module.CourseId);
             return View(module);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public PartialViewResult CreateAjax([Bind(Include = "Id,Name,Description,StartDate,EndDate,CourseId")] Module module)
+        {
+            Course course = db.Courses.Find(module.CourseId);
+            if (course != null && ModelState.IsValid)
+            {
+                module.Activities = new List<Activity>();
+                db.Modules.Add(module);
+                db.SaveChanges();
+                return PartialView("_CourseModules", course.Modules.OrderBy(m => m.StartDate).ToList());
+            }
+            return PartialView("Error");
+        }
 
         // GET: Modules/Edit/5
         public ActionResult Edit(int? id)

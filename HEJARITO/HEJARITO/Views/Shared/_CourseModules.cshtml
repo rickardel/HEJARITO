@@ -1,0 +1,75 @@
+﻿@model ICollection<HEJARITO.Models.Module>
+
+<ul class="alist" id="CourseModuleList">
+    @foreach (var module in Model)
+    {
+        <li>
+            <strong>
+                @module.StartDate.ToString("dd/MM") >> @module.EndDate.ToString("dd/MM")
+                @module.Name
+            </strong>
+            <ul class="alist@{@module.Id} ">
+                @foreach (var activity in module.Activities)
+                {
+                    <li>
+                        @activity.StartDate.ToString("dd/MM") >> @activity.EndDate.ToString("dd/MM")
+                        @activity.Name
+                    </li>
+                }
+            </ul>
+
+        </li>
+    }
+</ul>
+
+
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Course.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+    }
+
+    </table>*@
