@@ -8,7 +8,7 @@
 {
     <h2>Index</h2>
 
-    @if (User.IsInRole("Teacher")) //TM 2018-03-12 15:28
+    if (User.IsInRole("Teacher")) //TM 2018-03-12 15:28
     {
         <p>
             @Html.ActionLink("Create New", "Create")

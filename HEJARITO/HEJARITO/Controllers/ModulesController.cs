@@ -73,6 +73,7 @@ namespace HEJARITO.Controllers
                 module.Activities = new List<Activity>();
                 db.Modules.Add(module);
                 db.SaveChanges();
+
                 return PartialView("_CourseModules", course.Modules.OrderBy(m => m.StartDate).ToList());
             }
             return PartialView("Error");
