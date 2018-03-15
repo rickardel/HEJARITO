@@ -1,14 +1,13 @@
 ﻿@model HEJARITO.Models.Course
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detaljer";
 }
 
-
-<h2>Details</h2>
+<h2>Detaljer</h2>
 
 <div>
-    <h4>Course</h4>
+    <h4>Kurs</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -48,11 +47,13 @@
 <p>
     @if (User.IsInRole("Teacher")) //TM 2018-03-12 16:37
     {
-        @Html.ActionLink("Course Editor | ", "CourseEditor", new { id = Model.Id }) 
+        //TM 2018-03-15 12:04 Svenska texter
+        @Html.ActionLink("Kurseditor | ", "CourseEditor", new { id = Model.Id }) 
         
-        @Html.ActionLink("Edit | ", "Edit", new { id = Model.Id })
+        @Html.ActionLink("Redigera | ", "Edit", new { id = Model.Id })
     }
-    @Html.ActionLink("Back to List", "Index")
+    @*  //TM 2018-03-15 12:06 Svensk text + rollberoende startvy *@
+    @Html.ActionLink("Tillbaka till startsidan", "SelectStartView", "Home")
 </p>
 
 <div>

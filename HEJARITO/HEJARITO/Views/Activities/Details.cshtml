@@ -1,15 +1,15 @@
 ﻿@model HEJARITO.Models.Activity
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detaljer";
 }
 
 @if (User.Identity.IsAuthenticated) //TM 2018-03-13 05:47
 {
-    <h2>Details</h2>
+    <h2>Detaljer</h2>
 
     <div>
-        <h4>Activity</h4>
+        <h4>Aktivitet</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
@@ -73,7 +73,7 @@
     <p>
         @if (User.IsInRole("Teacher")) //TM 2018-03-12 15:34
         {
-            @Html.ActionLink("Edit | ", "Edit", new { id = Model.Id })
+            @Html.ActionLink("Redigera | ", "Edit", new { id = Model.Id })
         }
         @Html.ActionLink("Tillbaka till startsidan", "SelectStartView", "Home")
     </p>

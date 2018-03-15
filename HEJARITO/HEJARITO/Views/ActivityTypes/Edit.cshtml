@@ -1,12 +1,12 @@
 ﻿@model HEJARITO.Models.ActivityType
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Redigera";
 }
 
 @if (User.IsInRole("Teacher")) //TM 2018-03-12 15:00
 {
-    <h2>Edit</h2>
+    <h2>Redigera</h2>
 
 
     @using (Html.BeginForm())
@@ -14,7 +14,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h4>ActivityType</h4>
+            <h4>AktivitetsTyp</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.Id)
