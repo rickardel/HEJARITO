@@ -41,7 +41,7 @@
             <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
             <td>@Html.DisplayFor(modelItem => item.DeadlineDate)</td>
             <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
-            <td>@Html.ActionLink("Detaljer", "Details", "Activities", new { id = item.Id }, null)</td>
+            <td>@Html.ActionLink("Detaljer", "Details", "Activities", new { id = item.Id }, new { @class = "btn btn-xs btn-info" })</td>
         </tr>
 
         }
@@ -76,7 +76,7 @@
             <td>@Html.DisplayFor(modelItem => item.Description)</td>
             <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
             <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
-            <td>@Html.ActionLink("Detaljer", "Details", "Courses", new { id = item.Id }, null)</td>
+            <td>@Html.ActionLink("Detaljer", "Details", "Courses", new { id = item.Id }, new { @class = "btn btn-xs btn-info" })</td>
         </tr>
         }
     </tbody>
@@ -100,7 +100,7 @@
     </tfoot>
     <tbody>
         @foreach (var item in Model.Users)
-        {
+            {
         <tr>
             <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
             <td>@Html.DisplayFor(modelItem => item.LastName)</td>

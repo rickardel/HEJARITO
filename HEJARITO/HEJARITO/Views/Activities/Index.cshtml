@@ -9,7 +9,7 @@
 @if (User.IsInRole("Teacher")) //TM 2018-03-12 15:11
 {
     <p>
-        @Html.ActionLink("Skapa ny", "Create")
+        @Html.ActionLink("Skapa ny", "Create", "", new { @class = "btn btn-xs btn-success" })
     </p>
 }
 
@@ -26,19 +26,27 @@
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
+
+            @*  //TM 2018-03-16 14:41 Ska inte visas, sparar skärmutrymme
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+            *@
+
             <th>
                 @Html.DisplayNameFor(model => model.StartDate)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DeadlineDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndDate)
-            </th>
-            <th></th>
+
+
+            @*  //TM 2018-03-16 14:41 Ska inte visas, sparar skärmutrymme
+                <th>
+                    @Html.DisplayNameFor(model => model.DeadlineDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </th>
+                <th></th>
+                *@
         </tr>
 
         @foreach (var item in Model)
@@ -53,28 +61,36 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
+
+            @* //TM 2018-03-16 14:41 Ska inte visas, sparar skärmutrymme
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+            *@
+
             <td>
                 @Html.DisplayFor(modelItem => item.StartDate)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeadlineDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
+
+            @* //TM 2018-03-16 14:41 Ska inte visas, sparar skärmutrymme
+        <td>
+            @Html.DisplayFor(modelItem => item.DeadlineDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDate)
+        </td>
+            *@
+
             <td>
                 @if (User.IsInRole("Teacher")) //TM 2018-03-12 15:11
-                {
-                    @Html.ActionLink("Redigera | ", "Edit", new { id = item.Id })
-                    @Html.ActionLink("Ta bort | ", "Delete", new { id = item.Id })
-                }
-                @Html.ActionLink("Detaljer", "Details", new { id = item.Id })
+        {
+            @Html.ActionLink("Redigera", "Edit", new { id = item.Id }, new { @class = "btn btn-xs btn-warning" })
+            @Html.ActionLink("Ta bort", "Delete", new { id = item.Id }, new { @class = "btn btn-xs btn-danger" })
+}
+                @Html.ActionLink("Detaljer", "Details", new { id = item.Id }, new { @class = "btn btn-xs btn-info" })
             </td>
         </tr>
-        }
+                }
 
-    </table>
-}
+            </table>
+        }

@@ -14,13 +14,13 @@
         <dd>
             [
             @if (Model.HasPassword)
-            {
-                @Html.ActionLink("Change your password", "ChangePassword")
-            }
-            else
-            {
-                @Html.ActionLink("Create", "SetPassword")
-            }
+    {
+        @Html.ActionLink("Ändra lösenord", "ChangePassword", "", new { @class = "btn btn-xs btn-warning" })
+}
+else
+{
+        @Html.ActionLink("Skapa lösenord", "Create", "", new { @class = "btn btn-xs btn-success" })
+}
             ]
         </dd>
         <dt>External Logins:</dt>

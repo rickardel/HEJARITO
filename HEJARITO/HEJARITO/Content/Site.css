@@ -73,3 +73,43 @@ body > .container {
 code {
     font-size: 80%;
 }
+
+.btn-danger {
+    color: #e7e7e7;
+    background-color: transparent;
+    border-color: #e7e7e7;
+}
+
+.btn-default {
+    color: #e7e7e7;
+    background-color: transparent;
+    border-color: #e7e7e7;
+}
+
+.btn-info {
+    color: #e7e7e7;
+    background-color: transparent;
+    border-color: #e7e7e7;
+}
+
+.btn-primary {
+    color: #e7e7e7;
+    background-color: transparent;
+    border-color: #e7e7e7;
+}
+
+.btn-success {
+    color: #e7e7e7;
+    background-color: transparent;
+    border-color: #e7e7e7;
+}
+
+.btn-warning {
+    color: #e7e7e7;
+    background-color: transparent;
+    border-color: #e7e7e7;
+}
+
+.dl-horizontal dl:hover {
+    background-color: #fffff0;
+}
