@@ -113,5 +113,12 @@ code {
 
 /* //TM 2018-03-18 09:42 Tabellraders bakgrund lyser upp i pastellgul när musen hamnar ovanför dem */
 .table tbody tr:hover td {
-    background-color: #ffffe0;
+    background-color: #ffe;
+}
+
+/* //TM 2018-03-18 12:25 Tabellrubrikrader blir Lexiconfärgsatta */
+.table tbody tr:first-of-type th,
+.table thead tr:first-of-type th {
+    background-color: RGB(21, 40, 68); /*Lexicon-mörkblå*/
+    color: white;
 }

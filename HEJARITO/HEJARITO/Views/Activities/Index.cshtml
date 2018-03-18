@@ -15,7 +15,7 @@
 
 @if (User.Identity.IsAuthenticated) //TM 2018-03-13 13:26
 {
-    <table class="table">
+    <table class="table table-striped table-bordered">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.ActivityType.Name)
