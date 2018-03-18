@@ -54,7 +54,7 @@
                     <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
 
                     @*//TM 2018-03-13 13:12 "Nu blir det ingen krasch *@
-                    <td>@Html.ActionLink("Detaljer", "Details", "Activities", new { id = item.Id }, new { @class = "btn btn-xs btn-info" })</td>
+                    <td>@Html.ActionLink("Detaljer", "Details", "Activities", new { id = item.Id }, new { @class = "btn btn-xs btn-success" })</td>
                 </tr>
 
             }
@@ -91,7 +91,7 @@
                 <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
 
                 @*//TM 2018-03-13 13:12 "Nu blir det ingen krasch *@
-                <td>@Html.ActionLink("Detaljer", "Details", "Courses", new { id = item.Id }, new { @class = "btn btn-xs btn-info" })</td>
+                <td>@Html.ActionLink("Detaljer", "Details", "Courses", new { id = item.Id }, new { @class = "btn btn-xs btn-success" })</td>
             </tr>
             }
         </tbody>
