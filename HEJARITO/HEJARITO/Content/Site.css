@@ -74,6 +74,7 @@ code {
     font-size: 80%;
 }
 
+/* //TM 2018-03-18 09:39 Alla dessa 6 st. btn-knappar görs knappt synliga men de lyser färgglatt upp när musen hamnar ovanför dem */
 .btn-danger {
     color: #e7e7e7;
     background-color: transparent;
@@ -110,6 +111,7 @@ code {
     border-color: #e7e7e7;
 }
 
-.dl-horizontal dl:hover {
-    background-color: #fffff0;
+/* //TM 2018-03-18 09:42 Tabellraders bakgrund lyser upp i pastellgul när musen hamnar ovanför dem */
+.table tbody tr:hover td {
+    background-color: #ffffe0;
 }
