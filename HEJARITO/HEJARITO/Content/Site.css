@@ -74,46 +74,29 @@ code {
     font-size: 80%;
 }
 
-/* //TM 2018-03-18 09:39 Alla dessa 6 st. btn-knappar görs knappt synliga men de lyser färgglatt upp när musen hamnar ovanför dem */
-.btn-danger {
+/* //TM 2018-03-19 12:19 Alla btn-knappar i en tabell ska visas i en ljusgrå nyans */
+.btn, 
+.table tbody tr.btn {
     color: #e7e7e7;
-    background-color: transparent;
     border-color: #e7e7e7;
+    background-color: #303030;
+    opacity: 0.3;
 }
 
-.btn-default {
-    color: #e7e7e7;
-    background-color: transparent;
-    border-color: #e7e7e7;
+/*  //TM 2018-03-19 11:38 Alla btn-knappar i en tabell ska visas i mörkare grått när musen hamnar ovanför tabellraden
+    //TM 2018-03-19 14:42 Även btn-knappar i en paragraf eller input ska visas i samma mörkare grått */
+/*
+.a .btn,
+.input .btn,
+    */
+.table tbody tr:hover .btn {
+    opacity: 0.6;
 }
 
-.btn-info {
-    color: #e7e7e7;
-    background-color: transparent;
-    border-color: #e7e7e7;
-}
-
-.btn-primary {
-    color: #e7e7e7;
-    background-color: transparent;
-    border-color: #e7e7e7;
-}
-
-.btn-success {
-    color: #e7e7e7;
-    background-color: transparent;
-    border-color: #e7e7e7;
-}
-
-.btn-warning {
-    color: #e7e7e7;
-    background-color: transparent;
-    border-color: #e7e7e7;
-}
-
-/* //TM 2018-03-18 09:42 Tabellraders bakgrund lyser upp i pastellgul när musen hamnar ovanför dem */
-.table tbody tr:hover td {
-    background-color: #ffe;
+/* //TM 2018-03-19 11:38 Alla btn-knappar lyser färgglatt upp när musen hamnar ovanför dem */
+.table tbody tr .btn:hover,
+.btn:hover {
+    opacity: 1;
 }
 
 /* //TM 2018-03-18 12:25 Tabellrubrikrader blir Lexiconfärgsatta */
@@ -121,4 +104,9 @@ code {
 .table thead tr:first-of-type th {
     background-color: RGB(21, 40, 68); /*Lexicon-mörkblå*/
     color: white;
+}
+
+/* //TM 2018-03-19 08:48 Tabellraders bakgrund lyser upp i ljusgul när musen hamnar ovanför dem */
+.table tbody tr:hover td {
+    background-color: rgb(249, 255, 192);
 }
