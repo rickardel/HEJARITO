@@ -3,17 +3,45 @@
 <ul class="alist" id="CourseModuleList">
     @foreach (var module in Model)
     {
-        <li>
+        <li class="module-list">
+            <div class="dropdown" style="display:inline">
+                <button class="btn btn-xs btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-header">Modul</li>
+                    <li>@Html.ActionLink("Ändra", "Edit", "Modules", new { id = module.Id }, new { @class = "dropdown-item" })      </li>
+                    <li>@Html.ActionLink("Radera", "Delete", "Modules", new { id = module.Id }, new { @class = "dropdown-item" })   </li>
+                    <li class="dropdown-header">Moduldokument</li>
+                    <li>@Html.ActionLink("Ladda upp", "Create", "Documents", new { DocumentType = 1, ModuleId = module.Id}, "")</li>
+                </ul>
+            </div>
             <strong>
-                @module.StartDate.ToString("dd/MM") >> @module.EndDate.ToString("dd/MM")
-                @module.Name
+                @module.StartDate.ToString("dd/MM") > @module.EndDate.ToString("dd/MM")
+                @Html.ActionLink(@module.Name, "Details", "Modules", new { id = module.Id }, new { @class = "dropdown-item" })
             </strong>
+
             <ul class="alist@{@module.Id} ">
                 @foreach (var activity in module.Activities.OrderBy(a => a.StartDate).ToList())
                 {
                     <li>
+                        <div class="dropdown" style="display:inline">
+                            <button class="btn btn-xs btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Detaljer", "Details", "Activities", new { id = module.Id }, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("Ändra", "Edit", "Activities", new { id = module.Id }, new { @class = "dropdown-item" })      </li>
+                                <li>@Html.ActionLink("Radera", "Delete", "Activities", new { id = module.Id }, new { @class = "dropdown-item" })   </li>
+                                <li class="dropdown-header">Aktivitetsdokument</li>
+                                <li>@Html.ActionLink("Ladda upp", "Create", "Documents", new { ActivityId = activity.Id }, "")</li>
+                            </ul>
+                        </div>
                         @activity.StartDate.ToString("dd/MM") >> @activity.EndDate.ToString("dd/MM")
                         @activity.Name
+
                     </li>
                 }
             </ul>

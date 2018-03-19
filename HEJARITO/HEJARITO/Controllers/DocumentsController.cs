@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using HEJARITO.Models;
@@ -74,9 +75,23 @@ namespace HEJARITO.Controllers
         }
 
 
+        // GET: Documents/Create
+        public string  AjaxCreate(int? courseId)
+        {
+            //ViewBag.ActivityId = new SelectList(db.Activities, "Id", "Name");
+            //ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name");
+            //ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name");
+
+            ViewBag.ActivityTypes = db.ActivityTypes.ToList();
+            ViewBag.Courses = db.Courses.ToList();
+            ViewBag.Modules = db.Modules.ToList();
+            ViewBag.Activities = db.Activities.ToList();
+            Document c = new Document() { CourseId = courseId };
+            return ("This data is fetched through ajax call. ");
+        }
 
         // GET: Documents/Create
-        public ActionResult Create()
+        public ActionResult Create(int? courseId)
         {
             //ViewBag.ActivityId = new SelectList(db.Activities, "Id", "Name");
             //ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name");
@@ -86,7 +101,8 @@ namespace HEJARITO.Controllers
             ViewBag.Courses         = db.Courses.ToList();
             ViewBag.Modules         = db.Modules.ToList();
             ViewBag.Activities      = db.Activities.ToList();
-            return View();
+            Document c = new Document() { CourseId = courseId};
+            return View(c);
         }
 
         // POST: Documents/Create

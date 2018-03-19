@@ -337,7 +337,7 @@
     <Content Include="Views\Shared\_CreateCourseStudent.cshtml" />
     <Content Include="Views\Shared\_CourseStudents.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Documents\Create.cshtml" />
+    <Content Include="Views\Documents\normalCreate.cshtml" />
     <Content Include="Views\Documents\Delete.cshtml" />
     <Content Include="Views\Documents\Details.cshtml" />
     <Content Include="Views\Documents\Edit.cshtml" />
@@ -347,6 +347,7 @@
     <Content Include="Views\StudentDocuments\Details.cshtml" />
     <Content Include="Views\StudentDocuments\Edit.cshtml" />
     <Content Include="Views\StudentDocuments\Index.cshtml" />
+    <Content Include="Views\Shared\_CreateDocument.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -82,6 +82,7 @@ namespace HEJARITO.Controllers
 
         public ActionResult CourseEditor(int? id)
         {
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
