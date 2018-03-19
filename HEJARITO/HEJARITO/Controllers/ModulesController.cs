@@ -22,6 +22,15 @@ namespace HEJARITO.Controllers
             return View(modules.ToList());
         }
 
+        // JSON: return Activities in module
+        public ActionResult GetActivities(int module)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            var activities = db.Activities.Where(c => c.ModuleId == module).ToList();
+            var tmp = Json(activities, JsonRequestBehavior.AllowGet);
+            return tmp;
+        }
+
         // GET: Modules/Details/5
         public ActionResult Details(int? id)
         {

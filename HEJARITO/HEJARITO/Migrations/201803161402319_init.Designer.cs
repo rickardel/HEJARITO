@@ -7,13 +7,13 @@ namespace HEJARITO.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class initialERDSeed : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(initialERDSeed));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201803080901093_initial ERD & Seed"; }
+            get { return "201803161402319_init"; }
         }
         
         string IMigrationMetadata.Source

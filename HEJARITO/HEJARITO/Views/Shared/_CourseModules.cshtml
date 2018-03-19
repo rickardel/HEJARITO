@@ -9,7 +9,7 @@
                 @module.Name
             </strong>
             <ul class="alist@{@module.Id} ">
-                @foreach (var activity in module.Activities)
+                @foreach (var activity in module.Activities.OrderBy(a => a.StartDate).ToList())
                 {
                     <li>
                         @activity.StartDate.ToString("dd/MM") >> @activity.EndDate.ToString("dd/MM")

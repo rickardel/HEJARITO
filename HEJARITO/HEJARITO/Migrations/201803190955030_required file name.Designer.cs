@@ -7,13 +7,13 @@ namespace HEJARITO.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class TestavNullableDateTimeiActivityDeadlineDate : IMigrationMetadata
+    public sealed partial class requiredfilename : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(TestavNullableDateTimeiActivityDeadlineDate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(requiredfilename));
         
         string IMigrationMetadata.Id
         {
-            get { return "201803090909037_Test av Nullable DateTime i Activity.DeadlineDate"; }
+            get { return "201803190955030_required file name"; }
         }
         
         string IMigrationMetadata.Source
