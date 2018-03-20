@@ -6,75 +6,47 @@
 
 @if (User.Identity.IsAuthenticated) //TM 2018-03-13 05:47
 {
-    <h2>Details</h2>
+    if (User.IsInRole("Teacher"))
+    {
+        @Html.ActionLink("[Ändra] ", "Edit", new { id = Model.Id })
+    }
 
+    <h1>@Html.DisplayFor(model => model.Name)</h1>
     <div>
-        <h4>Activity</h4>
+        ( @Html.DisplayFor(model => model.ActivityType.Name) )
+
+
+        @Html.DisplayNameFor(model => model.StartDate):
+        @Html.DisplayFor(model => model.StartDate)
+        @Html.DisplayNameFor(model => model.EndDate):
+        @Html.DisplayFor(model => model.EndDate)
+
+        @foreach (var item in Model.StudentDocuments)
+        {
+            @Html.DisplayFor(itemModel => item.FileName);
+        }
+
+        @if (User.IsInRole("Teacher"))
+        {
+            @Html.ActionLink("[Ladda upp dokument för denna aktivitet]", "CreateActivityDocument", "Documents", new { ActivityId = Model.Id }, "")
+        }
+        else
+        {
+        @Html.ActionLink("[Ladda upp inlämningsuppgift]", "Create", "StudentDocuments", new { ActivityId = Model.Id }, "")
+        }
+        <p>@Html.DisplayFor(model => model.Description)</p>
         <hr />
+        <h2>Inlämningsuppgift</h2>
         <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.ActivityType.Name)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ActivityType.Name)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Module.Name)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Module.Name)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Description)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Description)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.StartDate)
-            </dd>
-
             <dt>
                 @Html.DisplayNameFor(model => model.DeadlineDate)
             </dt>
-
             <dd>
                 @Html.DisplayFor(model => model.DeadlineDate)
             </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.EndDate)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.EndDate)
-            </dd>
-
         </dl>
     </div>
-    <p>
-        @if (User.IsInRole("Teacher")) //TM 2018-03-12 15:34
-        {
-            @Html.ActionLink("Edit | ", "Edit", new { id = Model.Id })
-        }
-        @Html.ActionLink("Tillbaka till startsidan", "SelectStartView", "Home")
-    </p>
+    <dd id="list-Students" style="background-color: beige;">
+        @Html.Partial("_ActivityStudents", Model.Module.Course.ApplicationUsers)
+    </dd>
 }

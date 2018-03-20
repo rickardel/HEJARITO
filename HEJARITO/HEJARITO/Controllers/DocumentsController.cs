@@ -57,14 +57,19 @@ namespace HEJARITO.Controllers
             {
                 case DocumentType.CourseDocument:
                     localPath += "/Course_" + document.CourseId;
+                    //document.ActivityId = null;
+                    //document.ModuleId = null;
                     break;
                 case DocumentType.ModuleDocument:
                     document.Module = db.Modules.Find(document.ModuleId);
                     localPath += "/Course_" + document.Module.CourseId + "/Module_" + document.ModuleId;
+                    //document.CourseId = null;
+                    //document.ActivityId = null;
                     break;
                 case DocumentType.ActivityDocument:
                     document.Activity = db.Activities.Find(document.ActivityId);
                     localPath += "/Course_" + document.Activity.Module.CourseId + "/Module_" + document.Activity.ModuleId + "/Activity_" + document.ActivityId;
+                    //document.ModuleId = null; document.CourseId = null;
                     break;
                 default:
                     break;
@@ -76,7 +81,7 @@ namespace HEJARITO.Controllers
 
 
         // GET: Documents/Create
-        public ActionResult PartialCreate(int courseId , int documentType, int? moduleId, int? activityId)
+        public ActionResult PartialCreate(int courseId, int documentType, int? moduleId, int? activityId)
         {
             //ViewBag.ActivityId = new SelectList(db.Activities, "Id", "Name");
             //ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name");
@@ -107,17 +112,25 @@ namespace HEJARITO.Controllers
         }
 
         // GET: Documents/Create
+        public ActionResult CreateModuleDocument(int moduleId)
+        {
+            Module m = db.Modules.Find(moduleId);
+            ViewBag.ActivityTypes = db.ActivityTypes.ToList();
+            return View(new Document() { CourseId = m.Course.Id, ModuleId = m.Id, DocumentType = DocumentType.ModuleDocument });
+        }
+        public ActionResult CreateActivityDocument(int activityId)
+        {
+            Activity a = db.Activities.Find(activityId);
+            ViewBag.ActivityTypes = db.ActivityTypes.ToList();
+            return View(new Document() { CourseId = a.Module.Course.Id, ModuleId = a.Module.Id, ActivityId = a.Id, DocumentType = DocumentType.ActivityDocument });
+        }
         public ActionResult Create(int? courseId)
         {
-            //ViewBag.ActivityId = new SelectList(db.Activities, "Id", "Name");
-            //ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name");
-            //ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name");
-
-            ViewBag.ActivityTypes   = db.ActivityTypes.ToList();
-            ViewBag.Courses         = db.Courses.ToList();
-            ViewBag.Modules         = db.Modules.ToList();
-            ViewBag.Activities      = db.Activities.ToList();
-            Document c = new Document() { CourseId = courseId};
+            ViewBag.ActivityTypes = db.ActivityTypes.ToList();
+            ViewBag.Courses = db.Courses.ToList();
+            ViewBag.Modules = db.Modules.ToList();
+            ViewBag.Activities = db.Activities.ToList();
+            Document c = new Document() { CourseId = courseId };
             return View(c);
         }
 
@@ -142,14 +155,17 @@ namespace HEJARITO.Controllers
                         {
                             case DocumentType.CourseDocument:
                                 localPath += "/Course_" + document.CourseId;
+                                //document.ActivityId = null; document.ModuleId = null;
                                 break;
                             case DocumentType.ModuleDocument:
                                 document.Module = db.Modules.Find(document.ModuleId);
                                 localPath += "/Course_" + document.Module.CourseId + "/Module_" + document.ModuleId;
+                                document.CourseId = document.Module.CourseId; document.Course = document.Module.Course;
                                 break;
                             case DocumentType.ActivityDocument:
                                 document.Activity = db.Activities.Find(document.ActivityId);
                                 localPath += "/Course_" + document.Activity.Module.CourseId + "/Module_" + document.Activity.ModuleId + "/Activity_" + document.ActivityId;
+                                document.ModuleId = document.Activity.ModuleId; document.Module = document.Activity.Module; document.Course = document.Module.Course; document.CourseId = document.Module.CourseId;
                                 break;
                             default:
                                 break;
@@ -181,7 +197,7 @@ namespace HEJARITO.Controllers
         }
         // GET: Documents/Edit/5
         public ActionResult Edit(int? id)
-        { 
+        {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

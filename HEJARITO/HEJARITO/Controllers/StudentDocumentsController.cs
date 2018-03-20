@@ -60,10 +60,11 @@ namespace HEJARITO.Controllers
         }
 
         // GET: StudentDocuments/Create
-        public ActionResult Create()
+        public ActionResult Create(int activityId)
         {
             ViewBag.Activities = db.Activities.ToList();
-            return View();
+            
+            return View(new StudentDocument() { ActivityId = activityId});
         }
 
         // POST: StudentDocuments/Create

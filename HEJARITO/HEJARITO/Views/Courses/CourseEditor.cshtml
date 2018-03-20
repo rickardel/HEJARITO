@@ -19,12 +19,12 @@
 
             @*@Html.ActionLink("[Ladda upp kursdokument]", "Create", "Documents", new { CourseId = Model.Course.Id }, "")*@
             @*@Ajax.ActionLink("[Ladda upp kursdokument]", "_Create", "Documents", new { CourseId = Model.Course.Id }, new AjaxOptions
-            {
-                UpdateTargetId = "divFormContainer",
-                OnBegin = "onAjaxBegin",
-                OnComplete = "onAjaxComplete"
+                {
+                    UpdateTargetId = "divFormContainer",
+                    OnBegin = "onAjaxBegin",
+                    OnComplete = "onAjaxComplete"
 
-            })*@
+                })*@
             @*@Ajax.ActionLink("[Ladda upp kursdokument]", "Create", "Documents", new { CourseId = Model.Course.Id}, AjaxOptions{  })*@
             <a href="#" id="uploadCourseDocumentBtn" onclick="GetCourseDocumentForm()">[Ladda upp kursdokument]</a>
         </p>
@@ -32,7 +32,7 @@
             @Html.DisplayFor(model => model.Course.Description)
         </span>
         <hr />
-        <h2>Kursnnehåll</h2>
+        @*<h2>Kursnnehåll</h2>
         <span id="divCourseModules">
             @{ Html.RenderPartial("_CourseModules", Model.Course.Modules.OrderBy(m => m.StartDate).ToList()); }
         </span>
@@ -40,35 +40,36 @@
         <h2>Registrerade Studenter</h2>
         <span id="divCourseStudents">
             @{ Html.RenderPartial("_CourseStudents", Model.Course.ApplicationUsers); }
-        </span>
+        </span>*@
     </div>
 
-    <div class="col-md-6">
-        <span id="divFormContainer"></span>
-    </div>
+
 
 </div>
 
-@*<div id="divCourseModuleListing" class="col-lg-12">
+<div id="divCourseModuleListing" class="row">
 
-        <div class="col-lg-6">
-            <h4>Kursnnehåll</h4>
-            <span id="divCourseModules">
-                @{ Html.RenderPartial("_CourseModules", Model.Course.Modules.OrderBy(m => m.StartDate).ToList()); }
-            </span>
-            <details>
-                <summary>Lägg till modul</summary>
-                <span id="divCreateCourseModule" class="col-lg-12">
-                    @{ Html.RenderPartial("_CreateCourseModule", Model); }
-                </span>
-            </details>
-            <details>
-                <summary>Lägg till Aktivitet</summary>
-                <span id="divCreateModuleActivity" class="col-lg-12">
-                    @{ Html.RenderPartial("_CreateModuleActivity", Model.Activity); }
-                </span>
-            </details>
+    <div class="col-lg-6">
+        <div>
+            <span id="divFormContainer"></span>
         </div>
+        <h4>Kursnnehåll</h4>
+        <span id="divCourseModules">
+            @{ Html.RenderPartial("_CourseModules", Model.Course.Modules.OrderBy(m => m.StartDate).ToList()); }
+        </span>
+        <details>
+            <summary>Lägg till modul</summary>
+            <span id="divCreateCourseModule" class="col-lg-12">
+                @{ Html.RenderPartial("_CreateCourseModule", Model); }
+            </span>
+        </details>
+        <details>
+            <summary>Lägg till Aktivitet</summary>
+            <span id="divCreateModuleActivity" class="col-lg-12">
+                @{ Html.RenderPartial("_CreateModuleActivity", Model.Activity); }
+            </span>
+        </details>
+    </div>
         <div class="col-lg-6">
             <h4>Registrerade Studenter</h4>
             <span id="divCourseStudents">
@@ -81,7 +82,7 @@
                 </span>
             </details>
         </div>
-    </div>*@
+    </div>
 
 
 @section Scripts {
@@ -109,9 +110,12 @@
             //alert("should work");
             $("#divFormContainer").load('@Html.Raw(@Url.Action("PartialCreate", "Documents", new { @courseId = Model.Course.Id, @documentType = 0}))');
         }
-        function GetMduleDocumentForm() {
-            $("#divFormContainer").load('@Html.Raw(@Url.Action("PartialCreate", "Documents", new { @courseId = Model.Course.Id, @documentType = 0, @moduleId = 1}))');
-        }
+        @*function GetModuleDocumentForm(modelId) {
+            var M = modelId;
+            $("#divFormContainer").load(
+                '@Html.Raw(@Url.Action("PartialCreate", "Documents", new { @courseId = Model.Course.Id, @documentType = 0, @moduleId = M }))'
+            );
+        }*@
 
         function onAjaxBegin() {
             $("#divFormContainer").slideUp();
