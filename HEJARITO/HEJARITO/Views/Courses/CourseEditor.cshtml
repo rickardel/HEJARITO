@@ -93,7 +93,6 @@
             $("#btnCreateModule").on('click', function () {
                 let q = $("#Module_Name").val();
                 if (q.length > 1) {
-                    alert("there was " + q + " in name, so i will refresh.");
                     $("#divCreateModuleActivity").load("/Activities/GetActivityForm", { Id: 2 });
                 }
 
