@@ -18,13 +18,15 @@
             @Html.DisplayFor(model => model.Course.EndDate)
 
             @*@Html.ActionLink("[Ladda upp kursdokument]", "Create", "Documents", new { CourseId = Model.Course.Id }, "")*@
-            @Ajax.ActionLink("[Ladda upp kursdokument]", "_Create", "Documents", new { CourseId = Model.Course.Id }, new AjaxOptions
+            @*@Ajax.ActionLink("[Ladda upp kursdokument]", "_Create", "Documents", new { CourseId = Model.Course.Id }, new AjaxOptions
             {
                 UpdateTargetId = "divFormContainer",
                 OnBegin = "onAjaxBegin",
                 OnComplete = "onAjaxComplete"
 
-            })
+            })*@
+            @*@Ajax.ActionLink("[Ladda upp kursdokument]", "Create", "Documents", new { CourseId = Model.Course.Id}, AjaxOptions{  })*@
+            <a href="#" id="uploadCourseDocumentBtn" onclick="GetCourseDocumentForm()">[Ladda upp kursdokument]</a>
         </p>
         <span>
             @Html.DisplayFor(model => model.Course.Description)
@@ -41,10 +43,8 @@
         </span>
     </div>
 
-    <div class="col-md-6" style="background-color:blue">
-        <h4>Formulär</h4>
-        <span id="divFormContainer">
-        </span>
+    <div class="col-md-6">
+        <span id="divFormContainer"></span>
     </div>
 
 </div>
@@ -98,7 +98,21 @@
 
                 //alert(createdModuleName);
             });
+            var url = '@Url.Action("PartialCreate", "Documents")';
+            $("uploadCourseDocumentBtn").click(function () {
+                //$("divFormContainer").load(url, { CourseId = Module.Course.Id })
+                //$("divFormContainer").load("www.google.com");
+                alert("first one worked");
+            })
         });
+        function GetCourseDocumentForm() {
+            //alert("should work");
+            $("#divFormContainer").load('@Html.Raw(@Url.Action("PartialCreate", "Documents", new { @courseId = Model.Course.Id, @documentType = 0}))');
+        }
+        function GetMduleDocumentForm() {
+            $("#divFormContainer").load('@Html.Raw(@Url.Action("PartialCreate", "Documents", new { @courseId = Model.Course.Id, @documentType = 0, @moduleId = 1}))');
+        }
+
         function onAjaxBegin() {
             $("#divFormContainer").slideUp();
         }

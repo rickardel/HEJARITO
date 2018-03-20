@@ -76,7 +76,7 @@ namespace HEJARITO.Controllers
 
 
         // GET: Documents/Create
-        public string  AjaxCreate(int? courseId)
+        public ActionResult PartialCreate(int courseId , int documentType, int? moduleId, int? activityId)
         {
             //ViewBag.ActivityId = new SelectList(db.Activities, "Id", "Name");
             //ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name");
@@ -86,8 +86,24 @@ namespace HEJARITO.Controllers
             ViewBag.Courses = db.Courses.ToList();
             ViewBag.Modules = db.Modules.ToList();
             ViewBag.Activities = db.Activities.ToList();
-            Document c = new Document() { CourseId = courseId };
-            return ("This data is fetched through ajax call. ");
+            DocumentType dt = DocumentType.CourseDocument; ;
+            Document c = new Document() { DocumentType = dt, CourseId = courseId, ApplicationUserId = User.Identity.GetUserId() };
+            switch (documentType)
+            {
+                case 0:
+                    dt = DocumentType.CourseDocument;
+                    break;
+                case 1:
+                    dt = DocumentType.ModuleDocument;
+                    c = new Document() { DocumentType = dt, CourseId = courseId, ApplicationUserId = User.Identity.GetUserId() };
+                    break;
+                case 2:
+                    dt = DocumentType.ActivityDocument;
+                    c = new Document() { DocumentType = dt, CourseId = courseId, ApplicationUserId = User.Identity.GetUserId() };
+                    break;
+            }
+            dt = DocumentType.CourseDocument;
+            return PartialView("_CreateDocument", c);
         }
 
         // GET: Documents/Create
@@ -110,7 +126,7 @@ namespace HEJARITO.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,DocumentType,CourseId,ModuleId,ActivityId,FileName")] Document document, HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,DocumentType,CourseId,ModuleId,ActivityId,FileName")] Document document, HttpPostedFileBase fileName)
         {
             document.UploadDate = DateTime.Now;
             document.ApplicationUserId = User.Identity.GetUserId();
@@ -118,9 +134,9 @@ namespace HEJARITO.Controllers
             {
                 try
                 {
-                    if (file.ContentLength > 0)
+                    if (fileName.ContentLength > 0)
                     {
-                        string _FileName = Path.GetFileName(file.FileName);
+                        string _FileName = Path.GetFileName(fileName.FileName);
                         string localPath = "~/UploadedFiles";
                         switch (document.DocumentType)
                         {
@@ -141,21 +157,21 @@ namespace HEJARITO.Controllers
                         if (!Directory.Exists(Server.MapPath(localPath)))
                             Directory.CreateDirectory(Server.MapPath(localPath));
                         string _path = Path.Combine(Server.MapPath(localPath), _FileName);
-                        document.ContentLength = file.ContentLength;
-                        document.FileName = file.FileName;
-                        document.ContentType = file.ContentType;
+                        document.ContentLength = fileName.ContentLength;
+                        document.FileName = fileName.FileName;
+                        document.ContentType = fileName.ContentType;
                         document.ApplicationUser = db.Users.Find(document.ApplicationUserId);
-                        file.SaveAs(_path);
+                        fileName.SaveAs(_path);
                     }
                     db.Documents.Add(document);
                     db.SaveChanges();
-                    ViewBag.Message = "Filen: " + file.FileName + " är nu uppladdad!!";
+                    ViewBag.Message = "Filen: " + fileName.FileName + " är nu uppladdad!!";
                 }
                 catch
                 {
                     ViewBag.Message = "Kunde inte ladda upp filen!!";
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Index"); // Todo . return PartialView
             }
 
             ViewBag.ActivityId = new SelectList(db.Activities, "Id", "Name", document.ActivityId);

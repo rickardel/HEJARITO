@@ -49,7 +49,7 @@ namespace HEJARITO.Migrations
                         CourseId = c.Int(),
                         ModuleId = c.Int(),
                         ActivityId = c.Int(),
-                        FileName = c.String(maxLength: 255),
+                        FileName = c.String(nullable: false, maxLength: 255),
                         ContentLength = c.Int(nullable: false),
                         ContentType = c.String(),
                     })
@@ -163,7 +163,7 @@ namespace HEJARITO.Migrations
                         UploadDate = c.DateTime(nullable: false),
                         ApplicationUserId = c.String(maxLength: 128),
                         ActivityId = c.Int(),
-                        FileName = c.String(maxLength: 255),
+                        FileName = c.String(nullable: false, maxLength: 255),
                         ContentLength = c.Int(nullable: false),
                         ContentType = c.String(),
                     })

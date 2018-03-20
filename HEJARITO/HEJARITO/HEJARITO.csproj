@@ -215,13 +215,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803161402319_init.cs" />
-    <Compile Include="Migrations\201803161402319_init.Designer.cs">
-      <DependentUpon>201803161402319_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803190955030_required file name.cs" />
-    <Compile Include="Migrations\201803190955030_required file name.Designer.cs">
-      <DependentUpon>201803190955030_required file name.cs</DependentUpon>
+    <Compile Include="Migrations\201803191716469_init.cs" />
+    <Compile Include="Migrations\201803191716469_init.Designer.cs">
+      <DependentUpon>201803191716469_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -337,7 +333,7 @@
     <Content Include="Views\Shared\_CreateCourseStudent.cshtml" />
     <Content Include="Views\Shared\_CourseStudents.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Documents\normalCreate.cshtml" />
+    <Content Include="Views\Documents\Create.cshtml" />
     <Content Include="Views\Documents\Delete.cshtml" />
     <Content Include="Views\Documents\Details.cshtml" />
     <Content Include="Views\Documents\Edit.cshtml" />
@@ -348,6 +344,7 @@
     <Content Include="Views\StudentDocuments\Edit.cshtml" />
     <Content Include="Views\StudentDocuments\Index.cshtml" />
     <Content Include="Views\Shared\_CreateDocument.cshtml" />
+    <Content Include="Views\Shared\Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -366,11 +363,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803161402319_init.resx">
-      <DependentUpon>201803161402319_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803190955030_required file name.resx">
-      <DependentUpon>201803190955030_required file name.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803191716469_init.resx">
+      <DependentUpon>201803191716469_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

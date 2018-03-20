@@ -71,7 +71,7 @@ namespace HEJARITO.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,ActivityId,FileName,ContentLength,ContentType")] StudentDocument studentDocument, HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,ActivityId,FileName,ContentLength,ContentType")] StudentDocument studentDocument, HttpPostedFileBase fileName)
         {
             studentDocument.UploadDate = DateTime.Now;
             studentDocument.ApplicationUserId = User.Identity.GetUserId();
@@ -81,9 +81,9 @@ namespace HEJARITO.Controllers
                   
                 try
                 {
-                    if (file.ContentLength > 0)
+                    if (fileName.ContentLength > 0)
                     {
-                        string _FileName = Path.GetFileName(file.FileName);
+                        string _FileName = Path.GetFileName(fileName.FileName);
                         string localPath = "~/UploadedFiles";
 
                         studentDocument.Activity = db.Activities.Find(studentDocument.ActivityId);
@@ -93,15 +93,15 @@ namespace HEJARITO.Controllers
                         if (!Directory.Exists(Server.MapPath(localPath)))
                             Directory.CreateDirectory(Server.MapPath(localPath));
                         string _path = Path.Combine(Server.MapPath(localPath), _FileName);
-                        studentDocument.ContentLength = file.ContentLength;
-                        studentDocument.FileName = file.FileName;
-                        studentDocument.ContentType = file.ContentType;
+                        studentDocument.ContentLength = fileName.ContentLength;
+                        studentDocument.FileName = fileName.FileName;
+                        studentDocument.ContentType = fileName.ContentType;
                         studentDocument.ApplicationUserId = User.Identity.Name;
-                        file.SaveAs(_path);
+                        fileName.SaveAs(_path);
                     }
                     db.StudentDocuments.Add(studentDocument);
                     db.SaveChanges();
-                    ViewBag.Message = "Filen: " + file.FileName + " är nu uppladdad!!";
+                    ViewBag.Message = "Filen: " + fileName.FileName + " är nu uppladdad!!";
                     return RedirectToAction("Index");
                 }
                 catch
