@@ -83,12 +83,7 @@ code {
     opacity: 0.3;
 }
 
-/*  //TM 2018-03-19 11:38 Alla btn-knappar i en tabell ska visas i mörkare grått när musen hamnar ovanför tabellraden
-    //TM 2018-03-19 14:42 Även btn-knappar i en paragraf eller input ska visas i samma mörkare grått */
-/*
-.a .btn,
-.input .btn,
-    */
+/*  //TM 2018-03-19 11:38 Alla btn-knappar i en tabell ska visas i mörkare grått när musen hamnar ovanför tabellraden */
 .table tbody tr:hover .btn {
     opacity: 0.6;
 }
@@ -109,4 +104,12 @@ code {
 /* //TM 2018-03-19 08:48 Tabellraders bakgrund lyser upp i ljusgul när musen hamnar ovanför dem */
 .table tbody tr:hover td {
     background-color: rgb(249, 255, 192);
+}
+
+/* //TM 2018-03-20 11:38 Modifiera klassen 'text-success' som används för bekräftelser till användaren om genomförda ändringar */
+p.text-success {
+    color: lightyellow;
+    background-color:lightgreen;
+    font-size:x-large;
+    font-weight:bold;
 }

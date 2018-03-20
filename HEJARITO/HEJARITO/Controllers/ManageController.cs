@@ -55,8 +55,9 @@ namespace HEJARITO.Controllers
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
+                // TM 2018-03-20 10:47 Svenska texter isf. engelska
+                message == ManageMessageId.ChangePasswordSuccess ? "Ditt lösenord har ändrats."// "Your password has been changed."
+                : message == ManageMessageId.SetPasswordSuccess ? "Ditt lösenord har ställts in."// "Your password has been set."
                 : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."

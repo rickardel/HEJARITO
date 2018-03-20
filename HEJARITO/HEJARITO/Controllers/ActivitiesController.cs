@@ -58,6 +58,10 @@ namespace HEJARITO.Controllers
             {
                 db.Activities.Add(activity);
                 db.SaveChanges();
+
+                //TM 2018-03-19 16-19 Ska visas i nästa vy
+                ViewBag.StatusMessage = "Skapande av en ny aktivitet genomfördes";
+
                 return RedirectToAction("Index");
             }
 
@@ -74,6 +78,10 @@ namespace HEJARITO.Controllers
             {
                 db.Activities.Add(activity);
                 db.SaveChanges();
+
+                //TM 2018-03-19 16-19 Ska visas i nästa vy
+                ViewBag.KvittoMeddelande = "Skapande av en ny aktivitet genomfördes";
+
                 return PartialView("_CourseModules", module.Course.Modules.OrderBy(m => m.StartDate).ToList());
             }
             ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "Id", "Name", activity.ActivityTypeId);
@@ -118,6 +126,10 @@ namespace HEJARITO.Controllers
             {
                 db.Entry(activity).State = EntityState.Modified;
                 db.SaveChanges();
+
+                //TM 2018-03-19 16-19 Ska visas i nästa vy
+                ViewBag.KvittoMeddelande = "Redigering av en aktivitet genomfördes";
+
                 return RedirectToAction("Index");
             }
             ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "Id", "Name", activity.ActivityTypeId);
@@ -150,6 +162,10 @@ namespace HEJARITO.Controllers
             Activity activity = db.Activities.Find(id);
             db.Activities.Remove(activity);
             db.SaveChanges();
+
+            //TM 2018-03-19 16-19 Ska visas i nästa vy
+            ViewBag.KvittoMeddelande = "Borttagning av en aktivitet genomfördes";
+
             return RedirectToAction("Index");
         }
 

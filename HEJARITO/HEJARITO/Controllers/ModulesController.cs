@@ -57,6 +57,10 @@ namespace HEJARITO.Controllers
             {
                 db.Modules.Add(module);
                 db.SaveChanges();
+
+                //TM 2018-03-19 16-19 Ska visas i nästa vy
+                ViewBag.KvittoMeddelande = "Skapande av en ny modul genomfördes";
+
                 return RedirectToAction("Index");
             }
 
@@ -73,6 +77,9 @@ namespace HEJARITO.Controllers
                 module.Activities = new List<Activity>();
                 db.Modules.Add(module);
                 db.SaveChanges();
+
+                //TM 2018-03-19 16-19 Ska visas i nästa vy
+                ViewBag.KvittoMeddelande = "Skapande av en ny modul genomfördes";
 
                 return PartialView("_CourseModules", course.Modules.OrderBy(m => m.StartDate).ToList());
             }
@@ -108,6 +115,10 @@ namespace HEJARITO.Controllers
             {
                 db.Entry(module).State = EntityState.Modified;
                 db.SaveChanges();
+
+                //TM 2018-03-19 16-19 Ska visas i nästa vy
+                ViewBag.KvittoMeddelande = "Redigering av en modul genomfördes";
+
                 return RedirectToAction("Index");
             }
             ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name", module.CourseId);
@@ -139,6 +150,10 @@ namespace HEJARITO.Controllers
             Module module = db.Modules.Find(id);
             db.Modules.Remove(module);
             db.SaveChanges();
+
+            //TM 2018-03-19 16-19 Ska visas i nästa vy
+            ViewBag.KvittoMeddelande = "Borttagning av en modul genomfördes";
+
             return RedirectToAction("Index");
         }
 
