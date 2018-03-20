@@ -25,7 +25,7 @@ textarea {
 
 /* Padding removed from the logotype*/
 .navbar-brand {
-    padding: 0px;
+    padding: 0;
 }
 
 /* Navbar background color according to Lexicon*/
@@ -64,6 +64,8 @@ body {
 body > .container {
     padding: 60px 15px 0;
 }
+
+
 
 .footer > .container {
     padding-right: 15px;

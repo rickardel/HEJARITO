@@ -85,6 +85,9 @@ namespace HEJARITO.Controllers
         public PartialViewResult GetActivityForm()
         {
             //Course course = db.Courses.Find(id);
+            
+            ViewBag.Test = db.ActivityTypes.ToList();
+            ViewBag.Module = db.Modules.ToList();
             return PartialView("_CreateModuleActivity");
         }
 

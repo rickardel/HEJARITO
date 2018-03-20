@@ -207,19 +207,17 @@
     <Compile Include="Controllers\CourseAPIController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\CourseStudentAPIController.cs" />
+    <Compile Include="Controllers\DocumentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModulesController.cs" />
+    <Compile Include="Controllers\StudentDocumentsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803080901093_initial ERD &amp; Seed.cs" />
-    <Compile Include="Migrations\201803080901093_initial ERD &amp; Seed.Designer.cs">
-      <DependentUpon>201803080901093_initial ERD &amp; Seed.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803090909037_Test av Nullable DateTime i Activity.DeadlineDate.cs" />
-    <Compile Include="Migrations\201803090909037_Test av Nullable DateTime i Activity.DeadlineDate.Designer.cs">
-      <DependentUpon>201803090909037_Test av Nullable DateTime i Activity.DeadlineDate.cs</DependentUpon>
+    <Compile Include="Migrations\201803201206471_Init.cs" />
+    <Compile Include="Migrations\201803201206471_Init.Designer.cs">
+      <DependentUpon>201803201206471_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -227,10 +225,12 @@
     <Compile Include="Models\ActivityType.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CourseEditor.cs" />
+    <Compile Include="Models\Document.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Module.cs" />
     <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\StudentDocument.cs" />
     <Compile Include="Models\TeacherViewModel.cs" />
     <Compile Include="Models\StudentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -333,6 +333,21 @@
     <Content Include="Views\Shared\_CreateCourseStudent.cshtml" />
     <Content Include="Views\Shared\_CourseStudents.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Documents\Create.cshtml" />
+    <Content Include="Views\Documents\Delete.cshtml" />
+    <Content Include="Views\Documents\Details.cshtml" />
+    <Content Include="Views\Documents\Edit.cshtml" />
+    <Content Include="Views\Documents\Index.cshtml" />
+    <Content Include="Views\StudentDocuments\Create.cshtml" />
+    <Content Include="Views\StudentDocuments\Delete.cshtml" />
+    <Content Include="Views\StudentDocuments\Details.cshtml" />
+    <Content Include="Views\StudentDocuments\Edit.cshtml" />
+    <Content Include="Views\StudentDocuments\Index.cshtml" />
+    <Content Include="Views\Shared\_CreateDocument.cshtml" />
+    <Content Include="Views\Shared\Success.cshtml" />
+    <Content Include="Views\Activities\_ActivityStudents.cshtml" />
+    <Content Include="Views\Documents\CreateModuleDocument.cshtml" />
+    <Content Include="Views\Documents\CreateActivityDocument.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -351,11 +366,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803080901093_initial ERD &amp; Seed.resx">
-      <DependentUpon>201803080901093_initial ERD &amp; Seed.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803090909037_Test av Nullable DateTime i Activity.DeadlineDate.resx">
-      <DependentUpon>201803090909037_Test av Nullable DateTime i Activity.DeadlineDate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803201206471_Init.resx">
+      <DependentUpon>201803201206471_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

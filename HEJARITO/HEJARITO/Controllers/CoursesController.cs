@@ -23,6 +23,15 @@ namespace HEJARITO.Controllers
             return View(db.Courses.ToList());
         }
 
+        // JSON: return Modules in course
+        public ActionResult GetModules(int course)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            var modules = db.Modules.Where(c => c.CourseId == course).ToList();
+            var tmp = Json(modules, JsonRequestBehavior.AllowGet);
+            return tmp;
+        }
+
         // GET: Courses/Details/5
         public ActionResult Details(int? id)
         {
@@ -73,6 +82,7 @@ namespace HEJARITO.Controllers
 
         public ActionResult CourseEditor(int? id)
         {
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -88,7 +98,7 @@ namespace HEJARITO.Controllers
             CourseEditor courseEditor = new CourseEditor(course);
             ViewBag.ActivityTypeId =               new SelectList(db.ActivityTypes.ToList(), "Id", "Name");
             ViewBag.ModuleId =                          new SelectList(courseEditor.Course.Modules, "Id", "Name");
-            ViewBag.Test = db.ActivityTypes.ToList();
+            ViewBag.ActivityTypes = db.ActivityTypes.ToList();
             ViewBag.Module = course.Modules.ToList();
             return View(courseEditor);
         }

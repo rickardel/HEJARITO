@@ -10,6 +10,8 @@
 
     <div>
         <h4>Module</h4>
+        @Html.ActionLink("[Ladda upp dokument för denna modul]", "CreateModuleDocument", "Documents", new { ModuleId = Model.Id }, "")
+
         <hr />
         <dl class="dl-horizontal">
             <dt>@Html.DisplayNameFor(model => model.Course.Name)</dt>
