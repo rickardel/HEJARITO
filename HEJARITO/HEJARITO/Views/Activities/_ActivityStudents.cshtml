@@ -1,0 +1,38 @@
+﻿
+@model IEnumerable<HEJARITO.Models.ApplicationUser>
+
+@if (User.Identity.IsAuthenticated)
+{
+
+    <table class="table">
+        <tr>
+            <th>Kontaktuppgifter</th>
+            <th>Name</th>
+            <th>Uppladdat</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                    @if (item.PhoneNumber != null)
+                    {@Html.DisplayFor(modelItem => item.PhoneNumber);
+                }
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</td>
+
+                <td>
+                    @foreach (var doc in item.StudentDocuments)
+                    {
+                    @Html.ActionLink(" ", "Download", "StudentDocuments", new { Id = doc.Id }, new { @class = "glyphicon glyphicon-file" })
+                    }
+
+
+                </td>
+            </tr>
+        }
+
+    </table>
+}

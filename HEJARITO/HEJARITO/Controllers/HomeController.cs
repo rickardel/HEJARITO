@@ -98,11 +98,11 @@ namespace HEJARITO.Controllers
             List<Activity> startingActivities = new List<Activity>();
             List<Activity> endingActivities = new List<Activity>();
             List<Activity> deadLines = new List<Activity>();
-            startingActivities = db.Activities.Where(d => d.StartDate >= startDate && d.StartDate <= endDate).ToList();
-            endingActivities = db.Activities.Where(d => d.EndDate >= startDate && d.EndDate <= endDate).ToList();
-            deadLines = db.Activities.Where(d => d.DeadlineDate >= startDate && d.DeadlineDate <= endDate).ToList();
-            teacherViewModel.Activities = startingActivities.Concat(endingActivities).Concat(deadLines).ToList();
-
+            //startingActivities = db.Activities.Where(d => d.StartDate >= startDate && d.StartDate <= endDate).ToList();
+            //endingActivities = db.Activities.Where(d => d.EndDate >= startDate && d.EndDate <= endDate).ToList();
+            //deadLines = db.Activities.Where(d => d.DeadlineDate >= startDate && d.DeadlineDate <= endDate).ToList();
+            //teacherViewModel.Activities = startingActivities.Concat(endingActivities).Concat(deadLines).ToList();
+            teacherViewModel.Activities = db.Activities.Where(d => d.EndDate >= startDate && d.EndDate <= endDate).ToList();
             teacherViewModel.Courses = db.Courses.ToList();
 
             teacherViewModel.Users = db.Users.ToList();

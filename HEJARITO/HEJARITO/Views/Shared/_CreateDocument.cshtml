@@ -1,0 +1,144 @@
+﻿@model HEJARITO.Models.Document
+
+
+@using (Html.BeginForm("Create", "Documents", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h2>Nytt Document</h2>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" style="display:none;">
+            @Html.LabelFor(model => model.DocumentType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.DocumentType, htmlAttributes: new { @class = "form-control", @onChange = "ToggleSelectorsVisibility()" })
+                @Html.ValidationMessageFor(model => model.DocumentType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="divCourseId" style="display:none;">
+            @Html.LabelFor(model => model.CourseId, "CourseId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.CourseId, new SelectList(ViewBag.Courses, "Id", "Name"), "- Välj Kurs -", new { @class = "form-control", @onchange = "GetModules()" })
+                @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="divModuleId" style="display:none;">
+            @Html.LabelFor(model => model.ModuleId, "ModuleId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ModuleId, new SelectList(ViewBag.Modules, "Id", "Name"), "- Välj Module -", new { @class = "form-control", @onchange = "GetActivities()" })
+                @Html.ValidationMessageFor(model => model.ModuleId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="divActivityId" style="display:none;">
+            @Html.LabelFor(model => model.ActivityId, "ActivityId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ActivityId, new SelectList(ViewBag.Activities, "Id", "Name"), "- Alla Activiteter -", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ActivityId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FileName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.TextBox("file", "", new { type = "file", @class = "form-control" }) <br />*@
+                @Html.EditorFor(model => model.FileName, new { htmlAttributes = new { @class = "input-file control-label", type = "file", name = "file", title = "Vänligen välj fil" } })
+
+                @ViewBag.Message
+                @Html.ValidationMessageFor(model => model.FileName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+        });
+
+
+        function ToggleSelectorsVisibility() {
+            switch ($("#DocumentType").val()) {
+                case "0":
+                    $('#divModuleId').slideUp();
+                    $('#divActivityId').slideUp();
+                    break;
+                case "1":
+                    $('#divModuleId').slideDown();
+                    $('#divActivityId').slideUp();
+                    break;
+                case "2":
+                    $('#divModuleId').slideDown();
+                    $('#divActivityId').slideDown();
+                    break;
+                default:
+            }
+
+        }
+        function GetActivities() {
+            var moduleId = $('#ModuleId').val();
+            $.ajax({
+                url: '/Modules/GetActivities',
+                type: "GET",
+                dataType: "JSON",
+                data: { Module: moduleId },
+                success: function (activities) {
+                    $("#ActivityId").html(""); // clear before appending new list
+                    $.each(activities, function (i, activity) {
+                        $("#ActivityId").append(
+                            $('<option></option>').val(activity.Id).html(activity.Name));
+                    });
+                }
+            });
+        }
+        function GetModules() {
+            if ($('#CourseId').val() != null)
+                var courseId = $('#CourseId').val();
+            else
+                var courseId = -1;
+            $.ajax({
+                url: '/Courses/GetModules',
+                type: "GET",
+                dataType: "JSON",
+                data: { Course: courseId },
+                success: function (modules) {
+                    $("#ModuleId").html(""); // clear before appending new list
+                    $.each(modules, function (i, module) {
+                        $("#ModuleId").append(
+                            $('<option></option>').val(module.Id).html(module.Name));
+                    });
+                }
+            })
+            GetActivities();
+        }
+
+
+    </script>
+}

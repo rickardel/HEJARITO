@@ -25,7 +25,9 @@ namespace HEJARITO.Models
         
         public int? CourseId { get; set; }
         public virtual Course Course { get; set; }
-        //public virtual ICollection<Document> Documents { get; set; }
+        public virtual ICollection<Document> Documents { get; set; }
+        public virtual ICollection<StudentDocument> StudentDocuments { get; set; }
+
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -55,5 +57,11 @@ namespace HEJARITO.Models
         public System.Data.Entity.DbSet<HEJARITO.Models.Module> Modules { get; set; }
 
         public System.Data.Entity.DbSet<HEJARITO.Models.Course> Courses { get; set; }
+
+        public System.Data.Entity.DbSet<HEJARITO.Models.Document> Documents { get; set; }
+
+        public System.Data.Entity.DbSet<HEJARITO.Models.StudentDocument> StudentDocuments { get; set; }
+
+        //public System.Data.Entity.DbSet<HEJARITO.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

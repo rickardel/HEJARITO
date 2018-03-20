@@ -30,6 +30,7 @@ namespace HEJARITO.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Activity activity = db.Activities.Find(id);
+            ViewBag.documents = db.Documents.Where(d => d.Activity == activity);
             if (activity == null)
             {
                 return HttpNotFound();
@@ -93,6 +94,9 @@ namespace HEJARITO.Controllers
         public PartialViewResult GetActivityForm()
         {
             //Course course = db.Courses.Find(id);
+            
+            ViewBag.Test = db.ActivityTypes.ToList();
+            ViewBag.Module = db.Modules.ToList();
             return PartialView("_CreateModuleActivity");
         }
 
