@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -36,22 +35,45 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    @*The "Home" button goes to the Teacher or the Student homepage depending on the loged-in user*@
-                    @*<li class="active">@Html.ActionLink("Home", "SelectStartView", "Home")</li>*@
                     <li class="active" style="font-weight: bold">@Html.ActionLink("Om HEJARITO", "About", "Home")</li>
                     <li class="active" style="font-weight: bold">@Html.ActionLink("Kontakt", "Contact", "Home")</li>
-                    @*<li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li class="dropdown-header">Nav header</li>
-                            <li><a href="#">Separated link</a></li>
+                    @*
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Nav header</li>
+                                <li><a href="#">Separated link</a></li>
 
-                        </ul>
-                    </li>*@
+                            </ul>
+                        </li>
+                    *@
+
+                    @*The "Home" button goes to the Teacher or the Student homepage depending on the loged-in user*@
+                    @{
+                        // TM 2018-03-15 12:17 Länktext beror på inloggad användares roll
+                        string hemVariant = "";
+
+                        if (User.IsInRole("Teacher"))
+                        {
+                            hemVariant += "Lärarhem";
+                        }
+                        else
+                        {
+                            if (User.IsInRole("Student"))
+                            {
+                                hemVariant = "Elevhem";
+                            }
+                        }
+                        if (hemVariant.Length > 0)
+                        {
+                            <li class="active" style="font-weight: bold">@Html.ActionLink(hemVariant, "SelectStartView", "Home")</li>
+                        }
+                    }
+
                     <li>@Html.Partial("_LoginPartial")</li>
                 </ul>
             </div><!--/.nav-collapse -->
@@ -63,8 +85,12 @@
     </nav>
 
     <!-- Begin page content -->
+
     <div class="container">
-        
+        @*  //TM 2018-03-20 13:03 Kvitto/felmeddelande efter CUD *@
+        <p class="text-success">
+        @ViewBag.StatusMessage</p>
+
         @RenderBody()
     </div>
 

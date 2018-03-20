@@ -1,42 +1,47 @@
 ﻿@model HEJARITO.Models.IndexViewModel
 @{
-    ViewBag.Title = "Manage";
+    // TM 2018-03-20 10:03 Svensk text isf. engelsk
+    ViewBag.Title = "Kontoinställningar";
 }
+<h2>@ViewBag.Title</h2>
+@* // TM 2018-03-20 12:25 Raden nedan Verkar ha blivit överflödig! :-) *@
+    @*<p class="text-success">@ViewBag.StatusMessage</p>*@
 
-<h2>@ViewBag.Title.</h2>
-
-<p class="text-success">@ViewBag.StatusMessage</p>
 <div>
-    <h4>Change your account settings</h4>
+    @*// TM 2018-03-20 10:03 Svensk text isf. engelsk *@
+    <h4>Gör ändringar i dina kontoinställningar</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>Password:</dt>
+        @*// TM 2018-03-20 10:03 Svensk text isf. engelsk *@
+        <dt>Lösenord:</dt>
         <dd>
             [
             @if (Model.HasPassword)
             {
-                @Html.ActionLink("Change your password", "ChangePassword")
+                @Html.ActionLink("Ändra lösenord", "ChangePassword", "", new { @class = "btn btn-xs btn-warning" })
             }
             else
             {
-                @Html.ActionLink("Create", "SetPassword")
+                @Html.ActionLink("Skapa lösenord", "Create", "", new { @class = "btn btn-xs btn-success" })
             }
             ]
         </dd>
-        <dt>External Logins:</dt>
+        @*// TM 2018-03-20 10:03 Svensk text isf. engelsk *@
+        <dt>Externa inloggningar:</dt>
         <dd>
             @Model.Logins.Count [
-            @Html.ActionLink("Manage", "ManageLogins") ]
+            @*// TM 2018-03-20 10:03 Svensk text isf. engelsk *@
+            @Html.ActionLink("Hantera", "ManageLogins") ]
         </dd>
         @*
             Phone Numbers can used as a second factor of verification in a two-factor authentication system.
-             
+
              See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
                 for details on setting up this ASP.NET application to support two-factor authentication using SMS.
-             
+
              Uncomment the following block after you have set up two-factor authentication
         *@
-        @*  
+        @*
             <dt>Phone Number:</dt>
             <dd>
                 @(Model.PhoneNumber ?? "None")
@@ -56,11 +61,15 @@
                 }
             </dd>
         *@
-        <dt>Two-Factor Authentication:</dt>
+        @*// TM 2018-03-20 10:03 Svensk text isf. engelsk *@
+        <dt>2F-autentisering:</dt>
         <dd>
             <p>
-                There are no two-factor authentication providers configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                for details on setting up this ASP.NET application to support two-factor authentication.
+                @*// TM 2018-03-20 10:03 Svensk text isf. engelsk *@
+                Det finns inga konfigurerade leverantörer för tvåfaktorsautentisering. Se <a href="https://go.microsoft.com/fwlink/?LinkId=403804">den här artikeln</a> (på engelska)
+                för detaljer om hur denna ASP.NET-applikation kan fås till att stödja tvåfaktorsautentisering.
+                @*There are no two-factor authentication providers configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                    for details on setting up this ASP.NET application to support two-factor authentication.*@
             </p>
             @*@if (Model.TwoFactor)
                 {

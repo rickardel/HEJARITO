@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HEJARITO.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -6,7 +7,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using HEJARITO.Models;
 
 namespace HEJARITO.Controllers
 {
@@ -55,6 +55,10 @@ namespace HEJARITO.Controllers
             {
                 db.ActivityTypes.Add(activityType);
                 db.SaveChanges();
+
+                //TM 2018-03-19 16-19 Ska visas i nästa vy
+                ViewBag.KvittoMeddelande = "Skapandet av en ny aktivitetstyp genomfördes";
+
                 return RedirectToAction("Index");
             }
 
@@ -89,6 +93,10 @@ namespace HEJARITO.Controllers
             {
                 db.Entry(activityType).State = EntityState.Modified;
                 db.SaveChanges();
+
+                //TM 2018-03-19 16-19 Ska visas i nästa vy
+                ViewBag.KvittoMeddelande = "Redigering av en aktivitetstyp genomfördes";
+
                 return RedirectToAction("Index");
             }
             return View(activityType);
@@ -119,6 +127,10 @@ namespace HEJARITO.Controllers
             ActivityType activityType = db.ActivityTypes.Find(id);
             db.ActivityTypes.Remove(activityType);
             db.SaveChanges();
+
+            //TM 2018-03-19 16-19 Ska visas i nästa vy
+            ViewBag.KvittoMeddelande = "Borttagning av en aktivitetstyp genomfördes";
+
             return RedirectToAction("Index");
         }
 

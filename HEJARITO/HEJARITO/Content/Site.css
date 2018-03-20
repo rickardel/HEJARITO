@@ -75,3 +75,43 @@ body > .container {
 code {
     font-size: 80%;
 }
+
+/* //TM 2018-03-19 12:19 Alla btn-knappar i en tabell ska visas i en ljusgrå nyans */
+.btn, 
+.table tbody tr.btn {
+    color: #e7e7e7;
+    border-color: #e7e7e7;
+    background-color: #303030;
+    opacity: 0.3;
+}
+
+/*  //TM 2018-03-19 11:38 Alla btn-knappar i en tabell ska visas i mörkare grått när musen hamnar ovanför tabellraden */
+.table tbody tr:hover .btn {
+    opacity: 0.6;
+}
+
+/* //TM 2018-03-19 11:38 Alla btn-knappar lyser färgglatt upp när musen hamnar ovanför dem */
+.table tbody tr .btn:hover,
+.btn:hover {
+    opacity: 1;
+}
+
+/* //TM 2018-03-18 12:25 Tabellrubrikrader blir Lexiconfärgsatta */
+.table tbody tr:first-of-type th,
+.table thead tr:first-of-type th {
+    background-color: RGB(21, 40, 68); /*Lexicon-mörkblå*/
+    color: white;
+}
+
+/* //TM 2018-03-19 08:48 Tabellraders bakgrund lyser upp i ljusgul när musen hamnar ovanför dem */
+.table tbody tr:hover td {
+    background-color: rgb(249, 255, 192);
+}
+
+/* //TM 2018-03-20 11:38 Modifiera klassen 'text-success' som används för bekräftelser till användaren om genomförda ändringar */
+p.text-success {
+    color: lightyellow;
+    background-color:lightgreen;
+    font-size:x-large;
+    font-weight:bold;
+}

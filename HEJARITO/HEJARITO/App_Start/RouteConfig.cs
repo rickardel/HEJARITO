@@ -16,7 +16,8 @@ namespace HEJARITO
             routes.MapRoute(
                 name: "LoginAsDefault",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional }
+                //TM 2018-03-16 11:45 Genom denna 'action' hamnar användaren på rätt startvy när hen redan är inloggad vid appens uppstart
+                defaults: new { controller = "Home", action = "SelectStartView", id = UrlParameter.Optional }
             );
 
             //routes.MapRoute(

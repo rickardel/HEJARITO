@@ -74,6 +74,10 @@ namespace HEJARITO.Controllers
             {
                 db.Courses.Add(course);
                 db.SaveChanges();
+
+                //TM 2018-03-19 16-19 Ska visas i nästa vy
+                ViewBag.KvittoMeddelande = "Skapande av en ny kurs genomfördes";
+
                 return RedirectToAction("Index");
             }
 
@@ -160,6 +164,10 @@ namespace HEJARITO.Controllers
             {
                 db.Entry(course).State = EntityState.Modified;
                 db.SaveChanges();
+
+                //TM 2018-03-19 16-19 Ska visas i nästa vy
+                ViewBag.KvittoMeddelande = "Redigering av en kurs genomfördes";
+
                 return RedirectToAction("Index");
             }
             return View(course);
@@ -190,6 +198,10 @@ namespace HEJARITO.Controllers
             Course course = db.Courses.Find(id);
             db.Courses.Remove(course);
             db.SaveChanges();
+
+            //TM 2018-03-19 16-19 Ska visas i nästa vy
+            ViewBag.KvittoMeddelande = "Bortagning av en kurs genomfördes";
+
             return RedirectToAction("Index");
         }
 
