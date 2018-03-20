@@ -348,6 +348,7 @@
     <Content Include="Views\Activities\_ActivityStudents.cshtml" />
     <Content Include="Views\Documents\CreateModuleDocument.cshtml" />
     <Content Include="Views\Documents\CreateActivityDocument.cshtml" />
+    <Content Include="Views\Shared\_CourseModulesOld.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

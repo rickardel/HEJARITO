@@ -1,0 +1,70 @@
+﻿<ul class="alist" id="CourseModuleList">
+    @foreach (var module in Model)
+    {
+        <li class="module-list">
+            <div class="dropdown" style="display:inline">
+                <button class="btn btn-xs btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-header">Modul</li>
+                    <li>@Html.ActionLink("Ändra", "Edit", "Modules", new { id = module.Id }, new { @class = "dropdown-item" })      </li>
+                    <li>@Html.ActionLink("Radera", "Delete", "Modules", new { id = module.Id }, new { @class = "dropdown-item" })   </li>
+                    <li class="dropdown-header">Moduldokument</li>
+                    <li>@Html.ActionLink("Ladda upp", "Create", "Documents", new { DocumentType = 1, ModuleId = module.Id }, "")</li>
+                    @*<li><a href="#" id="uploadCourseDocumentBtn" onclick="GetModuleDocumentForm(@module.Id)">[Ladda upp moduldokument]</a></li>*@
+                </ul>
+            </div>
+
+
+            @*<a href="#"><span class="glyphicon glyphicon-file"></span></a>*@
+            <strong>
+                @module.StartDate.ToString("dd/MM") > @module.EndDate.ToString("dd/MM")
+                @*TODO only loop if module.Documents not null*@
+                @Html.ActionLink(@module.Name, "Details", "Modules", new { id = module.Id }, new { @title = module.Description, @class = "dropdown-item" })
+                @*@foreach (var item in module.Documents)
+                    {
+                        @Html.ActionLink(" ", "Download", "Documents", new { id = item.Id }, new { @title = item.Description, @target = "_blank", @class = "glyphicon glyphicon-file" })
+                    }*@
+
+            </strong>
+
+            <ul class="alist@{@module.Id} ">
+                @foreach (var activity in module.Activities.OrderBy(a => a.StartDate).ToList())
+                {
+                    <li>
+                        <div class="dropdown" style="display:inline">
+                            <button class="btn btn-xs btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Ändra", "Edit", "Activities", new { id = module.Id }, new { @class = "dropdown-item" })      </li>
+                                <li>@Html.ActionLink("Radera", "Delete", "Activities", new { id = module.Id }, new { @class = "dropdown-item" })   </li>
+                                <li class="dropdown-header">Aktivitetsdokument</li>
+                                <li>@Html.ActionLink("Ladda upp", "Create", "Documents", new { ActivityId = activity.Id }, "")</li>
+                            </ul>
+                        </div>
+                        @activity.StartDate.ToString("dd/MM") >> @activity.EndDate.ToString("dd/MM")
+                        @Html.ActionLink(@activity.Name, "Details", "Activities", new { id = activity.Id }, new { @title = module.Description, @class = "dropdown-item" })
+                        @*@foreach (var item in activity.Documents)
+                            {
+                                @Html.ActionLink(" ", "Download", "Documents", new { id = item.Id }, new { @title = item.Description, @target = "_blank", @class = "glyphicon glyphicon-file" })
+                            }
+                            @if (activity.DeadlineDate > DateTime.Now)
+                            {
+                                @Html.ActionLink(" ", "Create", "StudentDocuments", new { ActivityId = activity.Id }, new { @class = "btn btn-success btn-xs glyphicon glyphicon-send" })
+                            }
+                            @foreach (var item in activity.StudentDocuments)
+                            {
+                                @Html.ActionLink("Uppladdad den " + item.UploadDate, "Download", "StudentDocuments", new { id = item.Id }, new { @title = item.Description, @target = "_blank", @class = "glyphicon glyphicon-file" })
+                            }*@
+                    </li>
+                }
+            </ul>
+
+        </li>
+    }
+</ul>
+
