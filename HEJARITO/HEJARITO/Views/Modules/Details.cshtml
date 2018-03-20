@@ -1,12 +1,12 @@
 ﻿@model HEJARITO.Models.Module
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detaljer";
 }
 
 @if (User.Identity.IsAuthenticated) //TM 2018-03-12 15:44
 {
-    <h2>Details</h2>
+    <h2>Detaljer</h2>
 
     <div>
         <h4>Module</h4>
@@ -39,8 +39,8 @@
     <p>
         @if (User.IsInRole("Teacher")) //TM 2018-03-12 15:42
         {
-            @Html.ActionLink("Edit | ", "Edit", new { id = Model.Id })
+            @Html.ActionLink("Redigera", "Edit", new { id = Model.Id }, new { @class = "btn btn-xs btn-warning" })
         }
-        @Html.ActionLink("Tillbaka till startsidan", "SelectStartView", "Home")
+@Html.ActionLink("Tillbaka till startsidan", "SelectStartView", "Home", "", new { @class = "btn btn-xs btn-primary" })
     </p>
 }
