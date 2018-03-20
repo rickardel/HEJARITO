@@ -21,22 +21,8 @@
         @Html.DisplayNameFor(model => model.EndDate):
         @Html.DisplayFor(model => model.EndDate)
 
-        @foreach (var item in Model.StudentDocuments)
-        {
-            @Html.DisplayFor(itemModel => item.FileName);
-        }
 
-        @if (User.IsInRole("Teacher"))
-        {
-            @Html.ActionLink("[Ladda upp dokument för denna aktivitet]", "CreateActivityDocument", "Documents", new { ActivityId = Model.Id }, "")
-        }
-        else
-        {
-        @Html.ActionLink("[Ladda upp inlämningsuppgift]", "Create", "StudentDocuments", new { ActivityId = Model.Id }, "")
-        }
         <p>@Html.DisplayFor(model => model.Description)</p>
-        <hr />
-        <h2>Inlämningsuppgift</h2>
         <dl class="dl-horizontal">
             <dt>
                 @Html.DisplayNameFor(model => model.DeadlineDate)
@@ -45,8 +31,22 @@
                 @Html.DisplayFor(model => model.DeadlineDate)
             </dd>
         </dl>
+        <hr />
+        @if (User.IsInRole("Teacher"))
+        {
+            @Html.ActionLink("[Ladda upp dokument för denna aktivitet]", "CreateActivityDocument", "Documents", new { ActivityId = Model.Id }, "")
+            <h2>Inlämningsuppgift</h2>
+            <dd id="list-Students" style="background-color: beige;">
+                @Html.Partial("_ActivityStudents", Model.Module.Course.ApplicationUsers)
+            </dd>
+        }
+        else
+        {
+            @Html.ActionLink("[Ladda upp inlämningsuppgift]", "Create", "StudentDocuments", new { ActivityId = Model.Id }, "")
+        }
+
+
+
     </div>
-    <dd id="list-Students" style="background-color: beige;">
-        @Html.Partial("_ActivityStudents", Model.Module.Course.ApplicationUsers)
-    </dd>
+
 }
