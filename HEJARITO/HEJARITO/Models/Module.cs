@@ -119,10 +119,11 @@ namespace HEJARITO.Models
         private ApplicationDbContext applicationDbContext = new ApplicationDbContext();
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-        {            
+        {
             Module typedObjectInstance = (Module)validationContext.ObjectInstance; // Sätt typen för validContext.ObjectInstance till "Module"
             DateTime IncommingModuleStartDate = typedObjectInstance.StartDate; // Föreslaget startdatum för modul som ska skapas
             DateTime IncommingModuleEndDate = typedObjectInstance.EndDate; // Föreslaget slutdatum för modul som ska skapas
+            int moduleId = typedObjectInstance.Id; // Id för inkommande modul
             int result1 = 0; // Används för att lagra resultatet av datumjämförelser
             int result2 = 0; // Används för att lagra resultatet av datumjämförelser
             bool success1 = false;
@@ -137,7 +138,10 @@ namespace HEJARITO.Models
             List<Module> modules = new List<Module>(); // Skapa en tom lista för att kunna lagra alla moduler i
             foreach (var module in course.Modules) // Bygg upp en lista med alla moduler för den aktuella kursen
             {
-                modules.Add(module);
+                if (module.Id != moduleId)
+                {
+                    modules.Add(module);
+                }
             }
 
             // |<---------------------Course------------------->|
@@ -172,7 +176,7 @@ namespace HEJARITO.Models
                         temporaryTestErrorMessage = "IS < CS och IE < CS ej uppfyllt!";
                     }
                 }
-                
+
                 result1 = DateTime.Compare(IncommingModuleStartDate, module.EndDate);
                 if (result1 > 0)
                 {
@@ -187,7 +191,7 @@ namespace HEJARITO.Models
                         temporaryTestErrorMessage = "IS > CE och IE > CE ej uppfyllt!";
                     }
                 }
-                
+
                 moduleSuccess = success1 || success2; // Jämförelsen med denna modul har gått bra om success1 eller success2 är sant
 
                 courseSuccess = courseSuccess && moduleSuccess; // Jämförelsen med alla moduler har gått bra om moduleSuccess är sant för varje modul
@@ -213,6 +217,7 @@ namespace HEJARITO.Models
             Module typedObjectInstance = (Module)validationContext.ObjectInstance; // Sätt typen för validContext.ObjectInstance till "Module"
             DateTime IncommingModuleStartDate = typedObjectInstance.StartDate; // Föreslaget startdatum för modul som ska skapas
             DateTime IncommingModuleEndDate = typedObjectInstance.EndDate; // Föreslaget slutdatum för modul som ska skapas
+            int moduleId = typedObjectInstance.Id; // Id för inkommande modul
             int result1 = 0; // Används för att lagra resultatet av datumjämförelser
             int result2 = 0; // Används för att lagra resultatet av datumjämförelser
             bool success1 = false;
@@ -227,7 +232,10 @@ namespace HEJARITO.Models
             List<Module> modules = new List<Module>(); // Skapa en tom lista för att kunna lagra alla moduler i
             foreach (var module in course.Modules) // Bygg upp en lista med alla moduler för den aktuella kursen
             {
-                modules.Add(module);
+                if (module.Id != moduleId)
+                {
+                    modules.Add(module);
+                }
             }
 
             // |<---------------------Course------------------->|
