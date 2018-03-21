@@ -50,8 +50,9 @@ namespace HEJARITO.Models
         [Required(ErrorMessage = "En aktivitet måste kopplas till en module")]
         public int ModuleId { get; set; }
         public virtual Module Module { get; set; }
+
         public virtual ICollection<Document> Documents { get; set; }
-        public virtual ICollection<Document> StudentDocuments { get; set; }
+        public virtual ICollection<StudentDocument> StudentDocuments { get; set; }
 
     }
 
