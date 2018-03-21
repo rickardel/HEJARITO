@@ -41,6 +41,7 @@ namespace HEJARITO.Models
 
         public int? ActivityId { get; set; }
         public virtual Activity Activity { get; set; }
+
         [Required(ErrorMessage = "En fil måste väljas")]
         [StringLength(255)]
         public string FileName { get; set; }

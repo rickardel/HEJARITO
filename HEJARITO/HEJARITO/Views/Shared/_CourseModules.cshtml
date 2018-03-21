@@ -32,8 +32,13 @@
                             @*<li><a href="#" id="uploadCourseDocumentBtn" onclick="GetModuleDocumentForm(@module.Id)">[Ladda upp moduldokument]</a></li>*@
                         </ul>
                     </span>
-                    @Html.ActionLink(item.Name, "Details", "Modules", new { Id = item.Id}, "")
-                    <Br />
+                    @Html.ActionLink(item.Name, "Details", "Modules", new { Id = item.Id }, "")
+
+                    @foreach (var doc in item.Documents.Where(d => d.ActivityId == null))
+                    {
+                        @Html.ActionLink(" ", "Download", "Documents", new { Id = doc.Id }, new { @title = item.Description, @class = "glyphicon glyphicon-file" })
+                    }
+
                     <ul class="alist@{@item.Id} ">
                         @foreach (var activity in item.Activities.OrderBy(a => a.StartDate).ToList())
                         {
@@ -52,6 +57,11 @@
                                 </div>
                                 @activity.StartDate.ToString("dd/MM") >> @activity.EndDate.ToString("dd/MM")
                                 @Html.ActionLink(@activity.Name, "Details", "Activities", new { id = activity.Id }, new { @title = item.Description, @class = "dropdown-item" })
+                                @foreach (var doc in activity.Documents)
+                                {
+                                    @Html.ActionLink(" ", "Download", "Documents", new { Id = doc.Id }, new { @title = item.Description, @class = "glyphicon glyphicon-file" })
+
+                                }
                             </li>
                         }
                     </ul>

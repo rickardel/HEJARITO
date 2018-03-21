@@ -26,7 +26,9 @@
                 <td>
                     @foreach (var doc in item.StudentDocuments)
                     {
-                    @Html.ActionLink(" ", "Download", "StudentDocuments", new { Id = doc.Id }, new { @class = "glyphicon glyphicon-file" })
+                        @Html.ActionLink("Ladda ner", "Download", "StudentDocuments", new { Id = doc.Id }, new { @class = "btn btn-success btn-xs" })
+                    <span>@doc.UploadDate : "@doc.Name"</span>
+
                     }
 
 
