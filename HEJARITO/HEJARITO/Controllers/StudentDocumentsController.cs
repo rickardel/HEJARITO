@@ -30,6 +30,7 @@ namespace HEJARITO.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             StudentDocument studentDocument = db.StudentDocuments.Find(id);
             if (studentDocument == null)
             {
@@ -51,7 +52,7 @@ namespace HEJARITO.Controllers
             }
             string _FileName = Path.GetFileName(studentDocument.FileName);
             string localPath = "~/UploadedFiles";
-            localPath += "/Course_" + studentDocument.Activity.Module.CourseId + "/Module_" + studentDocument.Activity.ModuleId + "/Activity_" + studentDocument.ActivityId + "/" + User.Identity.Name;
+            localPath += "/Course_" + studentDocument.Activity.Module.CourseId + "/Module_" + studentDocument.Activity.ModuleId + "/Activity_" + studentDocument.ActivityId + "/" + User.Identity.GetUserName();
 
 
             string _path = Path.Combine(Server.MapPath(localPath), _FileName);

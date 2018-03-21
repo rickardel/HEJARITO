@@ -29,7 +29,7 @@ namespace HEJARITO.Models
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         [Display(Name = "Startdatum")]
-        [CheckActivityStartDateVSCourseStartDate]
+        [CheckActivityStartDateVSModuleStartDate]
         public DateTime StartDate { get; set; }
 
         [DataType(DataType.DateTime)]
@@ -44,14 +44,15 @@ namespace HEJARITO.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         [Display(Name = "Slutdatum")]
         [CheckActivityEndDateVSActivityStartDate]
-        [CheckActivityEndDateVSCourseEndDate]
+        [CheckActivityEndDateVSModuleEndDate]
         public DateTime EndDate { get; set; }
 
         [Required(ErrorMessage = "En aktivitet måste kopplas till en module")]
         public int ModuleId { get; set; }
         public virtual Module Module { get; set; }
+
         public virtual ICollection<Document> Documents { get; set; }
-        public virtual ICollection<Document> StudentDocuments { get; set; }
+        public virtual ICollection<StudentDocument> StudentDocuments { get; set; }
 
     }
 
@@ -76,7 +77,7 @@ namespace HEJARITO.Models
         }
     }
 
-    public class CheckActivityStartDateVSCourseStartDate : ValidationAttribute
+    public class CheckActivityStartDateVSModuleStartDate : ValidationAttribute
     {
         private ApplicationDbContext applicationDbContext = new ApplicationDbContext();
 
@@ -85,10 +86,9 @@ namespace HEJARITO.Models
             ApplicationDbContext applicationDbContext = new ApplicationDbContext();
             Activity typedObjectInstance = (Activity)validationContext.ObjectInstance;
             DateTime activityStartDate = (DateTime)value;
-            Module module = applicationDbContext.Modules.FirstOrDefault(m => m.Id == typedObjectInstance.ModuleId);
-            DateTime courseStartDate = applicationDbContext.Courses.FirstOrDefault(c => c.Id == module.CourseId).StartDate;
+            DateTime moduleStartDate = applicationDbContext.Modules.FirstOrDefault(m => m.Id == typedObjectInstance.ModuleId).StartDate;
 
-            int result = DateTime.Compare(activityStartDate, courseStartDate);
+            int result = DateTime.Compare(activityStartDate, moduleStartDate);
 
             if (result > 0 || result == 0)
             {
@@ -96,12 +96,12 @@ namespace HEJARITO.Models
             }
             else
             {
-                return new ValidationResult("Aktivitetens startdatum måste vara senare än eller lika med kursens startdatum!");
+                return new ValidationResult("Aktivitetens startdatum måste vara senare än eller lika med modulens startdatum!");
             }
         }
     }
 
-    public class CheckActivityEndDateVSCourseEndDate : ValidationAttribute
+    public class CheckActivityEndDateVSModuleEndDate : ValidationAttribute
     {
         private ApplicationDbContext applicationDbContext = new ApplicationDbContext();
 
@@ -110,10 +110,9 @@ namespace HEJARITO.Models
             ApplicationDbContext applicationDbContext = new ApplicationDbContext();
             Activity typedObjectInstance = (Activity)validationContext.ObjectInstance;
             DateTime activityEndDate = (DateTime)value;
-            Module module = applicationDbContext.Modules.FirstOrDefault(m => m.Id == typedObjectInstance.ModuleId);
-            DateTime courseEndDate = applicationDbContext.Courses.FirstOrDefault(c => c.Id == module.CourseId).EndDate;
+            DateTime moduleEndDate = applicationDbContext.Modules.FirstOrDefault(m => m.Id == typedObjectInstance.ModuleId).EndDate;
 
-            int result = DateTime.Compare(activityEndDate, courseEndDate);
+            int result = DateTime.Compare(activityEndDate, moduleEndDate);
 
             if (result < 0 || result == 0)
             {
@@ -121,7 +120,7 @@ namespace HEJARITO.Models
             }
             else
             {
-                return new ValidationResult("Aktivitetens slutdatum måste vara tidigare än eller lika med kursens slutdatum!");
+                return new ValidationResult("Aktivitetens slutdatum måste vara tidigare än eller lika med modulens slutdatum!");
             }
         }
     }

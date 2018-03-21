@@ -20,8 +20,8 @@ namespace HEJARITO.Controllers
         // GET: Documents
         public ActionResult Index()
         {
-            var documents = db.Documents.Include(d => d.Activity).Include(d => d.Course).Include(d => d.Module);
-            return View(documents.ToList());
+            ICollection<Document> documents = db.Documents.Include(d => d.Activity).Include(d => d.Course).Include(d => d.Module).ToList();
+            return View(documents);
         }
 
         // GET: Documents/Details/5
@@ -155,17 +155,17 @@ namespace HEJARITO.Controllers
                         {
                             case DocumentType.CourseDocument:
                                 localPath += "/Course_" + document.CourseId;
-                                //document.ActivityId = null; document.ModuleId = null;
+                                
                                 break;
                             case DocumentType.ModuleDocument:
                                 document.Module = db.Modules.Find(document.ModuleId);
                                 localPath += "/Course_" + document.Module.CourseId + "/Module_" + document.ModuleId;
-                                document.CourseId = document.Module.CourseId; document.Course = document.Module.Course;
+                                
                                 break;
                             case DocumentType.ActivityDocument:
                                 document.Activity = db.Activities.Find(document.ActivityId);
                                 localPath += "/Course_" + document.Activity.Module.CourseId + "/Module_" + document.Activity.ModuleId + "/Activity_" + document.ActivityId;
-                                document.ModuleId = document.Activity.ModuleId; document.Module = document.Activity.Module; document.Course = document.Module.Course; document.CourseId = document.Module.CourseId;
+                                
                                 break;
                             default:
                                 break;

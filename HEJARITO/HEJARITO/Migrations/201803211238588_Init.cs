@@ -52,22 +52,16 @@ namespace HEJARITO.Migrations
                         FileName = c.String(nullable: false, maxLength: 255),
                         ContentLength = c.Int(nullable: false),
                         ContentType = c.String(),
-                        Activity_Id = c.Int(),
-                        Activity_Id1 = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Activities", t => t.ActivityId)
                 .ForeignKey("dbo.Courses", t => t.CourseId)
                 .ForeignKey("dbo.Modules", t => t.ModuleId)
                 .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUserId)
-                .ForeignKey("dbo.Activities", t => t.Activity_Id)
-                .ForeignKey("dbo.Activities", t => t.Activity_Id1)
                 .Index(t => t.ApplicationUserId)
                 .Index(t => t.CourseId)
                 .Index(t => t.ModuleId)
-                .Index(t => t.ActivityId)
-                .Index(t => t.Activity_Id)
-                .Index(t => t.Activity_Id1);
+                .Index(t => t.ActivityId);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -194,8 +188,6 @@ namespace HEJARITO.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Documents", "Activity_Id1", "dbo.Activities");
-            DropForeignKey("dbo.Documents", "Activity_Id", "dbo.Activities");
             DropForeignKey("dbo.StudentDocuments", "ApplicationUserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.StudentDocuments", "ActivityId", "dbo.Activities");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
@@ -219,8 +211,6 @@ namespace HEJARITO.Migrations
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.AspNetUsers", new[] { "CourseId" });
-            DropIndex("dbo.Documents", new[] { "Activity_Id1" });
-            DropIndex("dbo.Documents", new[] { "Activity_Id" });
             DropIndex("dbo.Documents", new[] { "ActivityId" });
             DropIndex("dbo.Documents", new[] { "ModuleId" });
             DropIndex("dbo.Documents", new[] { "CourseId" });
