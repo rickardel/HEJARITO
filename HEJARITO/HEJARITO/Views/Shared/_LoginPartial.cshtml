@@ -9,7 +9,7 @@
             <li style="font-weight: bold" class="active">
                 @Html.ActionLink("Välkommen " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Hantera" })
             </li>
-            @* // TM 2018-03-20 10:36 Separat menyval för hantering av kontoinställningar. OBS!!! Möjligheten fanns redan bakom 'Välkommen'-menyn *@
+            @* //TM 2018-03-20 10:36 Separat menyval för hantering av kontoinställningar. OBS!!! Möjligheten fanns redan bakom 'Välkommen'-menyn *@
             <li style="font-weight: bold" class="active">
                 @Html.ActionLink("Hantera kontoinställningar", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Hantera" })
             </li>
