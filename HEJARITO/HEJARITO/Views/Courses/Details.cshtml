@@ -49,7 +49,7 @@
                     <th>Kursdokument</th>
                 </tr>
             </thead>
-            <tbody class="slist" id="CourseStudentList">
+            <tbody class="slist" id="CourseDocumentsList">
                 @foreach (var doc in Model.Documents.Where(d => d.ActivityId == null).Where(d => d.ModuleId == null))
                 {
                     <tr>
