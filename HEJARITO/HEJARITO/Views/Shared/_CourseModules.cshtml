@@ -25,8 +25,8 @@
                         </button>
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Modul</li>
-                            <li>@Html.ActionLink("Ändra", "Edit", "Modules", new { id = item.Id }, new { @class = "dropdown-item" })      </li>
-                            <li>@Html.ActionLink("Radera", "Delete", "Modules", new { id = item.Id }, new { @class = "dropdown-item" })   </li>
+                            <li>@Html.ActionLink("Ändra", "Edit", "Modules", new { Id = item.Id }, new { @class = "dropdown-item" })      </li>
+                            <li>@Html.ActionLink("Radera", "Delete", "Modules", new { Id = item.Id }, new { @class = "dropdown-item" })   </li>
                             <li class="dropdown-header">Moduldokument</li>
                             <li>@Html.ActionLink("Ladda upp", "Create", "Documents", new { DocumentType = 1, ModuleId = item.Id }, "")</li>
                             @*<li><a href="#" id="uploadCourseDocumentBtn" onclick="GetModuleDocumentForm(@module.Id)">[Ladda upp moduldokument]</a></li>*@
@@ -40,7 +40,7 @@
                     }
 
                     <ul class="alist@{@item.Id} ">
-                        @foreach (var activity in item.Activities.OrderBy(a => a.StartDate).ToList())
+                        @foreach (var activity in item.Activities.OrderBy(a => a.StartDate))
                         {
                             <li>
                                 <div class="dropdown" style="display:inline">
@@ -49,14 +49,14 @@
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li>@Html.ActionLink("Ändra", "Edit", "Activities", new { id = item.Id }, new { @class = "dropdown-item" })      </li>
-                                        <li>@Html.ActionLink("Radera", "Delete", "Activities", new { id = item.Id }, new { @class = "dropdown-item" })   </li>
+                                        <li>@Html.ActionLink("Ändra", "Edit", "Activities", new { Id = activity.Id }, new { @class = "dropdown-item" })      </li>
+                                        <li>@Html.ActionLink("Radera", "Delete", "Activities", new { Id = activity.Id }, new { @class = "dropdown-item" })   </li>
                                         <li class="dropdown-header">Aktivitetsdokument</li>
                                         <li>@Html.ActionLink("Ladda upp", "Create", "Documents", new { ActivityId = activity.Id }, "")</li>
                                     </ul>
                                 </div>
                                 @activity.StartDate.ToString("dd/MM") >> @activity.EndDate.ToString("dd/MM")
-                                @Html.ActionLink(@activity.Name, "Details", "Activities", new { id = activity.Id }, new { @title = item.Description, @class = "dropdown-item" })
+                                @Html.ActionLink(@activity.Name, "Details", "Activities", new { Id = activity.Id }, new { @title = item.Description, @class = "dropdown-item" })
                                 @foreach (var doc in activity.Documents)
                                 {
                                     @Html.ActionLink(" ", "Download", "Documents", new { Id = doc.Id }, new { @title = item.Description, @class = "glyphicon glyphicon-file" })

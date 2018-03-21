@@ -6,41 +6,70 @@
 
 @if (User.Identity.IsAuthenticated) //TM 2018-03-12 15:44
 {
-    <h2>Detaljer</h2>
 
-    <div>
-        <h4>Module</h4>
-        @Html.ActionLink("[Ladda upp dokument för denna modul]", "CreateModuleDocument", "Documents", new { ModuleId = Model.Id }, "")
+<div>
+    <h1>@Html.DisplayFor(model => model.Name)</h1>
 
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>@Html.DisplayNameFor(model => model.Course.Name)</dt>
-            <dd>@Html.DisplayFor(model => model.Course.Name)</dd>
+    @Html.ActionLink("[Ändra]", "Edit", new { Id = Model.Id }, "")
 
-            <dt>@Html.DisplayNameFor(model => model.Name)</dt>
-            <dd>@Html.DisplayFor(model => model.Name)</dd>
+    @Html.ActionLink("[Ladda upp dokument för denna modul]", "CreateModuleDocument", "Documents", new { ModuleId = Model.Id }, "")
 
-            <dt>@Html.DisplayNameFor(model => model.Description)</dt>
-            <dd>@Html.DisplayFor(model => model.Description)</dd>
 
-            <dt>@Html.DisplayNameFor(model => model.StartDate)</dt>
-            <dd>@Html.DisplayFor(model => model.StartDate)</dd>
-
-            <dt>@Html.DisplayNameFor(model => model.EndDate)</dt>
-            <dd>@Html.DisplayFor(model => model.EndDate)</dd>
-
-            @* //TM 2018-03-09 11:58 Lista alla aktiviteter inom aktuell modul *@
-            @* //TM 2018-03-09 12:57 OBS!!! Bakgrundsfärg hårdkodad! *@
-            <dd id="list-activities" style="background-color: beige;">
-                @Html.Partial("_Activities", Model.Activities)
-            </dd>
-        </dl>
-    </div>
-    <p>
+    <span>
         @if (User.IsInRole("Teacher")) //TM 2018-03-12 15:42
         {
             @Html.ActionLink("Redigera", "Edit", new { id = Model.Id }, new { @class = "btn btn-xs btn-warning" })
         }
-@Html.ActionLink("Tillbaka till startsidan", "SelectStartView", "Home", "", new { @class = "btn btn-xs btn-primary" })
-    </p>
+        @Html.ActionLink("Tillbaka till startsidan", "SelectStartView", "Home", "", new { @class = "btn btn-xs btn-primary" })
+    </span>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Course.Name)</dt>
+        <dd></dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Name)</dt>
+        <dd>@Html.DisplayFor(model => model.Name)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Description)</dt>
+        <dd>@Html.DisplayFor(model => model.Description)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.StartDate)</dt>
+        <dd>@Html.DisplayFor(model => model.StartDate)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.EndDate)</dt>
+        <dd>@Html.DisplayFor(model => model.EndDate)</dd>
+    </dl>
+    <div class="col-sm-8">
+        @* //TM 2018-03-09 11:58 Lista alla aktiviteter inom aktuell modul *@
+        @* //TM 2018-03-09 12:57 OBS!!! Bakgrundsfärg hårdkodad! *@
+        <span id="list-activities" style="background-color: beige;">
+            @Html.Partial("_Activities", Model.Activities)
+        </span>
+
+    </div>
+
+</div>
+
+
+    <div class="col-sm-4">
+        <table class="table table-striped table-bordered" id="coursedocumentstable" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Kursdokument</th>
+                </tr>
+            </thead>
+            <tbody class="slist" id="CourseDocumentsList">
+                @foreach (var doc in Model.Documents.Where(d => d.ActivityId == null).Where(d => d.ModuleId == null))
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink("Ladda ner", "Download", "Documents", new { Id = doc.Id }, new { @class = "btn btn-success btn-xs" })
+                            <span>@doc.UploadDate : "@doc.Name"</span>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
 }
