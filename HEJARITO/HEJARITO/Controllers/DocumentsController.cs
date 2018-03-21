@@ -20,8 +20,8 @@ namespace HEJARITO.Controllers
         // GET: Documents
         public ActionResult Index()
         {
-            var documents = db.Documents.Include(d => d.Activity).Include(d => d.Course).Include(d => d.Module);
-            return View(documents.ToList());
+            ICollection<Document> documents = db.Documents.Include(d => d.Activity).Include(d => d.Course).Include(d => d.Module).ToList();
+            return View(documents);
         }
 
         // GET: Documents/Details/5
