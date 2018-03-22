@@ -2,12 +2,12 @@
 
 
 
-<table class="table table-striped table-bordered" id="coursestable" cellspacing="0">
+<table class="table table-striped table-bordered" id="coursestableX" cellspacing="0">
     <thead>
         <tr>
-            <th width="10%">Startdatum</th>
-            <th width="10%">Slutdatum</th>
-            <th>Modulinnehåll</th>
+            <th width="90px">Startdatum</th>
+            <th width="90px">Slutdatum</th>
+            <th>Modul</th>
 
         </tr>
     </thead>
@@ -18,20 +18,6 @@
                 <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
                 <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
                 <td>
-                    <span class="dropdown" style="display:inline">
-                        <button class="btn btn-xs btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-header">Modul</li>
-                            <li>@Html.ActionLink("Ändra", "Edit", "Modules", new { Id = item.Id }, new { @class = "dropdown-item" })      </li>
-                            <li>@Html.ActionLink("Radera", "Delete", "Modules", new { Id = item.Id }, new { @class = "dropdown-item" })   </li>
-                            <li class="dropdown-header">Moduldokument</li>
-                            <li>@Html.ActionLink("Ladda upp", "Create", "Documents", new { DocumentType = 1, ModuleId = item.Id }, "")</li>
-                            @*<li><a href="#" id="uploadCourseDocumentBtn" onclick="GetModuleDocumentForm(@module.Id)">[Ladda upp moduldokument]</a></li>*@
-                        </ul>
-                    </span>
                     @Html.ActionLink(item.Name, "Details", "Modules", new { Id = item.Id }, "")
 
                     @foreach (var doc in item.Documents.Where(d => d.ActivityId == null))
@@ -43,18 +29,6 @@
                         @foreach (var activity in item.Activities.OrderBy(a => a.StartDate))
                         {
                             <li>
-                                <div class="dropdown" style="display:inline">
-                                    <button class="btn btn-xs btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li>@Html.ActionLink("Ändra", "Edit", "Activities", new { Id = activity.Id }, new { @class = "dropdown-item" })      </li>
-                                        <li>@Html.ActionLink("Radera", "Delete", "Activities", new { Id = activity.Id }, new { @class = "dropdown-item" })   </li>
-                                        <li class="dropdown-header">Aktivitetsdokument</li>
-                                        <li>@Html.ActionLink("Ladda upp", "Create", "Documents", new { ActivityId = activity.Id }, "")</li>
-                                    </ul>
-                                </div>
                                 @activity.StartDate.ToString("dd/MM") >> @activity.EndDate.ToString("dd/MM")
                                 @Html.ActionLink(@activity.Name, "Details", "Activities", new { Id = activity.Id }, new { @title = item.Description, @class = "dropdown-item" })
                                 @foreach (var doc in activity.Documents)

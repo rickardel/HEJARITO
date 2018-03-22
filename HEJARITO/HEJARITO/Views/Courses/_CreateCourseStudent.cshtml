@@ -24,7 +24,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Student.Email, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Student.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.Student.Email, new { htmlAttributes = new { @class = "form-control" , @onchange = "verifyEmailAvailability()" } })
             @Html.ValidationMessageFor(model => model.Student.Email, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -35,11 +35,10 @@
             @Html.ValidationMessageFor(model => model.Student.PhoneNumber, "", new { @class = "text-danger" })
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" style="display:none;">
         @Html.LabelFor(model => model.Student.CourseId, "CourseId", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.HiddenFor(model => model.Student.CourseId)
-            @Html.EditorFor(model => model.Student.CourseId, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Student.CourseId, "", new { @class = "text-danger" })
         </div>
     </div>

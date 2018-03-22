@@ -327,11 +327,11 @@
     <Content Include="Views\Home\Student.cshtml" />
     <Content Include="Views\Modules\_Activities.cshtml" />
     <Content Include="Views\Shared\_CourseModules.cshtml" />
-    <Content Include="Views\Shared\_CreateCourseModule.cshtml" />
+    <Content Include="Views\Courses\_CreateCourseModule.cshtml" />
     <Content Include="Views\Courses\CourseEditor.cshtml" />
-    <Content Include="Views\Shared\_CreateModuleActivity.cshtml" />
-    <Content Include="Views\Shared\_CreateCourseStudent.cshtml" />
-    <Content Include="Views\Shared\_CourseStudents.cshtml" />
+    <Content Include="Views\Courses\_CreateModuleActivity.cshtml" />
+    <Content Include="Views\Courses\_CreateCourseStudent.cshtml" />
+    <Content Include="Views\Courses\_CourseStudents.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Documents\Create.cshtml" />
     <Content Include="Views\Documents\Delete.cshtml" />
@@ -348,7 +348,9 @@
     <Content Include="Views\Activities\_ActivityStudents.cshtml" />
     <Content Include="Views\Documents\CreateModuleDocument.cshtml" />
     <Content Include="Views\Documents\CreateActivityDocument.cshtml" />
-    <Content Include="Views\Shared\_CourseModulesOld.cshtml" />
+    <Content Include="Views\Courses\_CourseModulesOld.cshtml" />
+    <Content Include="Views\Courses\_CourseModulesEditor.cshtml" />
+    <Content Include="Views\Courses\_CourseDocuments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

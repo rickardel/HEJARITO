@@ -30,7 +30,14 @@ namespace HEJARITO.Controllers
             var tmp = Json(activities, JsonRequestBehavior.AllowGet);
             return tmp;
         }
+        public ActionResult GetDates(int moduleId)
+        {
+            Module m = db.Modules.Find(moduleId);
+            string start = m.StartDate.Year +"-"+ m.StartDate.Month + "-" + m.StartDate.Day + " " + m.StartDate.Hour + ":" + m.StartDate.Minute + ":" + m.StartDate.Second;
+            string end = m.EndDate.Year + "-" + m.EndDate.Month + "-" + m.EndDate.Day + " " + m.EndDate.Hour + ":" + m.EndDate.Minute + ":" + m.EndDate.Second;
 
+            return Json(new string[]{ start, end }, JsonRequestBehavior.AllowGet);
+        }
         // GET: Modules/Details/5
         public ActionResult Details(int? id)
         {
@@ -64,6 +71,7 @@ namespace HEJARITO.Controllers
         {
             if (ModelState.IsValid)
             {
+                module.EndDate = module.EndDate.Add(new TimeSpan(23, 59, 59));
                 db.Modules.Add(module);
                 db.SaveChanges();
 
@@ -84,6 +92,7 @@ namespace HEJARITO.Controllers
             if (course != null && ModelState.IsValid)
             {
                 module.Activities = new List<Activity>();
+                module.EndDate = module.EndDate.Add(new TimeSpan(23, 59, 59));
                 db.Modules.Add(module);
                 db.SaveChanges();
 

@@ -20,14 +20,14 @@ namespace HEJARITO.Models
         public string Description { get; set; }
 
         [Required(ErrorMessage = "En kurs måste ha ett startdatum")]
-        [DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Startdatum")]
         public DateTime StartDate { get; set; }
 
         [Required(ErrorMessage = "En kurs måste ha ett slutdatum")]
-        [DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Slutdatum")]
         public DateTime EndDate { get; set; }
 
