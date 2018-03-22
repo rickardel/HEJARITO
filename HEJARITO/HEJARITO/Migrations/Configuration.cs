@@ -42,13 +42,13 @@ namespace HEJARITO.Migrations
             //TM 2018-03-13 11:26 Kurser ska seedas före elever för att sistnämnda ska kunna tilldelas någon av de förstnämnda
 
             var courses = new[] {
-                new Course { Name = "IT-teknik + Office 365 #2018/0",               StartDate = DateTime.Parse("2018-03-01"), EndDate = DateTime.Parse("2018-06-15") },
-                new Course { Name = "Systemutveckling i Java #2018/0",              StartDate = DateTime.Parse("2018-03-10"), EndDate = DateTime.Parse("2018-07-16") },
-                new Course { Name = "Systemutveckling i ASP.NET MVC/C# #2018/0",    StartDate = DateTime.Parse("2018-03-20"), EndDate = DateTime.Parse("2018-08-17") },
-                new Course { Name = "IT-teknik + Office 365 #2018/1",               StartDate = DateTime.Parse("2018-04-01"), EndDate = DateTime.Parse("2018-07-31") },
-                new Course { Name = "Systemutveckling i Java #2018/1",              StartDate = DateTime.Parse("2018-04-10"), EndDate = DateTime.Parse("2018-08-31") },
-                new Course { Name = "Systemutveckling i ASP.NET MVC/C# #2018/1",    StartDate = DateTime.Parse("2018-04-20"), EndDate = DateTime.Parse("2018-09-30") },
-                new Course { Name = "Systemutveckling i ASP.NET MVC/C# #2018/2",    StartDate = DateTime.Parse("2018-05-20"), EndDate = DateTime.Parse("2018-10-31") },
+                new Course { Name = "IT-support -2018/0",               StartDate = DateTime.Parse("2018-03-01"), EndDate = DateTime.Parse("2018-06-15") },
+                new Course { Name = "Java -2018/0",                     StartDate = DateTime.Parse("2018-03-10"), EndDate = DateTime.Parse("2018-07-16") },
+                new Course { Name = ".NET -2018/0",                     StartDate = DateTime.Parse("2018-03-20"), EndDate = DateTime.Parse("2018-08-17") },
+                new Course { Name = "IT-support -2018/1",               StartDate = DateTime.Parse("2018-04-01"), EndDate = DateTime.Parse("2018-07-31") },
+                new Course { Name = "Java -2018/1",                     StartDate = DateTime.Parse("2018-04-10"), EndDate = DateTime.Parse("2018-08-31") },
+                new Course { Name = ".NET -2018/1",                     StartDate = DateTime.Parse("2018-04-20"), EndDate = DateTime.Parse("2018-09-30") },
+                new Course { Name = ".NET -2018/2",                     StartDate = DateTime.Parse("2018-05-20"), EndDate = DateTime.Parse("2018-10-31") },
             };
 
             context.Courses.AddOrUpdate(
@@ -188,9 +188,9 @@ namespace HEJARITO.Migrations
 
             var activitytypes = new[] {
                 new ActivityType { Name = "Föreläsning" },
-                new ActivityType { Name = "e-Learning" },
+                new ActivityType { Name = "E-learning" },
                 new ActivityType { Name = "Övningstillfälle" },
-                new ActivityType { Name = "annat" }
+                new ActivityType { Name = "Annat" }
             };
 
             context.ActivityTypes.AddOrUpdate(
