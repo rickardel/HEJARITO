@@ -116,3 +116,12 @@ p.text-success {
     font-weight:bold;
 }
 
+/* //TM 2018-03-22 11:33 Se till att långa texter förkortas och visas med ... */
+.table-striped tbody tr td {
+    width: 100px;
+    max-width: 150px;
+    white-space: nowrap;
+    /*background-color: deeppink;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
