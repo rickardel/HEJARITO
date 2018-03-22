@@ -11,9 +11,8 @@
             <th>aktivitet</th>
             <th>typ</th>
             <th>start</th>
-            <th>slut</th>
-            <th>beskrivning</th>
             <th>deadline</th>
+            <th>slut</th>
         </tr>
 
         @foreach (var item in Model)
@@ -23,9 +22,8 @@
                 <td>@Html.DisplayFor(modelItem => item.Name)</td>
                 <td>@Html.DisplayFor(modelItem => item.ActivityType.Name)</td>
                 <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
-                <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
-                <td>@Html.DisplayFor(modelItem => item.Description)</td>
                 <td>@Html.DisplayFor(modelItem => item.DeadlineDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
             </tr>
         }
 

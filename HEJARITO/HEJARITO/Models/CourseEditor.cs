@@ -13,8 +13,8 @@ namespace HEJARITO.Models
         public CourseEditor(Course course)
         {
             this.Course = course;
-            this.Module = new Module() { CourseId = course.Id, StartDate = DateTime.Now, EndDate = DateTime.Now };
-            this.Activity = new Activity() { StartDate = DateTime.Now, DeadlineDate = DateTime.Now, EndDate = DateTime.Now };
+            this.Module = new Module() { CourseId = course.Id };
+            this.Activity = new Activity();
             this.Student = new ApplicationUser() { CourseId = course.Id };
         }
 

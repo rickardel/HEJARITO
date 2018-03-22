@@ -1,0 +1,39 @@
+﻿@model ICollection<HEJARITO.Models.ApplicationUser>
+
+@*<ul class="slist" id="CourseStudentList">
+    @foreach (var student in Model)
+    {
+        <li>
+            <strong>
+                @student.FirstName @student.LastName
+            </strong>
+            @student.Email
+            ( @student.PhoneNumber )
+        </li>
+    }
+</ul>*@
+
+
+<table class="table table-striped table-bordered" id="studentstable" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Studenter</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody class="slist" id="CourseStudentList">
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>
+                    @student.FirstName @student.LastName
+                </td>
+                <td>
+                    @student.Email
+                </td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>

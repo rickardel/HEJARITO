@@ -18,16 +18,16 @@ namespace HEJARITO.Models
         public string Description { get; set; }
 
         [Required(ErrorMessage = "En modul måste ha ett startdatum")]
-        [DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Startdatum")]
         [CheckModuleStartDateVSCourseStartDate]
         [CheckModuleStartAndEndDateVSAllModulesStartAndEndDates1]   // Hör ihop med motsvarande check för "EndDate" nedan!
         public DateTime StartDate { get; set; }
 
         [Required(ErrorMessage = "En modul måste ha ett slutdatum")]
-        [DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Slutdatum")]
         [CheckModuleEndDateVSModuleStartDate]
         [CheckModuleEndDateVSCourseEndDate]
@@ -297,6 +297,7 @@ namespace HEJARITO.Models
             }
             else
             {
+                
                 return new ValidationResult("Något datum för den nya modulen överlappar annan moduls datum!");
             }
         }

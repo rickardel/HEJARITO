@@ -55,12 +55,7 @@ namespace HEJARITO.Controllers
         [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:38
         public ActionResult Create()
         {
-            Course tmpCourse = new Course()
-            {
-                StartDate = DateTime.Now,
-                EndDate = DateTime.Now
-            };
-            return View(tmpCourse);
+            return View();
         }
 
         // POST: Courses/Create
@@ -73,6 +68,7 @@ namespace HEJARITO.Controllers
         {
             if (ModelState.IsValid)
             {
+                course.EndDate = course.EndDate.Add(new TimeSpan(23, 59, 59));
                 db.Courses.Add(course);
                 db.SaveChanges();
 
@@ -101,8 +97,9 @@ namespace HEJARITO.Controllers
             ViewBag.newActivityModule = new SelectList(course.Modules, "Id", "Name");
 
             CourseEditor courseEditor = new CourseEditor(course);
-            ViewBag.ActivityTypeId =               new SelectList(db.ActivityTypes.ToList(), "Id", "Name");
-            ViewBag.ModuleId =                          new SelectList(courseEditor.Course.Modules, "Id", "Name");
+            courseEditor.Module =       new Module() { CourseId = course.Id, StartDate = course.StartDate, EndDate = course.EndDate};
+            ViewBag.ActivityTypeId =    new SelectList(db.ActivityTypes.ToList(), "Id", "Name");
+            ViewBag.ModuleId =          new SelectList(courseEditor.Course.Modules, "Id", "Name");
             ViewBag.ActivityTypes = db.ActivityTypes.ToList();
             ViewBag.Module = course.Modules.ToList();
             return View(courseEditor);
@@ -136,7 +133,13 @@ namespace HEJARITO.Controllers
             return PartialView("_CourseStudents", course.ApplicationUsers);
 
         }
-
+        public ActionResult VerifyEmailAvailability(string email)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            bool exists = db.Users.Any(u => u.Email == email);
+            return Json(!exists, JsonRequestBehavior.AllowGet);
+           
+        }
         // GET: Courses/Edit/5
         [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:38
         public ActionResult Edit(int? id)

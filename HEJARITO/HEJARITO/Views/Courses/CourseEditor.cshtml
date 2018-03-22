@@ -26,21 +26,21 @@
 
                 })*@
             @*@Ajax.ActionLink("[Ladda upp kursdokument]", "Create", "Documents", new { CourseId = Model.Course.Id}, AjaxOptions{  })*@
-            <a href="#" id="uploadCourseDocumentBtn" onclick="GetCourseDocumentForm()">[Ladda upp kursdokument]</a>
+            <a href="#" id="uploadCourseDocumentBtn" onclick="GetCourseDocumentForm()">[Ladda upp dokument till kurs]</a>
         </p>
         <span>
             @Html.DisplayFor(model => model.Course.Description)
         </span>
         <hr />
         @*<h2>Kursnnehåll</h2>
-        <span id="divCourseModules">
-            @{ Html.RenderPartial("_CourseModules", Model.Course.Modules.OrderBy(m => m.StartDate).ToList()); }
-        </span>
+            <span id="divCourseModules">
+                @{ Html.RenderPartial("_CourseModules", Model.Course.Modules.OrderBy(m => m.StartDate).ToList()); }
+            </span>
 
-        <h2>Registrerade Studenter</h2>
-        <span id="divCourseStudents">
-            @{ Html.RenderPartial("_CourseStudents", Model.Course.ApplicationUsers); }
-        </span>*@
+            <h2>Registrerade Studenter</h2>
+            <span id="divCourseStudents">
+                @{ Html.RenderPartial("_CourseStudents", Model.Course.ApplicationUsers); }
+            </span>*@
     </div>
 
 
@@ -49,13 +49,13 @@
 
 <div id="divCourseModuleListing" class="row">
 
-    <div class="col-lg-6">
+    <div class="col-sm-8">
         <div>
             <span id="divFormContainer"></span>
         </div>
-        <h4>Kursnnehåll</h4>
+
         <span id="divCourseModules">
-            @{ Html.RenderPartial("_CourseModules", Model.Course.Modules.OrderBy(m => m.StartDate).ToList()); }
+            @{ Html.RenderPartial("_CourseModulesEditor", Model.Course.Modules.OrderBy(m => m.StartDate).ToList()); }
         </span>
         <details>
             <summary>Lägg till modul</summary>
@@ -70,19 +70,21 @@
             </span>
         </details>
     </div>
-        <div class="col-lg-6">
-            <h4>Registrerade Studenter</h4>
-            <span id="divCourseStudents">
-                @{ Html.RenderPartial("_CourseStudents", Model.Course.ApplicationUsers); }
+    <div class="col-sm-4">
+        @{ Html.RenderPartial("_CourseDocuments", Model.Course.Documents); }
+
+        <details>
+            <summary>Registrera ny elev</summary>
+            <span id="divCreateCourseStudent">
+                @{ Html.RenderPartial("_CreateCourseStudent", Model); }
             </span>
-            <details>
-                <summary>Registrera elev</summary>
-                <span id="divCreateCourseStudent">
-                    @{ Html.RenderPartial("_CreateCourseStudent", Model); }
-                </span>
-            </details>
+        </details>
+        <div id="divCourseStudents">
+            @{ Html.RenderPartial("_CourseStudents", Model.Course.ApplicationUsers); }
         </div>
+
     </div>
+</div>
 
 
 @section Scripts {
@@ -106,8 +108,7 @@
             })
         });
         function GetCourseDocumentForm() {
-            //alert("should work");
-            $("#divFormContainer").load('@Html.Raw(@Url.Action("PartialCreate", "Documents", new { @courseId = Model.Course.Id, @documentType = 0}))');
+           $("#divFormContainer").load('@Html.Raw(@Url.Action("PartialCreate", "Documents", new { @courseId = Model.Course.Id, @documentType = 0}))');
         }
         @*function GetModuleDocumentForm(modelId) {
             var M = modelId;
@@ -116,12 +117,45 @@
             );
         }*@
 
+        function verifyEmailAvailability() {
+            var studentEmail = $('#Student_Email').val();
+            $.ajax({
+                url: '/Courses/VerifyEmailAvailability',
+                type: "GET",
+                dataType: "JSON",
+                data: { email: studentEmail },
+                success: function (available) {
+                    if (available) {
+                        $("#Student_Email").addClass("valid");
+                        $("#Student_Email").removeClass("input-validation-error");
+                    } else {
+                        $("#Student_Email").addClass("input-validation-error");
+                        $("#Student_Email").removeClass("valid");
+                    }
+                }
+            });
+        }
+
         function onAjaxBegin() {
             $("#divFormContainer").slideUp();
         }
 
         function onAjaxComplete() {
             $("#divFormContainer").slideDown();
+        }
+
+        function GetModuleDates() {
+            var moduleId = $('#ModuleId').val();
+            $.ajax({
+                url: '/Modules/GetDates',
+                type: "GET",
+                dataType: "JSON",
+                data: { ModuleId: moduleId },
+                success: function (dates) {
+                    $("#StartDate").val(dates[0]);
+                    $("#EndDate").val(dates[1]);
+                }
+            });
         }
     </script>
 }
