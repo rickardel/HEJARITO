@@ -9,23 +9,24 @@
 
 <h2>Aktiviteter som slutar denna vecka</h2>
 <table width="100%" class="table table-striped table-bordered" id="activitiestable" cellspacing="0">
+    @* //TM 2018-03-22 14:02 Beautifying genom tabellkolumnernas enhetliga bredd m.h.a. Bootstrapklasserna "col-md-X"*@
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Activities.First().Name)</th>
-            <th>@Html.DisplayNameFor(model => model.Activities.First().ActivityTypeId)</th>
+            <th class="col-md-4">@Html.DisplayNameFor(model => model.Activities.First().Name)</th>
+            <th class="col-md-2">@Html.DisplayNameFor(model => model.Activities.First().ActivityTypeId)</th>
 
             @* //TM 2018-03-19 10:43 Bort med beskrivningar!
                 <th>@Html.DisplayNameFor(model => model.Activities.First().Description)</th>*@
 
-            <th>@Html.DisplayNameFor(model => model.Activities.First().StartDate)</th>
+            <th class="col-md-2">@Html.DisplayNameFor(model => model.Activities.First().StartDate)</th>
 
             @* //TM 2018-03-19 10:47 Bort med Deadlines!
                 <th>@Html.DisplayNameFor(model => model.Activities.First().DeadlineDate)</th>*@
 
-            <th>@Html.DisplayNameFor(model => model.Activities.First().EndDate)</th>
+            <th class="col-md-2">@Html.DisplayNameFor(model => model.Activities.First().EndDate)</th>
 
             @*//TM 2018-03-19 10:52 Ingen kolumnrubrik ska visas för detaljknapparna *@
-            <th>@*Detaljer*@</th>
+            <th class="col-md-2">@*Detaljer*@</th>
 
         </tr>
     </thead>
@@ -67,7 +68,7 @@
 </table>
 
 <h2>
-    Samtliga kurser
+    Pågående och kommande kurser
     @Html.ActionLink("+ Kurs", "Create", "Courses", "", new { @title = "Skapa en ny kurs", @class = "btn btn-default btn-xs" })
     @Html.ActionLink("+ Modul", "Create", "Modules", "", new { @title = "Skapa en ny modul", @class = "btn btn-default btn-xs" })
     @Html.ActionLink("+ Aktivitet", "Create", "Activities", "", new { @title = "Skapa en ny aktivitet", @class = "btn btn-default btn-xs" })
@@ -75,19 +76,20 @@
 </h2>
 
 
+@* //TM 2018-03-22 14:02 Beautifying genom tabellkolumnernas enhetliga bredd m.h.a. Bootstrapklasserna "col-md-X"*@
 <table width="100%" class="table table-striped table-bordered" id="coursestable" cellspacing="0">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Courses.First().Name)</th>
+            <th class="col-md-6">@Html.DisplayNameFor(model => model.Courses.First().Name)</th>
 
             @* //TM 2018-03-19 10:43 Bort med beskrivningar!
                 <th>@Html.DisplayNameFor(model => model.Courses.First().Description)</th>*@
 
-            <th>@Html.DisplayNameFor(model => model.Courses.First().StartDate)</th>
-            <th>@Html.DisplayNameFor(model => model.Courses.First().EndDate)</th>
+            <th class="col-md-2">@Html.DisplayNameFor(model => model.Courses.First().StartDate)</th>
+            <th class="col-md-2">@Html.DisplayNameFor(model => model.Courses.First().EndDate)</th>
 
             @*//TM 2018-03-19 10:52 Ingen kolumnrubrik ska visas för detaljknapparna *@
-            <th>@*Detaljer*@</th>
+            <th class="col-md-2">@*Detaljer*@</th>
 
         </tr>
     </thead>
@@ -122,14 +124,15 @@
     </tbody>
 </table>
 
-<h2>Kontaktlista</h2>
+<h2>Adressbok</h2>
 
+@* //TM 2018-03-22 14:02 Beautifying genom tabellkolumnernas enhetliga bredd m.h.a. Bootstrapklasserna "col-md-X"*@
 <table width="100%" class="table table-striped table-bordered" id="contactstable" cellspacing="0">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Users.First().FirstName)</th>
-            <th>@Html.DisplayNameFor(model => model.Users.First().LastName)</th>
-            <th>@Html.DisplayNameFor(model => model.Users.First().Email)</th>
+            <th class="col-md-3">@Html.DisplayNameFor(model => model.Users.First().FirstName)</th>
+            <th class="col-md-3">@Html.DisplayNameFor(model => model.Users.First().LastName)</th>
+            <th class="col-md-6">@Html.DisplayNameFor(model => model.Users.First().Email)</th>
         </tr>
     </thead>
 
@@ -149,7 +152,7 @@
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
                 <td>@Html.DisplayFor(modelItem => item.LastName)</td>
-                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                <td><a href="mailto:@Html.DisplayFor(modelItem => item.Email)">@Html.DisplayFor(modelItem => item.Email)</a></td>
             </tr>
         }
     </tbody>
@@ -159,5 +162,5 @@
 @*JG 2018-03-12: Script for rendering the tables.*@
 @section Scripts
 {
-    
+
 }
