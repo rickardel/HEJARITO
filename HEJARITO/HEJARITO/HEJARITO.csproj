@@ -215,9 +215,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803211238588_Init.cs" />
-    <Compile Include="Migrations\201803211238588_Init.Designer.cs">
-      <DependentUpon>201803211238588_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201803221859344_Init.cs" />
+    <Compile Include="Migrations\201803221859344_Init.Designer.cs">
+      <DependentUpon>201803221859344_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -226,6 +226,7 @@
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CourseEditor.cs" />
     <Compile Include="Models\Document.cs" />
+    <Compile Include="Models\HejaRiToExceptionFilter.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Module.cs" />
@@ -237,6 +238,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bg10.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\HeJaRiTo-bakgrund.png" />
@@ -350,7 +352,7 @@
     <Content Include="Views\Documents\CreateModuleDocument.cshtml" />
     <Content Include="Views\Documents\CreateActivityDocument.cshtml" />
     <Content Include="Views\Courses\_CourseModulesOld.cshtml" />
-    <Content Include="Views\Courses\_CourseModulesEditor.cshtml" />
+    <Content Include="Views\Shared\_CourseModulesEditor.cshtml" />
     <Content Include="Views\Courses\_CourseDocuments.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -370,8 +372,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803211238588_Init.resx">
-      <DependentUpon>201803211238588_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803221859344_Init.resx">
+      <DependentUpon>201803221859344_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

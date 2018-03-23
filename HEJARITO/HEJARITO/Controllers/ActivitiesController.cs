@@ -78,17 +78,18 @@ namespace HEJARITO.Controllers
             Module module = db.Modules.Find(activity.ModuleId);
             if (module != null && ModelState.IsValid)
             {
+                activity.Documents = new List<Document>();
                 db.Activities.Add(activity);
                 db.SaveChanges();
 
                 //TM 2018-03-19 16-19 Ska visas i nästa vy
                 ViewBag.KvittoMeddelande = "Skapande av en ny aktivitet genomfördes";
 
-                return PartialView("_CourseModules", module.Course.Modules.OrderBy(m => m.StartDate).ToList());
+                return PartialView("_CourseModulesEditor", module.Course.Modules.OrderBy(m => m.StartDate).ToList());
             }
             ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "Id", "Name", activity.ActivityTypeId);
             ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name", activity.ModuleId);
-            return PartialView("Error");
+            return PartialView("_CourseModulesEditor");
         }
 
 
