@@ -10,7 +10,7 @@
             @Model.Course.Name
         </h1>
         <p>
-            @Html.ActionLink("[Ändra]", "Edit", new { id = Model.Course.Id })
+            @Html.ActionLink(" ", "Edit", new { id = Model.Course.Id }, new { @class = "btn btn-warning glyphicon glyphicon-cog"})
 
             @Html.DisplayNameFor(model => model.Course.StartDate):
             @Html.DisplayFor(model => model.Course.StartDate)
@@ -26,7 +26,7 @@
 
                 })*@
             @*@Ajax.ActionLink("[Ladda upp kursdokument]", "Create", "Documents", new { CourseId = Model.Course.Id}, AjaxOptions{  })*@
-            <a href="#" id="uploadCourseDocumentBtn" onclick="GetCourseDocumentForm()">[Ladda upp dokument till kurs]</a>
+            
         </p>
         <span>
             @Html.DisplayFor(model => model.Course.Description)
