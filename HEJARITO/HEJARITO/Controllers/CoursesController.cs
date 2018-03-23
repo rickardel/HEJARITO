@@ -106,18 +106,21 @@ namespace HEJARITO.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public PartialViewResult CreateStudentAjax([Bind(Include = "Id,CourseId,FirstName,LastName,Email,PhoneNumber")] ApplicationUser student)
+        public PartialViewResult CreateStudentAjax(CourseEditor courseEditor)
         {
-            Course course = db.Courses.Find(student.CourseId);
+            Course course = db.Courses.Find(courseEditor.Student.CourseId);
+            courseEditor.Course = course;
+            courseEditor.Module.Course = course;
+
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
             var user = new Models.ApplicationUser()
             {
-                CourseId = student.CourseId,
-                FirstName = student.FirstName,
-                LastName = student.LastName,
-                Email = student.Email,
-                UserName = student.Email,
-                PhoneNumber = student.PhoneNumber,
+                CourseId = courseEditor.Student.CourseId,
+                FirstName = courseEditor.Student.FirstName,
+                LastName = courseEditor.Student.LastName,
+                Email = courseEditor.Student.Email,
+                UserName = courseEditor.Student.Email,
+                PhoneNumber = courseEditor.Student.PhoneNumber,
             };
             var result = userManager.Create(user, "password");
 
@@ -130,7 +133,7 @@ namespace HEJARITO.Controllers
                 userManager.AddToRole(user.Id, Role.Student);
             }
             
-            return PartialView("_CourseStudents", course.ApplicationUsers);
+            return PartialView("_CreateStudentAndList", courseEditor);
 
         }
         public ActionResult VerifyEmailAvailability(string email)

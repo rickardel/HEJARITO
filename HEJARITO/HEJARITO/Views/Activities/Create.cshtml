@@ -80,9 +80,10 @@
             </div>
         </div>
     }
-    <div>
-@Html.ActionLink("Tillbaka till startsidan", "SelectStartView", "Home", "", new { @class = "btn btn-xs btn-primary" })
-    </div>
+        <div>
+            @Html.ActionLink("Tillbaka", null, null, null, new { @class = "btn btn-xs btn-primary", href = Request.UrlReferrer })
+            @*@Html.ActionLink("Tillbaka till startsidan", "SelectStartView", "Home", "", new { @class = "btn btn-xs btn-primary" })*@
+        </div>
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

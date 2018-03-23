@@ -13,7 +13,7 @@ namespace HEJARITO.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201803211238588_Init"; }
+            get { return "201803230942445_Init"; }
         }
         
         string IMigrationMetadata.Source

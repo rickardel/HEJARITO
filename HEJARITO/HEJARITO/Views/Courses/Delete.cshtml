@@ -51,10 +51,10 @@
         {
             @Html.AntiForgeryToken()
 
-            <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-xs btn-danger" />
-        @Html.ActionLink("Tillbaka till startsidan", "SelectStartView", "Home", "", new { @class = "btn btn-xs btn-primary" })
-            </div>
+        <div class="form-actions no-color">
+            @Html.ActionLink("Tillbaka", null, null, null, new { @class = "btn btn-xs btn-primary", href = Request.UrlReferrer })
+            <input type="submit" value="Delete" class="btn btn-xs btn-danger" />
+        </div>
         }
     </div>
 }

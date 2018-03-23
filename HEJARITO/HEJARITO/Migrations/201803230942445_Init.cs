@@ -57,7 +57,7 @@ namespace HEJARITO.Migrations
                 .ForeignKey("dbo.Activities", t => t.ActivityId)
                 .ForeignKey("dbo.Courses", t => t.CourseId)
                 .ForeignKey("dbo.Modules", t => t.ModuleId)
-                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUserId)
+                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUserId, cascadeDelete:true)
                 .Index(t => t.ApplicationUserId)
                 .Index(t => t.CourseId)
                 .Index(t => t.ModuleId)
@@ -84,7 +84,7 @@ namespace HEJARITO.Migrations
                         UserName = c.String(nullable: false, maxLength: 256),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Courses", t => t.CourseId)
+                .ForeignKey("dbo.Courses", t => t.CourseId, cascadeDelete: true)
                 .Index(t => t.CourseId)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
             

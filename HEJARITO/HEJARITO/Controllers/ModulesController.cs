@@ -92,16 +92,17 @@ namespace HEJARITO.Controllers
             if (course != null && ModelState.IsValid)
             {
                 module.Activities = new List<Activity>();
+                module.Documents = new List<Document>();
                 module.EndDate = module.EndDate.Add(new TimeSpan(23, 59, 59));
                 db.Modules.Add(module);
                 db.SaveChanges();
 
                 //TM 2018-03-19 16-19 Ska visas i nästa vy
                 ViewBag.KvittoMeddelande = "Skapande av en ny modul genomfördes";
-
-                return PartialView("_CourseModules", course.Modules.OrderBy(m => m.StartDate).ToList());
+                List<Module> lm = course.Modules.OrderBy(m => m.StartDate).ToList();
+                return PartialView("_CourseModulesEditor", lm);
             }
-            return PartialView("Error");
+            return PartialView("_CourseModulesEditor");
         }
 
         // GET: Modules/Edit/5

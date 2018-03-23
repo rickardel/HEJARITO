@@ -25,6 +25,7 @@ namespace HEJARITO.Models
         
         public int? CourseId { get; set; }
         public virtual Course Course { get; set; }
+
         public virtual ICollection<Document> Documents { get; set; }
         public virtual ICollection<StudentDocument> StudentDocuments { get; set; }
 
@@ -34,6 +35,8 @@ namespace HEJARITO.Models
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
+            //userIdentity.AddClaim(new Claim("FullName", this.FirstName +", " + this.LastName));
+            
             return userIdentity;
         }
     }

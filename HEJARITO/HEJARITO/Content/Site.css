@@ -29,11 +29,21 @@ html {
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 320px;
+}
+
+
+.form-control {
+    margin-left: 3em;
+    width: 80%;
 }
 
 .input-validation-error {
     border: dotted 1px red;
+}
+
+.valid {
+    border: dotted 1px green;
 }
 
 /* Padding removed from the logotype*/
@@ -92,7 +102,8 @@ code {
 }
 
 /* //TM 2018-03-19 12:19 Alla btn-knappar i en tabell ska visas i en ljusgrå nyans */
-    .btn, .table tbody tr.btn {
+.btn,
+.table tbody tr.btn {
     color: #e7e7e7;
     border-color: #e7e7e7;
     background-color: #303030;
@@ -102,6 +113,30 @@ code {
 /*  //TM 2018-03-19 11:38 Alla btn-knappar i en tabell ska visas i mörkare grått när musen hamnar ovanför tabellraden */
 .table tbody tr:hover .btn {
     opacity: 0.6;
+}
+
+.table .activity-listing .btn {
+    opacity: 0;
+}
+
+.table .activity-listing a.listing {
+    text-decoration: none;
+    color: black;
+}
+
+.table .activity-listing a.listing:hover {
+    text-decoration: none;
+    text-shadow: 1px 1px black;
+}
+
+.table .activity-listing:hover .btn {
+    opacity: 1;
+}
+
+.listing-icon {
+   padding: 3px;
+   margin-right:5px;
+   float:right;
 }
 
 /* //TM 2018-03-19 11:38 Alla btn-knappar lyser färgglatt upp när musen hamnar ovanför dem */
@@ -122,12 +157,13 @@ code {
     background-color: rgb(249, 255, 192);
 }
 
+
 /* //TM 2018-03-20 11:38 Modifiera klassen 'text-success' som används för bekräftelser till användaren om genomförda ändringar */
-p.text-success {
+.text-success {
     color: lightyellow;
-    background-color:lightgreen;
-    font-size:x-large;
-    font-weight:bold;
+    background-color: lightgreen;
+    font-size: x-large;
+    font-weight: bold;
 }
 
 /* //TM 2018-03-22 11:33 Se till att långa texter förkortas och visas med ... */
