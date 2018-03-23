@@ -135,13 +135,14 @@
     </table>
 }
 
-<h2>
-    Pågående och kommande kurser
-    @Html.ActionLink("+ Kurs", "Create", "Courses", "", new { @title = "Skapa en ny kurs", @class = "btn btn-primary btn-xs" })
-    @Html.ActionLink("+ Modul", "Create", "Modules", "", new { @title = "Skapa en ny modul", @class = "btn btn-primary btn-xs" })
-    @Html.ActionLink("+ Aktivitet", "Create", "Activities", "", new { @title = "Skapa en ny aktivitet", @class = "btn btn-primary btn-xs" })
-    @Html.ActionLink("+ Dokument", "Create", "Documents", "", new { @title = "Ladda upp nytt dokument", @class = "btn btn-primary btn-xs" })
-</h2>
+    <h2>
+        Pågående och kommande kurser
+        @Html.ActionLink("+ Kurs", "Create", "Courses", "", new { @title = "Skapa en ny kurs", @class = "btn btn-primary btn-xs" })
+        @Html.ActionLink("+ Modul", "Create", "Modules", "", new { @title = "Skapa en ny modul", @class = "btn btn-primary btn-xs" })
+        @Html.ActionLink("+ Aktivitet", "Create", "Activities", "", new { @title = "Skapa en ny aktivitet", @class = "btn btn-primary btn-xs" })
+        @Html.ActionLink("+ Dokument", "Create", "Documents", "", new { @title = "Ladda upp nytt dokument", @class = "btn btn-primary btn-xs" })
+        @Html.ActionLink("Lista alla kurser", "Index", "Courses", "", new { @title = "Lista alla kurser", @class = "btn btn-primary btn-xs" })
+    </h2>
 
 
 @* //TM 2018-03-22 14:02 Beautifying genom tabellkolumnernas enhetliga bredd m.h.a. Bootstrapklasserna "col-md-X"*@

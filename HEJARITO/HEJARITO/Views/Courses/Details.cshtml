@@ -23,7 +23,7 @@
         @Html.ActionLink("Redigera", "Edit", new { id = Model.Id }, new { @class = "btn btn-xs btn-warning" })
     }
     @*  //TM 2018-03-15 12:06 Svensk text + rollberoende startvy *@
-    @Html.ActionLink("Tillbaka till startsidan", "SelectStartView", "Home", "", new { @class = "btn btn-xs btn-primary" })
+    @*@Html.ActionLink("Tillbaka till startsidan", "SelectStartView", "Home", "", new { @class = "btn btn-xs btn-primary" })*@
 </span>
 
 <div>
@@ -39,6 +39,10 @@
                 @{ Html.RenderPartial("_CourseModules", Model.Modules.OrderBy(m => m.StartDate).ToList()); }
             </div>
 
+            <div>
+                @Html.ActionLink("Tillbaka", null, null, null, new { @class = "btn btn-xs btn-primary", href = Request.UrlReferrer })
+            </div>
+
         </div>
     </div>
     <div class="col-sm-4">
@@ -46,6 +50,8 @@
         @{ Html.RenderPartial("_CourseDocuments", Model.Documents); }
         @{ Html.RenderPartial("_CourseStudents", Model.ApplicationUsers); }
 
-
     </div>
+
+
+
 </div>

@@ -6,86 +6,94 @@
 
 @if (User.Identity.IsAuthenticated) //TM 2018-03-13 05:47
 {
-<h1>
-    @Html.DisplayFor(model => model.Name)
-    @foreach (var item in Model.Documents)
+    <h1>
+        @Html.DisplayFor(model => model.Name)
+        @foreach (var item in Model.Documents)
         {
-    @Html.ActionLink(" ", "Download", "Documents", new { Id = item.Id }, new { @title = item.Description, @class = "btn btn-success glyphicon glyphicon-file" })
+            @Html.ActionLink(" ", "Download", "Documents", new { Id = item.Id }, new { @title = item.Description, @class = "btn btn-success glyphicon glyphicon-file" })
         }
-</h1>
-<span>
-    @if (User.IsInRole("Teacher")) //TM 2018-03-12 15:42
+    </h1>
+    <span>
+        @if (User.IsInRole("Teacher")) //TM 2018-03-12 15:42
         {
-    @Html.ActionLink("Redigera", "Edit", new { id = Model.Id }, new { @class = "btn btn-xs btn-warning" })
-    @Html.ActionLink("[Ladda upp dokument för denna aktivitet]", "CreateActivityDocument", "Documents", new { ActivityId = Model.Id }, "")
+            @Html.ActionLink("Redigera", "Edit", new { id = Model.Id }, new { @class = "btn btn-xs btn-warning" })
+            @Html.ActionLink("[Ladda upp dokument för denna aktivitet]", "CreateActivityDocument", "Documents", new { ActivityId = Model.Id }, "")
 
         }
-</span>
-<div>
-    <hr />
+    </span>
+    <div>
+        <hr />
 
-    <p>@Html.DisplayFor(model => model.Description)</p>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
+        <p>@Html.DisplayFor(model => model.Description)</p>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.StartDate)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DeadlineDate)
-        </dt>
-        <dd>
-            <strong>@Html.DisplayFor(model => model.DeadlineDate)</strong>
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DeadlineDate)
+            </dt>
+            <dd>
+                <strong>@Html.DisplayFor(model => model.DeadlineDate)</strong>
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EndDate):
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.EndDate):
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EndDate)
+            </dd>
 
-    </dl>
-    <hr />
-    <div class="col-sm-8">
-        @if (User.IsInRole("Teacher"))
+        </dl>
+
+        <hr />
+        <div class="col-sm-8">
+            @if (User.IsInRole("Teacher"))
             {
-        <span id="list-Students" style="background-color: beige;">
-            @Html.Partial("_ActivityStudents", Model)
-        </span>
+                <span id="list-Students" style="background-color: beige;">
+                    @Html.Partial("_ActivityStudents", Model)
+                </span>
             }
             else
             {
-        @Html.ActionLink("[Ladda upp inlämningsuppgift]", "Create", "StudentDocuments", new { ActivityId = Model.Id }, "")
-        @foreach (var item in Model.StudentDocuments){
+                @Html.ActionLink("[Ladda upp inlämningsuppgift]", "Create", "StudentDocuments", new { ActivityId = Model.Id }, "")
 
             }
-            }
-    </div>
-    <div class="col-sm-4">
-        <table class="table table-striped table-bordered" id="coursedocumentstable" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>Kursdokument</th>
-                </tr>
-            </thead>
-            <tbody class="slist" id="CourseDocumentsList">
-                @foreach (var doc in Model.Documents)
+
+            <div>
+                @Html.ActionLink("Tillbaka", null, null, null, new { @class = "btn btn-xs btn-primary", href = Request.UrlReferrer })
+            </div>
+
+        </div>
+
+
+        <div class="col-sm-4">
+            <table class="table table-striped table-bordered" id="coursedocumentstable" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Aktivitetsdokument</th>
+                    </tr>
+                </thead>
+                <tbody class="slist" id="CourseDocumentsList">
+                    @foreach (var doc in Model.Documents)
                     {
-                <tr>
-                    <td>
-                        @Html.ActionLink("Ladda ner", "Download", "Documents", new { Id = doc.Id }, new { @class = "btn btn-success btn-xs" })
-                        <span>@doc.UploadDate : "@doc.Name"</span>
-                    </td>
-                </tr>
+                        <tr>
+                            <td>
+                                @Html.ActionLink("Ladda ner", "Download", "Documents", new { Id = doc.Id }, new { @class = "btn btn-success btn-xs" })
+                                <span>@doc.UploadDate : "@doc.Name"</span>
+                            </td>
+                        </tr>
                     }
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+
     </div>
 
-</div>
+
 
 }

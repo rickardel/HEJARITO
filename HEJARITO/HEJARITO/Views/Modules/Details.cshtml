@@ -50,7 +50,7 @@
         <table class="table table-striped table-bordered" id="coursedocumentstable" cellspacing="0">
             <thead>
                 <tr>
-                    <th>Kursdokument</th>
+                    <th>Moduldokument</th>
                 </tr>
             </thead>
             <tbody class="slist" id="CourseDocumentsList">
@@ -67,4 +67,9 @@
             </tbody>
         </table>
     </div>
+
+    <div>
+        @Html.ActionLink("Tillbaka", null, null, null, new { @class = "btn btn-xs btn-primary", href = Request.UrlReferrer })
+    </div>
+
 }
