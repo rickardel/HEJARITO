@@ -103,9 +103,34 @@ namespace HEJARITO.Controllers
             //deadLines = db.Activities.Where(d => d.DeadlineDate >= startDate && d.DeadlineDate <= endDate).ToList();
             //teacherViewModel.Activities = startingActivities.Concat(endingActivities).Concat(deadLines).ToList();
             teacherViewModel.Activities = db.Activities.Where(d => d.EndDate >= startDate && d.EndDate <= endDate).ToList();
+            if (teacherViewModel.Activities.Count > 3)
+            {
+                ViewBag.TableSizeActivities = "large";
+            }
+            else
+            {
+                ViewBag.TableSizeActivities = "small";
+            }
+
             teacherViewModel.Courses = db.Courses.ToList();
+            if (teacherViewModel.Courses.Count > 3)
+            {
+                ViewBag.TableSizeCourses = "large";
+            }
+            else
+            {
+                ViewBag.TableSizeCourses = "small";
+            }
 
             teacherViewModel.Users = db.Users.ToList();
+            if (teacherViewModel.Users.Count > 3)
+            {
+                ViewBag.TableSizeContacts = "large";
+            }
+            else
+            {
+                ViewBag.TableSizeContacts = "small";
+            }
 
             return View(teacherViewModel);
         }
