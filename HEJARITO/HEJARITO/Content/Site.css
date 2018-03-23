@@ -1,19 +1,23 @@
 ﻿body {
-    padding-top: 10px;
+    /*
+    padding-top: 50px;
     padding-bottom: 20px;
+    */
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
+    /*
     padding-left: 15px;
     padding-right: 15px;
+    */
 }
 
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
-.dl-horizontal dt {
+    .dl-horizontal dt {
     white-space: normal;
 }
 
@@ -80,7 +84,9 @@ body {
 /* Not required for template or sticky footer method. */
 
 body > .container {
-    padding: 30px 15px 0;
+    /* //TM 2018-03-22 16:30 Efter bortkommentering av denna padding så försvann den sista onödiga vita remsan mellan meny och bild i /Home/Index :-) */
+    /* //TM 2018-03-22 17:02 Men: översta BS-tabellens <h2>-rubrik försvann likaså i alla vyer :-( - bortkommentering togs bort. */
+    padding: 60px 15px 0;
 }
 
 
@@ -142,4 +148,15 @@ code {
     /*background-color: deeppink;*/
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.bg {
+    /* The image used */
+    /*background-image: url("/Content/HeJaRiTo-bakgrund.png");*/
+    /* Full height */
+    height: auto;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
