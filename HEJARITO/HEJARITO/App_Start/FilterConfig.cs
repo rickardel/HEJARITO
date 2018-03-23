@@ -8,8 +8,8 @@ namespace HEJARITO
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            //filters.Add(new HandleErrorAttribute());
-            filters.Add(new HejaRiToExceptionFilter());
+            filters.Add(new HandleErrorAttribute());
+            //filters.Add(new HejaRiToExceptionFilter());
         }
     }
 }

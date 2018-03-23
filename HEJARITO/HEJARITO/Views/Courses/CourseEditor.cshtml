@@ -74,15 +74,8 @@
     </div>
     <div class="col-sm-4">
         @{ Html.RenderPartial("_CourseDocuments", Model.Course.Documents); }
-
-        <details>
-            <summary>Registrera ny elev</summary>
-            <span id="divCreateCourseStudent">
-                @{ Html.RenderPartial("_CreateCourseStudent", Model); }
-            </span>
-        </details>
         <div id="divCourseStudents">
-            @{ Html.RenderPartial("_CourseStudents", Model.Course.ApplicationUsers); }
+            @{ Html.RenderPartial("_CreateStudentAndList", Model); }
         </div>
 
     </div>

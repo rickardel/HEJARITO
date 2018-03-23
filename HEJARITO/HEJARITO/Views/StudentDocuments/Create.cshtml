@@ -31,7 +31,7 @@
             </div>
         </div>
 
-        <div class="form-group" id="divActivityId" @*style="display:none;"*@>
+        <div class="form-group" id="divActivityId" style="display:none;">
             @Html.LabelFor(model => model.ActivityId, "ActivityId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.ActivityId, new SelectList(ViewBag.Activities, "Id", "Name"), "- Alla Activiteter -", new { @class = "form-control" })

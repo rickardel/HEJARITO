@@ -9,7 +9,12 @@ namespace HEJARITO.Models
     public class CourseEditor
     {
         public Course Course { get; set; }
-
+        public CourseEditor()
+        {
+            this.Course = new Course() ;
+            this.Module = new Module() { CourseId = this.Course.Id };
+            this.Activity = new Activity();
+        }
         public CourseEditor(Course course)
         {
             this.Course = course;
