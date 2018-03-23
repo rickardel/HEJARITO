@@ -37,17 +37,17 @@
 
                 }
                 else
-if (item.Module != null)
+                    if (item.Module != null)
                 {
                     @Html.ActionLink(item.Module.Name, "Details", "Modules", new { id = item.ModuleId }, new { @class = "btn btn-xs btn-default" })
 
                 }
                 else
-if (item.Course != null)
+                    if (item.Course != null)
                 {
                     @Html.ActionLink(item.Course.Name, "Details", "Courses", new { id = item.CourseId }, new { @class = "btn btn-xs btn-default" })
                 }
-                <br/>
+                <br />
                 @Html.DisplayFor(modelItem => item.DocumentType)
             </td>
 

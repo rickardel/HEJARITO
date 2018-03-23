@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 10px;
     padding-bottom: 20px;
 }
 
@@ -21,13 +21,22 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 320px;
+}
+
+details {
+}
+
+.form-control {
+    margin-left: 3em;
+    width: 80%;
 }
 
 .input-validation-error {
     border: dotted 1px red;
     box-shadow: 1px 2px 3px red;
 }
+
 .valid {
     border: dotted 1px green;
 }
@@ -71,7 +80,7 @@ body {
 /* Not required for template or sticky footer method. */
 
 body > .container {
-    padding: 60px 15px 0;
+    padding: 30px 15px 0;
 }
 
 
@@ -86,7 +95,7 @@ code {
 }
 
 /* //TM 2018-03-19 12:19 Alla btn-knappar i en tabell ska visas i en ljusgrå nyans */
-.btn, 
+.btn,
 .table tbody tr.btn {
     color: #e7e7e7;
     border-color: #e7e7e7;
@@ -118,11 +127,11 @@ code {
 }
 
 /* //TM 2018-03-20 11:38 Modifiera klassen 'text-success' som används för bekräftelser till användaren om genomförda ändringar */
-p.text-success {
+.text-success {
     color: lightyellow;
-    background-color:lightgreen;
-    font-size:x-large;
-    font-weight:bold;
+    background-color: lightgreen;
+    font-size: x-large;
+    font-weight: bold;
 }
 
 /* //TM 2018-03-22 11:33 Se till att långa texter förkortas och visas med ... */

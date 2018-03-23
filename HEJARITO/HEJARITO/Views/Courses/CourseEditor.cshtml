@@ -57,12 +57,14 @@
         <span id="divCourseModules">
             @{ Html.RenderPartial("_CourseModulesEditor", Model.Course.Modules.OrderBy(m => m.StartDate).ToList()); }
         </span>
+        <hr />
         <details>
             <summary>Lägg till modul</summary>
-            <span id="divCreateCourseModule" class="col-lg-12">
+            <span id="divCreateCourseModule">
                 @{ Html.RenderPartial("_CreateCourseModule", Model); }
             </span>
         </details>
+        <hr />
         <details>
             <summary>Lägg till Aktivitet</summary>
             <span id="divCreateModuleActivity" class="col-lg-12">
