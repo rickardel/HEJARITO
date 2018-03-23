@@ -255,7 +255,8 @@
             <tr>
                 <th class="col-md-3">@Html.DisplayNameFor(model => model.Users.First().FirstName)</th>
                 <th class="col-md-3">@Html.DisplayNameFor(model => model.Users.First().LastName)</th>
-                <th class="col-md-6">@Html.DisplayNameFor(model => model.Users.First().Email)</th>
+                <th class="col-md-4">@Html.DisplayNameFor(model => model.Users.First().Email)</th>
+                <th class="col-md-2">Telefonnummer</th>
             </tr>
         </thead>
 
@@ -272,11 +273,12 @@
         <tbody>
             @foreach (var item in Model.Users)
             {
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
-                    <td>@Html.DisplayFor(modelItem => item.LastName)</td>
-                    <td><a href="mailto:@Html.DisplayFor(modelItem => item.Email)">@Html.DisplayFor(modelItem => item.Email)</a></td>
-                </tr>
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                <td><a href="mailto:@Html.DisplayFor(modelItem => item.Email)">@Html.DisplayFor(modelItem => item.Email)</a></td>
+                <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+            </tr>
             }
         </tbody>
     </table>
@@ -289,7 +291,8 @@
             <tr>
                 <th class="col-md-3">@Html.DisplayNameFor(model => model.Users.First().FirstName)</th>
                 <th class="col-md-3">@Html.DisplayNameFor(model => model.Users.First().LastName)</th>
-                <th class="col-md-6">@Html.DisplayNameFor(model => model.Users.First().Email)</th>
+                <th class="col-md-4">@Html.DisplayNameFor(model => model.Users.First().Email)</th>
+                <th class="col-md-2">Telefonnummer</th>
             </tr>
         </thead>
 
@@ -306,11 +309,12 @@
         <tbody>
             @foreach (var item in Model.Users)
             {
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
-                    <td>@Html.DisplayFor(modelItem => item.LastName)</td>
-                    <td><a href="mailto:@Html.DisplayFor(modelItem => item.Email)">@Html.DisplayFor(modelItem => item.Email)</a></td>
-                </tr>
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                <td><a href="mailto:@Html.DisplayFor(modelItem => item.Email)">@Html.DisplayFor(modelItem => item.Email)</a></td>
+                <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+            </tr>
             }
         </tbody>
     </table>

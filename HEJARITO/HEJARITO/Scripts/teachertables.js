@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
     $('#activitiestable-small').DataTable(
         {
+            order: [[2, 'asc']],
             language:
                 {
                     lengthMenu: "Visa _MENU_ rader per sida",
@@ -19,6 +20,7 @@
 
     $('#coursestable-small').DataTable(
         {
+            order: [[1, 'asc']],
             language:
                 {
                     lengthMenu: "Visa _MENU_ rader per sida",
@@ -37,6 +39,7 @@
 
     $('#contactstable-small').DataTable(
         {
+            order: [[1, 'asc']],
             language:
                 {
                     lengthMenu: "Visa _MENU_ rader per sida",
@@ -57,6 +60,7 @@
 $(document).ready(function () {
     $('#activitiestable-large').DataTable(
         {
+            order: [[2, 'asc']],
             language:
                 {
                     lengthMenu: "Visa _MENU_ rader per sida",
@@ -73,6 +77,7 @@ $(document).ready(function () {
 
     $('#coursestable-large').DataTable(
         {
+            order: [[1, 'asc']],
             language:
                 {
                     lengthMenu: "Visa _MENU_ rader per sida",
@@ -89,6 +94,7 @@ $(document).ready(function () {
 
     $('#contactstable-large').DataTable(
         {
+            order: [[1, 'asc']],
             language:
                 {
                     lengthMenu: "Visa _MENU_ rader per sida",
