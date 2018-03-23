@@ -155,17 +155,17 @@ namespace HEJARITO.Controllers
                         {
                             case DocumentType.CourseDocument:
                                 localPath += "/Course_" + document.CourseId;
-                                
+                                document.ModuleId = null; document.ActivityId = null;
                                 break;
                             case DocumentType.ModuleDocument:
                                 document.Module = db.Modules.Find(document.ModuleId);
                                 localPath += "/Course_" + document.Module.CourseId + "/Module_" + document.ModuleId;
-                                
+                                document.CourseId = null; document.ActivityId = null;
                                 break;
                             case DocumentType.ActivityDocument:
                                 document.Activity = db.Activities.Find(document.ActivityId);
                                 localPath += "/Course_" + document.Activity.Module.CourseId + "/Module_" + document.Activity.ModuleId + "/Activity_" + document.ActivityId;
-                                
+                                document.ModuleId = null; document.CourseId = null;
                                 break;
                             default:
                                 break;
