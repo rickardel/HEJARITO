@@ -24,8 +24,6 @@ textarea {
     max-width: 320px;
 }
 
-details {
-}
 
 .form-control {
     margin-left: 3em;
@@ -108,6 +106,24 @@ code {
     opacity: 0.6;
 }
 
+.table .activity-listing .btn {
+    opacity: 0;
+}
+
+.table .activity-listing a {
+    text-decoration: none;
+}
+
+.table .activity-listing a:hover {
+    text-decoration: none;
+    text-shadow: 2px 2px yellow;
+}
+
+.table .activity-listing:hover .btn {
+    opacity: 1;
+}
+
+
 /* //TM 2018-03-19 11:38 Alla btn-knappar lyser färgglatt upp när musen hamnar ovanför dem */
 .table tbody tr .btn:hover,
 .btn:hover {
@@ -125,6 +141,7 @@ code {
 .table tbody tr:hover td {
     background-color: rgb(249, 255, 192);
 }
+
 
 /* //TM 2018-03-20 11:38 Modifiera klassen 'text-success' som används för bekräftelser till användaren om genomförda ändringar */
 .text-success {

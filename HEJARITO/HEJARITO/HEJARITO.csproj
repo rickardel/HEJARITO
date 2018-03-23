@@ -226,7 +226,6 @@
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CourseEditor.cs" />
     <Compile Include="Models\Document.cs" />
-    <Compile Include="Models\GenericPrincipalExtensions.cs" />
     <Compile Include="Models\HejaRiToExceptionFilter.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
