@@ -36,7 +36,6 @@ textarea {
 
 .input-validation-error {
     border: dotted 1px red;
-    box-shadow: 1px 2px 3px red;
 }
 
 .valid {
@@ -116,19 +115,25 @@ code {
     opacity: 0;
 }
 
-.table .activity-listing a {
+.table .activity-listing a.listing {
     text-decoration: none;
+    color: black;
 }
 
-.table .activity-listing a:hover {
+.table .activity-listing a.listing:hover {
     text-decoration: none;
-    text-shadow: 2px 2px yellow;
+    text-shadow: 1px 1px black;
 }
 
 .table .activity-listing:hover .btn {
     opacity: 1;
 }
 
+.listing-icon {
+   padding: 3px;
+   margin-right:5px;
+   float:right;
+}
 
 /* //TM 2018-03-19 11:38 Alla btn-knappar lyser färgglatt upp när musen hamnar ovanför dem */
 .table tbody tr .btn:hover,
