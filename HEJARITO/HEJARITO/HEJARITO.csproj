@@ -354,6 +354,7 @@
     <Content Include="Views\Courses\_CourseModulesOld.cshtml" />
     <Content Include="Views\Shared\_CourseModulesEditor.cshtml" />
     <Content Include="Views\Courses\_CourseDocuments.cshtml" />
+    <Content Include="Views\Shared\_HomeIndexLayout.cshtml" />
     <Content Include="Views\Courses\_CreateStudentAndList.cshtml" />
   </ItemGroup>
   <ItemGroup>
