@@ -1,3 +1,13 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    var myPath = HttpContext.Current.Request.AppRelativeCurrentExecutionFilePath;
+    string cLayout = "";
+    if (myPath == "~/Home/Index")
+    {
+        cLayout = "~/Views/Shared/_HomeIndexLayout.cshtml";
+    }
+    else
+    {
+        cLayout = "~/Views/Shared/_Layout.cshtml";
+    }
+    Layout = cLayout;
 }
