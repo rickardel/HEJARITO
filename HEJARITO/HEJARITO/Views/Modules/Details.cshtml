@@ -41,10 +41,11 @@
             @Html.Partial("_Activities", Model.Activities)
         </span>
 
+        <div>
+            @Html.ActionLink("Tillbaka", null, null, null, new { @class = "btn btn-xs btn-primary", href = Request.UrlReferrer })
+        </div>
+
     </div>
-
-
-
 
     <div class="col-sm-4">
         <table class="table table-striped table-bordered" id="coursedocumentstable" cellspacing="0">
@@ -66,10 +67,6 @@
 
             </tbody>
         </table>
-    </div>
-
-    <div>
-        @Html.ActionLink("Tillbaka", null, null, null, new { @class = "btn btn-xs btn-primary", href = Request.UrlReferrer })
     </div>
 
 }
