@@ -9,7 +9,6 @@ namespace HEJARITO.Models
     {
         public bool HasPassword { get; set; }
         public IList<UserLoginInfo> Logins { get; set; }
-        [Display(Name = "Telefonnummer")]
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
@@ -63,7 +62,7 @@ namespace HEJARITO.Models
     {
         [Required]
         [Phone]
-        [Display(Name = "Telefonnummer")]
+        [Display(Name = "Phone Number")]
         public string Number { get; set; }
     }
 
@@ -75,7 +74,7 @@ namespace HEJARITO.Models
 
         [Required]
         [Phone]
-        [Display(Name = "Telefonnummer")]
+        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
     }
 
