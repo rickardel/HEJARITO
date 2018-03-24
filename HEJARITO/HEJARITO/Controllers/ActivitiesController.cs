@@ -87,9 +87,26 @@ namespace HEJARITO.Controllers
 
                 return PartialView("_CourseModulesEditor", module.Course.Modules.OrderBy(m => m.StartDate).ToList());
             }
+            else
+            {
+                List<ModelError> l = new List<ModelError>();
+                foreach (var item in ModelState.Values)
+                {
+                    foreach (var error in item.Errors)
+                    {
+                        if (!l.Any(e => e.ErrorMessage == error.ErrorMessage))
+                        {
+                            l.Add(error);
+                        }
+
+                    }
+
+                }
+                ViewBag.errorMessages = l;
+            }
             ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "Id", "Name", activity.ActivityTypeId);
             ViewBag.ModuleId = new SelectList(db.Modules, "Id", "Name", activity.ModuleId);
-            return PartialView("_CourseModulesEditor");
+            return PartialView("_CourseModulesEditor", module.Course.Modules.OrderBy(m => m.StartDate).ToList());
         }
 
 

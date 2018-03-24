@@ -35,9 +35,9 @@
     <div class="col-sm-8">
 
         <div>
-            <div id="divCourseModules">
+            <span id="divCourseModules">
                 @{ Html.RenderPartial("_CourseModules", Model.Modules.OrderBy(m => m.StartDate).ToList()); }
-            </div>
+            </span>
 
             <div>
                 @Html.ActionLink("Tillbaka", null, null, null, new { @class = "btn btn-xs btn-primary", href = Request.UrlReferrer })
