@@ -53,14 +53,6 @@
         <div>
             <span id="divFormContainer"></span>
         </div>
-
-        <span id="divCourseModules">
-            @{ Html.RenderPartial("_CourseModulesEditor", Model.Course.Modules.OrderBy(m => m.StartDate).ToList()); }
-        </span>
-        <div>
-            @Html.ActionLink("Tillbaka", null, null, null, new { @class = "btn btn-xs btn-primary", href = Request.UrlReferrer })
-        </div>
-        <hr />
         <div class="col-sm-6">
             <details>
                 <summary>Lägg till modul</summary>
@@ -77,13 +69,22 @@
                 </span>
             </details>
         </div>
+        <span id="divCourseModules">
+            @{ Html.RenderPartial("_CourseModulesEditor", Model.Course.Modules.OrderBy(m => m.StartDate).ToList()); }
+        </span>
+        <div>
+            @Html.ActionLink("Tillbaka", null, null, null, new { @class = "btn btn-xs btn-primary", href = Request.UrlReferrer })
+        </div>
+        <hr />
+
     </div>
     <div class="col-sm-4">
-        @{ Html.RenderPartial("_CourseDocuments", Model.Course.Documents); }
         <div id="divCourseStudents">
             @{ Html.RenderPartial("_CreateStudentAndList", Model); }
         </div>
-
+        <div id="divCourseDocuments" width="90%">
+            @{ Html.RenderPartial("_CourseDocuments", Model.Course.Documents); }
+        </div>
     </div>
 </div>
 

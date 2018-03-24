@@ -1,21 +1,5 @@
 ﻿@model HEJARITO.Models.CourseEditor
 
-@if (ViewBag.errorMessages != null)
-{
-
-    <div class="input-validation-error">
-        <ul>
-            @foreach (var error in @ViewBag.errorMessages)
-            {
-                <li>
-                    @error.ErrorMessage
-                </li>
-            }
-        </ul>
-
-    </div>
-}
-
 
 @using (Ajax.BeginForm("CreateAjax", "Modules", new AjaxOptions { UpdateTargetId = "divCourseModules", OnFailure = "function () {alert('noob')}" }))
 {
