@@ -35,9 +35,9 @@
     <div class="col-sm-8">
 
         <div>
-            <div id="divCourseModules">
+            <span id="divCourseModules">
                 @{ Html.RenderPartial("_CourseModules", Model.Modules.OrderBy(m => m.StartDate).ToList()); }
-            </div>
+            </span>
 
             <div>
                 @Html.ActionLink("Tillbaka", null, null, null, new { @class = "btn btn-xs btn-primary", href = Request.UrlReferrer })
@@ -48,9 +48,12 @@
     </div>
     <div class="col-sm-4">
 
-        @{ Html.RenderPartial("_CourseDocuments", Model.Documents); }
-        @{ Html.RenderPartial("_CourseStudents", Model.ApplicationUsers); }
-
+        <div id="divCourseDocuments">
+            @{ Html.RenderPartial("_CourseDocuments", Model.Documents); }
+        </div>
+        <div id="divCourseStudents">
+            @{ Html.RenderPartial("_CourseStudents", Model.ApplicationUsers); }
+        </div>
     </div>
 
 

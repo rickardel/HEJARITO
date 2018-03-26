@@ -33,10 +33,10 @@ namespace HEJARITO.Controllers
         public ActionResult GetDates(int moduleId)
         {
             Module m = db.Modules.Find(moduleId);
-            string start = m.StartDate.Year +"-"+ m.StartDate.Month + "-" + m.StartDate.Day + " " + m.StartDate.Hour + ":" + m.StartDate.Minute + ":" + m.StartDate.Second;
-            string end = m.EndDate.Year + "-" + m.EndDate.Month + "-" + m.EndDate.Day + " " + m.EndDate.Hour + ":" + m.EndDate.Minute + ":" + m.EndDate.Second;
+            string start = m.StartDate.Year.ToString("0000") + "-" + m.StartDate.Month.ToString("00") + "-" + m.StartDate.Day.ToString("00") + "T" + m.StartDate.Hour.ToString("00") + ":" + m.StartDate.Minute.ToString("00") + ":" + m.StartDate.Second.ToString("00");
+            string end = m.EndDate.Year.ToString("0000") + "-" + m.EndDate.Month.ToString("00") + "-" + m.EndDate.Day.ToString("00") + "T" + m.EndDate.Hour.ToString("00") + ":" + m.EndDate.Minute.ToString("00") + ":" + m.EndDate.Second.ToString("00");
 
-            return Json(new string[]{ start, end }, JsonRequestBehavior.AllowGet);
+            return Json(new string[] { start, end }, JsonRequestBehavior.AllowGet);
         }
         // GET: Modules/Details/5
         public ActionResult Details(int? id)
@@ -90,6 +90,8 @@ namespace HEJARITO.Controllers
         public PartialViewResult CreateAjax([Bind(Include = "Id,Name,Description,StartDate,EndDate,CourseId")] Module module)
         {
             Course course = db.Courses.Find(module.CourseId);
+
+            List<Module> lm = course.Modules.OrderBy(m => m.StartDate).ToList();
             if (course != null && ModelState.IsValid)
             {
                 module.Activities = new List<Activity>();
@@ -100,10 +102,28 @@ namespace HEJARITO.Controllers
 
                 //TM 2018-03-19 16-19 Ska visas i nästa vy
                 ViewBag.KvittoMeddelande = "Skapande av en ny modul genomfördes";
-                List<Module> lm = course.Modules.OrderBy(m => m.StartDate).ToList();
+
                 return PartialView("_CourseModulesEditor", lm);
             }
-            return PartialView("_CourseModulesEditor");
+            else
+            {
+                List<ModelError> l = new List<ModelError>();
+                foreach (var item in ModelState.Values)
+                {
+                    foreach (var error in item.Errors)
+                    {
+                        if (!l.Any(e => e.ErrorMessage == error.ErrorMessage))
+                        {
+                            l.Add(error);
+                        }
+                        
+                    }
+                    
+                }
+                ViewBag.errorMessages = l ;
+            }
+
+            return PartialView("_CourseModulesEditor", lm);
         }
 
         // GET: Modules/Edit/5

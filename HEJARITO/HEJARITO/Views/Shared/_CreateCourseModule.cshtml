@@ -1,5 +1,6 @@
 ﻿@model HEJARITO.Models.CourseEditor
 
+
 @using (Ajax.BeginForm("CreateAjax", "Modules", new AjaxOptions { UpdateTargetId = "divCourseModules", OnFailure = "function () {alert('noob')}" }))
 {
     @Html.AntiForgeryToken()

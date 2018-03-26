@@ -84,8 +84,24 @@
     <!-- Begin page content -->
 
     <div class="container" id="main-content">
+
+        @*<div id="ErrorMessageList" class="alert alert-danger alert-dismissible fade in" style="clear: both; display:none;">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <ul>
+                @if (ViewBag.errorMessages != null)
+                {
+                    foreach (var error in @ViewBag.errorMessages)
+                    {
+                        <li>
+                            @error.ErrorMessage
+                        </li>
+                    }
+                }
+            </ul>
+        </div>*@
         @*  //TM 2018-03-20 13:03 Kvitto/felmeddelande efter CUD *@
-        <p class="text-success">
+        <p class="text-success" id="errorMessageContent">
+
             @ViewBag.StatusMessage
         </p>
 
