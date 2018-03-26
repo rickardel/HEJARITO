@@ -187,7 +187,22 @@ namespace HEJARITO.Controllers
                 {
                     ViewBag.Message = "Kunde inte ladda upp filen!!";
                 }
-                return RedirectToAction("Index"); // Todo . return PartialView
+
+
+                switch (document.DocumentType)
+                {
+                    case DocumentType.CourseDocument:
+                        int courseId = Int32.Parse(Request["CourseId"]);
+                        return RedirectToAction("Details", "Courses", new { id = courseId });
+                    case DocumentType.ModuleDocument:
+                        int moduleId = Int32.Parse(Request["ModuleId"]);
+                        return RedirectToAction("Details", "Modules", new { id = moduleId });
+                    case DocumentType.ActivityDocument:
+                        int activityId = Int32.Parse(Request["ActivityId"]);
+                        return RedirectToAction("Details", "Activities", new { id = activityId });
+                    default:
+                        break;
+                }
             }
 
             ViewBag.ActivityId = new SelectList(db.Activities, "Id", "Name", document.ActivityId);
