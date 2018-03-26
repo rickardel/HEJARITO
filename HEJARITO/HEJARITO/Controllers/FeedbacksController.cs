@@ -37,11 +37,16 @@ namespace HEJARITO.Controllers
         }
 
         // GET: Feedbacks/Create
-        public ActionResult Create()
+        public ActionResult Create(int studentDocumentId)
         {
             //ViewBag.ApplicationUserId = new SelectList(db.ApplicationUsers, "Id", "FirstName");
+            Feedback fb = new Feedback() {
+                Name = "Kommentar på uppgift",
+                Grade = 3,
+                StudentDocumentId = studentDocumentId
+        };
             ViewBag.StudentDocumentId = new SelectList(db.StudentDocuments, "Id", "Name");
-            return View();
+            return View(fb);
         }
 
         // POST: Feedbacks/Create
@@ -49,8 +54,14 @@ namespace HEJARITO.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Content,Grade,StudentDocumentId,ApplicationUserId")] Feedback feedback)
+        public ActionResult Create([Bind(Include = "Id,Name,Content,Grade,StudentDocumentId")] Feedback feedback)
         {
+            feedback.StudentDocument = db.StudentDocuments.FirstOrDefault(sd => sd.Id == feedback.StudentDocumentId);
+            if (feedback.StudentDocument != null) {
+                feedback.ApplicationUser = db.Users.FirstOrDefault(u => u.Id == feedback.StudentDocument.ApplicationUserId);
+                feedback.ApplicationUserId = feedback.ApplicationUser.Id;
+            }
+
             if (ModelState.IsValid)
             {
                 db.Feedbacks.Add(feedback);
