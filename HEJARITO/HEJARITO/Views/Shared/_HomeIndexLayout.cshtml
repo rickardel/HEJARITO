@@ -14,19 +14,22 @@
             height: 100%;
             margin: 0;
         }
+
         .bg {
             /* The image used */
             background-image: url("../../Content/HeJaRiTo-bakgrund.png");
             /* Full height */
             height: 100%;
             /* Center and scale the image nicely */
+            width: auto;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
         }
+
         #Floating {
-            width: 60%;
-            height: 50%;
+            width: auto;
+            height: 65%;
             min-width: 250px;
             min-height: 250px;
         }
@@ -35,16 +38,22 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <a href="~/Account/Login" title="Klicka var som helst för att komma till inloggningen!">
-    <div class="bg">
-        <div id="Floating"></div>
-        <div class="container" style="width:0; height:auto">
-            <p style="color:transparent">klklklklk</p>
-                <div style="background-color:lightyellow;color:rgb(21,40,68);opacity:0.8">
+    <a href="~/Account/Login" title=@ViewBag.MyText>
+        <div class="bg">
+            <div class="container" style="width:60%; height:auto">
+                <div>
+                    <p style="width:330px; font-size:36px; font-weight:bolder; background-color:rgb(222,222,111);color:rgb(222,0,0); text-align:center; opacity:0.85">Välkommen!</p>
                 </div>
-        </div>
-    </div>
-    </a>
+            </div>
+                <div id="Floating"></div>
+                <div class="container" style="width:auto; height:auto">
+                    <p style="color:transparent">klklklklk</p>
+                    <div>
+                        <p style="font-size:xx-large; font-weight:bolder; background-color:rgb(21,40,68);color:white; text-align:center; opacity:0.7">@ViewBag.MyText</p>
+                    </div>
+                </div>
+            </div>
+</a>
     <!-- //TM 2018-03-23 13:56
     <div class="row" style="background-color:darkblue">
         <div class="col-lg-4">
@@ -81,5 +90,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="~/Scripts/teachertables.js"></script>
 </body>
 </html>
