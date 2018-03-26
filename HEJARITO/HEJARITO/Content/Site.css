@@ -1,8 +1,11 @@
-﻿body {
+﻿body,
+html {
     /*
     padding-top: 50px;
     padding-bottom: 20px;
     */
+    width:100%;
+    margin:0;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -172,15 +175,4 @@ code {
     /*background-color: deeppink;*/
     overflow: hidden;
     text-overflow: ellipsis;
-}
-
-.bg {
-    /* The image used */
-    /*background-image: url("/Content/HeJaRiTo-bakgrund.png");*/
-    /* Full height */
-    height: auto;
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
 }

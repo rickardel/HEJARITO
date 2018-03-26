@@ -64,7 +64,8 @@ namespace HEJARITO.Controllers
                 //TM 2018-03-19 16-19 Ska visas i nästa vy
                 ViewBag.StatusMessage = "Skapande av en ny aktivitet genomfördes";
 
-                return RedirectToAction("Index");
+                int Id = Int32.Parse(Request["ModuleId"]);
+                return RedirectToAction("Details", "Modules", new { id = Id });
             }
 
             ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "Id", "Name", activity.ActivityTypeId);
@@ -154,7 +155,7 @@ namespace HEJARITO.Controllers
                 ViewBag.KvittoMeddelande = "Redigering av en aktivitet genomfördes";
 
                 //return RedirectToAction("Index");
-                int Id = Int32.Parse(Request["Id"]);
+                int Id = Int32.Parse(Request["ModuleId"]);
                 return RedirectToAction("Details", "Activities", new {id = Id });
             }
             ViewBag.ActivityTypeId = new SelectList(db.ActivityTypes, "Id", "Name", activity.ActivityTypeId);

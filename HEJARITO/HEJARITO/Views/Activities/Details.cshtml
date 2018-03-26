@@ -88,7 +88,7 @@
             }
                 <div>
                     @Html.ActionLink("Tillbaka", null, null, null, new { @class = "btn btn-xs btn-primary", href = Request.UrlReferrer })
-                    @Html.ActionLink("Till kursen", "Details", "Courses", new { id = Model.Id }, new { @class = "btn btn-xs btn-primary"})
+                    @Html.ActionLink("Till modulen", "Details", "Modules", new { Id = Model.ModuleId }, new { @class = "btn btn-xs btn-primary"})
                 </div>
 
         </div>
