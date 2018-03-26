@@ -158,7 +158,9 @@ namespace HEJARITO.Controllers
                 //TM 2018-03-19 16-19 Ska visas i nästa vy
                 ViewBag.KvittoMeddelande = "Redigering av en modul genomfördes";
 
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                int Id = Int32.Parse(Request["Id"]);
+                return RedirectToAction("Details", "Modules", new { id = Id });
             }
             ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name", module.CourseId);
             return View(module);

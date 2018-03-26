@@ -21,9 +21,10 @@ namespace HEJARITO.Models
         [Required(ErrorMessage = "Ett dokument måste ha ett namn")]
         [DataType(DataType.Text)]
         [StringLength(100, ErrorMessage = "Namn måste bestå av minst {2} tecken.", MinimumLength = 2)]
-        [Display(Name = "DokumentNamn")]
+        [Display(Name = "Dokumentnamn")]
         public string Name { get; set; }
 
+        [Display(Name = "Beskrivning")]
         public string Description { get; set; }
         public DateTime UploadDate { get; set; }
 
@@ -31,6 +32,7 @@ namespace HEJARITO.Models
         public virtual ApplicationUser ApplicationUser { get; set; }
 
         [Required(ErrorMessage ="Dokumentet måste vara av en viss typ")]
+        [Display(Name = "Dokumenttyp")]
         public DocumentType DocumentType { get; set; }
 
         public int? CourseId { get; set; }
@@ -44,6 +46,7 @@ namespace HEJARITO.Models
 
         [Required(ErrorMessage = "En fil måste väljas")]
         [StringLength(255)]
+        [Display(Name = "Filnamn")]
         public string FileName { get; set; }
         public int ContentLength { get; set; }
         public string ContentType { get; set; }
