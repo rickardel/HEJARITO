@@ -45,7 +45,8 @@ namespace HEJARITO.Controllers
             }
             else
             {
-                return RedirectToAction("About");
+                //TM 2018-03-26 11:05 Icke-inloggad användare ska hamna på välkomstsidan enligt Rickard
+                return RedirectToAction("Index");
             }
         }
 
