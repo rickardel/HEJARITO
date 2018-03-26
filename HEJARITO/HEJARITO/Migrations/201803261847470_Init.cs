@@ -182,10 +182,10 @@ namespace HEJARITO.Migrations
                         Content = c.String(),
                         Grade = c.Int(nullable: false),
                         StudentDocumentId = c.Int(nullable: false),
-                        ApplicationUserId = c.String(nullable: false, maxLength: 128),
+                        ApplicationUserId = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUserId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUserId)
                 .ForeignKey("dbo.StudentDocuments", t => t.StudentDocumentId, cascadeDelete: true)
                 .Index(t => t.StudentDocumentId)
                 .Index(t => t.ApplicationUserId);
