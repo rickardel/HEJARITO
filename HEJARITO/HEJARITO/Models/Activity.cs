@@ -48,6 +48,7 @@ namespace HEJARITO.Models
         public DateTime EndDate { get; set; }
 
         [Required(ErrorMessage = "En aktivitet måste kopplas till en module")]
+        [Display(Name = "ModulId")]
         public int ModuleId { get; set; }
         public virtual Module Module { get; set; }
 
