@@ -13,7 +13,6 @@
         @if (User.IsInRole("Teacher")) //TM 2018-03-12 15:42
         {
             @Html.ActionLink("Redigera", "Edit", new { id = Model.Id }, new { @class = "btn btn-xs btn-warning" })
-            @Html.ActionLink("[Ladda upp dokument för denna modul]", "CreateModuleDocument", "Documents", new { ModuleId = Model.Id }, "")
         }
     </span>
 
@@ -55,6 +54,20 @@
                 </tr>
             </thead>
             <tbody class="slist" id="CourseDocumentsList">
+
+                @if (User.IsInRole("Teacher"))
+                {
+                    <tr>
+                        <td>
+                            @*<a class="btn btn-success glyphicon glyphicon-upload" href="#" id="uploadCourseDocumentBtn" onclick="GetCourseDocumentForm()"></a>*@
+                            @Html.ActionLink(" ", "CreateModuleDocument", "Documents", new { ModuleId = Model.Id }, new { @class = "btn btn-success glyphicon glyphicon-upload" })
+                            Ladda upp nytt Moduldokument
+
+                        </td>
+                    </tr>
+                }
+
+
                 @foreach (var doc in Model.Documents.Where(d => d.ActivityId == null))
                 {
                     <tr>

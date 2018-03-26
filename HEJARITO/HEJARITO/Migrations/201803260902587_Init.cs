@@ -57,7 +57,7 @@ namespace HEJARITO.Migrations
                 .ForeignKey("dbo.Activities", t => t.ActivityId)
                 .ForeignKey("dbo.Courses", t => t.CourseId)
                 .ForeignKey("dbo.Modules", t => t.ModuleId)
-                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUserId, cascadeDelete:true)
+                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUserId)
                 .Index(t => t.ApplicationUserId)
                 .Index(t => t.CourseId)
                 .Index(t => t.ModuleId)
@@ -84,7 +84,7 @@ namespace HEJARITO.Migrations
                         UserName = c.String(nullable: false, maxLength: 256),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Courses", t => t.CourseId, cascadeDelete: true)
+                .ForeignKey("dbo.Courses", t => t.CourseId)
                 .Index(t => t.CourseId)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
             
@@ -174,6 +174,23 @@ namespace HEJARITO.Migrations
                 .Index(t => t.ActivityId);
             
             CreateTable(
+                "dbo.Feedbacks",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Content = c.String(),
+                        Grade = c.Int(nullable: false),
+                        StudentDocumentId = c.Int(nullable: false),
+                        ApplicationUserId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUserId, cascadeDelete: true)
+                .ForeignKey("dbo.StudentDocuments", t => t.StudentDocumentId, cascadeDelete: true)
+                .Index(t => t.StudentDocumentId)
+                .Index(t => t.ApplicationUserId);
+            
+            CreateTable(
                 "dbo.AspNetRoles",
                 c => new
                     {
@@ -188,6 +205,8 @@ namespace HEJARITO.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Feedbacks", "StudentDocumentId", "dbo.StudentDocuments");
+            DropForeignKey("dbo.Feedbacks", "ApplicationUserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.StudentDocuments", "ApplicationUserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.StudentDocuments", "ActivityId", "dbo.Activities");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
@@ -202,6 +221,8 @@ namespace HEJARITO.Migrations
             DropForeignKey("dbo.Documents", "ActivityId", "dbo.Activities");
             DropForeignKey("dbo.Activities", "ActivityTypeId", "dbo.ActivityTypes");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.Feedbacks", new[] { "ApplicationUserId" });
+            DropIndex("dbo.Feedbacks", new[] { "StudentDocumentId" });
             DropIndex("dbo.StudentDocuments", new[] { "ActivityId" });
             DropIndex("dbo.StudentDocuments", new[] { "ApplicationUserId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
@@ -218,6 +239,7 @@ namespace HEJARITO.Migrations
             DropIndex("dbo.Activities", new[] { "ModuleId" });
             DropIndex("dbo.Activities", new[] { "ActivityTypeId" });
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Feedbacks");
             DropTable("dbo.StudentDocuments");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");

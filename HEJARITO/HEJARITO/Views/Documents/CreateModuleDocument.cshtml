@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" style="display:none;">
         @Html.LabelFor(model => model.DocumentType, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.HiddenFor(model => model.DocumentType)
@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" style="display:none;">
         @Html.LabelFor(model => model.CourseId, "CourseId", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DisplayFor(model => model.CourseId)
@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" style="display:none;">
         @Html.LabelFor(model => model.ModuleId, "ModuleId", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.HiddenFor(model => model.ModuleId)
