@@ -119,6 +119,12 @@
             );
         }*@
 
+        function AddErrorMessage() {
+            $("ErrorContent").append('<div class="alert alert-danger alert-dismissible fade in" style="clear: both;"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></div>');
+            $("#ErrorMessageList").slideDown();
+            $("#ErrorMessageList ul").append("<li>lala</li>");
+        }
+
         function verifyEmailAvailability() {
             var studentEmail = $('#Student_Email').val();
             $.ajax({
