@@ -16,7 +16,23 @@ namespace HEJARITO.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            //TM 2018-03-26 11:36 Efter klick på loggan ska redan inloggad användare hamna rätt isf. på inloggningsvyn
+            {
+                if (User.IsInRole("Teacher"))
+                {
+                    return RedirectToAction("Teacher");
+                }
+                if (User.IsInRole("Student"))
+                {
+                    return RedirectToAction("Student");
+                }
+                else
+                {
+                    //TM 2018-03-26 11:58 'Non-breaking space' (\u00A0) ska användas isf. vanligt mellanslag för att texten ska ha rätt utseende i vyn
+                    ViewBag.MyText = "Klicka\u00A0hit\u00A0eller\u00A0var\u00A0som\u00A0helst\u00A0på\u00A0bilden\u00A0för\u00A0att\u00A0komma\u00A0till\u00A0inloggningen!";
+                    return View();
+                }
+            }
         }
 
         public ActionResult About()

@@ -35,6 +35,7 @@ namespace HEJARITO.Models
         public DateTime EndDate { get; set; }
 
         [Required]
+        [Display(Name = "KursId")]
         public int CourseId { get; set; }
 
         public virtual Course Course { get; set; }
