@@ -1,4 +1,4 @@
-﻿@model ICollection<HEJARITO.Models.Document>
+﻿@model HEJARITO.Models.Course
 
 <table class="table table-striped table-bordered" id="" cellspacing="0">
     <thead>
@@ -6,34 +6,45 @@
             <th>
                 Kursdokument
             </th>
-            
+
     </thead>
     <tbody class="" id="">
-        <tr>
-            <td>
-                <a class="btn btn-success glyphicon glyphicon-upload" href="#" id="uploadCourseDocumentBtn" onclick="GetCourseDocumentForm()"></a>
-                Ladda upp nytt kursdokument
-            </td>
-            
-        </tr>
-        @if (Model.Count > 0)
+        @if (User.IsInRole("Teacher"))
         {
-            foreach (var doc in Model)
+            <tr>
+                <td>
+                    @*<a class="btn btn-success glyphicon glyphicon-upload" href="#" id="uploadCourseDocumentBtn" onclick="GetCourseDocumentForm()"></a>*@
+                    @Html.ActionLink(" ", "Create", "Documents", new { CourseId = Model.Id }, new { @class = "btn btn-success glyphicon glyphicon-upload" })
+
+                    Ladda upp nytt kursdokument
+
+                </td>
+            </tr>
+        }
+        @if (Model.Documents.Count > 0)
+        {
+            foreach (var doc in Model.Documents)
             {
                 <tr>
                     <td>
                         @Html.ActionLink("Ladda ner", "Download", "Documents", new { Id = doc.Id }, new { @class = "btn btn-success btn-xs" })
-                        <span>@doc.UploadDate : "@doc.Name"</span>
+                        <span>@doc.UploadDate.ToShortDateString() :</span>
+                        <span class="activity-listing">
+                            @Html.ActionLink(doc.Name, "Details", "Documents", new { Id = doc.Id }, new { @class = "listing" })
+                            @*@Html.ActionLink(" ", "Edit", "Documents", new { Id = doc.Id }, new { @class = "listing-icon btn btn-sm btn-warning  glyphicon glyphicon-cog" })*@
+                            @Html.ActionLink(" ", "Delete", "Documents", new { Id = doc.Id }, new { @class = "listing-icon btn btn-sm btn-danger glyphicon glyphicon-trash" })
+                        </span>
                     </td>
                 </tr>
             }
         }
-        else {
-                <tr>
-                    <td>
-                        - Inga dokument ännu -
-                    </td>
-                </tr>
+        else
+        {
+            <tr>
+                <td>
+                    - Inga dokument ännu -
+                </td>
+            </tr>
         }
     </tbody>
 </table>

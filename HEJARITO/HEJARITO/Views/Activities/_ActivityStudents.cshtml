@@ -9,28 +9,34 @@
         <tr>
             <th>Inlämningsuppgift</th>
             <th>Name</th>
-            <th>Kontaktuppgifter</th>
+            @*<th>Kontaktuppgifter</th>*@
         </tr>
 
         @foreach (var item in Model.Module.Course.ApplicationUsers)
         {
             <tr>
                 <td>
-                    @foreach (var doc in item.StudentDocuments.Where(d=>d.ActivityId == Model.Id))
+                    @foreach (var doc in item.StudentDocuments.Where(d => d.ActivityId == Model.Id))
                     {
                         @Html.ActionLink("Ladda ner", "Download", "StudentDocuments", new { Id = doc.Id }, new { @class = "btn btn-success btn-xs" })
-                        <span>@doc.UploadDate : "@doc.Name"</span>
+
+                        <span>
+                            @doc.UploadDate
+                            @Html.ActionLink(" " + doc.Name, "Details", "StudentDocuments", new { Id = doc.Id }, "")
+                        </span>
+                        <Br />
                     }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
                 </td>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.Email)
                     @if (item.PhoneNumber != null)
-                    {@Html.DisplayFor(modelItem => item.PhoneNumber);
-                }
-                </td>
+                    {
+                        @Html.DisplayFor(modelItem => item.PhoneNumber);
+                    }
+                </td>*@
 
             </tr>
         }

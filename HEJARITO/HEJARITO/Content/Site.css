@@ -52,10 +52,13 @@ textarea {
     padding: 0;
 }
 
+
 /* Navbar background color according to Lexicon*/
 .navbar-default {
     background-color: RGB(21, 40, 68);
 }
+
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -176,3 +179,11 @@ code {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.navbar-default .navbar-nav, .navbar-default .navbar-nav > li > a {
+color: white;
+}
+.navbar-default .navbar-nav > li > a:hover {
+        color: rgb(23, 40, 67);
+        background-color: rgb(255, 255, 255);
+    }

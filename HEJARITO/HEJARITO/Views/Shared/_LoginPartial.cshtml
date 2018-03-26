@@ -12,10 +12,10 @@
                 <p style="color: #555; background-color: #e7e7e7; margin-bottom: 0px; padding-bottom: 5px">@User.Identity.GetUserName()</p>
             </li>*@
             @* //TM 2018-03-20 10:36 Separat menyval för hantering av kontoinställningar. OBS!!! Möjligheten fanns redan bakom 'Välkommen'-menyn *@
-            <li style="font-weight: bold" class="active">
+            <li style="font-weight: bold">
                     @Html.ActionLink(@User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Hantera kontoinställningar" })
             </li>
-            <li style="font-weight: bold" class="active"><a href="javascript:document.getElementById('logoutForm').submit()"> Logga ut</a></li>
+            <li style="font-weight: bold"><a href="javascript:document.getElementById('logoutForm').submit()"> Logga ut</a></li>
         </ul>
     }
 }
@@ -24,6 +24,6 @@ else
     <ul class="nav navbar-nav navbar-right">
         @*To do: Remove the "Register" actionlink below:
             <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
-        <li style="font-weight: bold" class="active">@Html.ActionLink("Logga in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li style="font-weight: bold">@Html.ActionLink("Logga in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }

@@ -31,7 +31,7 @@ namespace HEJARITO.Controllers
             }
             Activity activity = db.Activities.Find(id);
             ViewBag.documents = db.Documents.Where(d => d.ActivityId == activity.Id).ToList();
-
+            ViewBag.hasReport = db.ActivityTypes;
             if (activity == null)
             {
                 return HttpNotFound();

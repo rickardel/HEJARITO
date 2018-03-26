@@ -65,6 +65,8 @@ namespace HEJARITO.Models
 
         public System.Data.Entity.DbSet<HEJARITO.Models.StudentDocument> StudentDocuments { get; set; }
 
+        public System.Data.Entity.DbSet<HEJARITO.Models.Feedback> Feedbacks { get; set; }
+
         //public System.Data.Entity.DbSet<HEJARITO.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
-}
+} 

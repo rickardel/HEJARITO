@@ -29,5 +29,7 @@ namespace HEJARITO.Models
         public string FileName { get; set; }
         public int ContentLength { get; set; }
         public string ContentType { get; set; }
+
+        public virtual ICollection<Feedback> Feedbacks { get; set; }
     }
 }
