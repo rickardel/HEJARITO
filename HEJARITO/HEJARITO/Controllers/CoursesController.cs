@@ -75,7 +75,7 @@ namespace HEJARITO.Controllers
                 //TM 2018-03-19 16-19 Ska visas i nästa vy
                 ViewBag.KvittoMeddelande = "Skapande av en ny kurs genomfördes";
 
-                return RedirectToAction("Index");
+                return RedirectToAction("SelectStartView", "Home");
             }
 
             return View(course);

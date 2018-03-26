@@ -105,9 +105,9 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div>
+        @Html.ActionLink("Tillbaka", null, null, null, new { @class = "btn btn-xs btn-primary", href = Request.UrlReferrer })
+    </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
