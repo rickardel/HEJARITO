@@ -84,7 +84,9 @@
     <!-- Begin page content -->
 
     <div class="container" id="main-content">
-
+        <div id="footerBreadCrumbs">
+            @Html.Partial("_BreadCrumbs")
+        </div>
         @*<div id="ErrorMessageList" class="alert alert-danger alert-dismissible fade in" style="clear: both; display:none;">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             <ul>
@@ -108,7 +110,9 @@
         @RenderBody()
     </div>
 
+
     <footer class="footer">
+
         <div class="container">
             <p>Lärplattform för Lexicon. Copyright HEJARITO 2018.</p>
         </div>
