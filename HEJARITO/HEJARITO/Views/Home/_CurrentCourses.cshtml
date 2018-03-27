@@ -1,0 +1,63 @@
+﻿@model HEJARITO.Models.TeacherViewModel
+
+<span>
+
+    @Html.ActionLink("+ Kurs", "Create", "Courses", "", new { @title = "Skapa en ny kurs", @class = "btn btn-primary btn-xs" })
+    @Html.ActionLink("+ Modul", "Create", "Modules", "", new { @title = "Skapa en ny modul", @class = "btn btn-primary btn-xs" })
+    @Html.ActionLink("+ Aktivitet", "Create", "Activities", "", new { @title = "Skapa en ny aktivitet", @class = "btn btn-primary btn-xs" })
+    @Html.ActionLink("+ Dokument", "Create", "Documents", "", new { @title = "Ladda upp nytt dokument", @class = "btn btn-primary btn-xs" })
+    @Html.ActionLink("Lista alla kurser", "Index", "Courses", "", new { @title = "Lista alla kurser", @class = "btn btn-primary btn-xs" })
+</span>
+
+
+@* //TM 2018-03-22 14:02 Beautifying genom tabellkolumnernas enhetliga bredd m.h.a. Bootstrapklasserna "col-md-X"*@
+@if (ViewBag.TableSizeCourses == "large")
+{
+    <table class="table table-striped table-bordered" id="coursestable-large" cellspacing="0">
+        <thead>
+            <tr>
+                <th class="col-md-1">@Html.DisplayNameFor(model => model.Courses.First().StartDate)</th>
+                <th class="col-md-1">@Html.DisplayNameFor(model => model.Courses.First().EndDate)</th>
+                <th class="col-md-10">@Html.DisplayNameFor(model => model.Courses.First().Name)</th>
+               
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model.Courses)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                    <td>@Html.ActionLink(item.Name, "Details", "Courses", new { id = item.Id }, "" )</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (ViewBag.TableSizeCourses == "small")
+{
+    <table class="table table-striped table-bordered" id="coursestable-small" cellspacing="0">
+        <thead>
+            <tr>
+                <th class="col-md-1">@Html.DisplayNameFor(model => model.Courses.First().StartDate)</th>
+                <th class="col-md-1">@Html.DisplayNameFor(model => model.Courses.First().EndDate)</th>
+                <th class="col-md-10">@Html.DisplayNameFor(model => model.Courses.First().Name)</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model.Courses)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                    <td>@Html.ActionLink(item.Name, "Details", "Courses", new { id = item.Id }, "")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

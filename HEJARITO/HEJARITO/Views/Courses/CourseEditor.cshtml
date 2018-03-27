@@ -5,7 +5,7 @@
 }
 
 <div id="divCourseInfo" class="row">
-    <div class="col-md-6" id="divCourseModuleListing">
+    <div class="row" id="divCourseModuleListing">
         <h1>
             @Model.Course.Name
         </h1>
@@ -42,35 +42,37 @@
                 @{ Html.RenderPartial("_CourseStudents", Model.Course.ApplicationUsers); }
             </span>*@
     </div>
-
-
-
 </div>
 
 <div id="divCourseModuleListing" class="row">
 
-    <div class="col-sm-6">
+    <div class="col-md-8">
         <div>
             <span id="divFormContainer"></span>
         </div>
 
-        <span id="divCourseModules">
+        <div id="divCourseModules">
             @{ Html.RenderPartial("_CourseModulesEditor", Model.Course.Modules.OrderBy(m => m.StartDate).ToList()); }
-        </span>
+        </div>
         <div>
             @Html.ActionLink("Tillbaka", null, null, null, new { @class = "btn btn-xs btn-primary", href = Request.UrlReferrer })
         </div>
         <hr />
-
-    </div>
-
-    <div class="col-sm-6">
-        <div id="divCourseDocuments" width="90%">
-            @{ Html.RenderPartial("_CourseDocuments", Model.Course); }
+        <div class="col-md-6">
+            <div id="divCourseDocuments" width="90%">
+                @{ Html.RenderPartial("_CourseDocuments", Model.Course); }
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div id="">
+                @{ Html.RenderPartial("_CourseStudents", Model.Course.ApplicationUsers); }
+            </div>
         </div>
     </div>
 
-    <div class="col-sm-6">
+
+
+    <div class="col-md-4">
         <details>
             <summary>Lägg till modul</summary>
             <span id="divCreateCourseModule">
@@ -78,7 +80,7 @@
             </span>
         </details>
     </div>
-    <div class="col-sm-6">
+    <div class="col-md-4">
         <details>
             <summary>Lägg till Aktivitet</summary>
             <span id="divCreateModuleActivity" class="col-lg-12">
@@ -86,9 +88,19 @@
             </span>
         </details>
     </div>
-    <div class="col-sm-6">
+    <div class="col-md-4">
         <div id="divCourseStudents">
-            @{ Html.RenderPartial("_CreateStudentAndList", Model); }
+            @if (User.IsInRole("Teacher"))
+            {
+                <details>
+                    <summary>Registrera ny elev</summary>
+                    <span id="divCreateCourseStudent">
+                        @{ Html.RenderPartial("_CreateCourseStudent", Model); }
+                    </span>
+                </details>
+
+                
+            }
         </div>
     </div>
 
