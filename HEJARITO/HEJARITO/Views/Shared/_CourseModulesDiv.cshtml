@@ -1,0 +1,35 @@
+﻿@model ICollection<HEJARITO.Models.Module>
+
+
+<dl>
+    <dt>Startdatum</dt>
+    <dt>Slutdatum </dt>
+    <dt>Modul     </dt>
+    @foreach (var item in Model)
+    {
+        <dd>@Html.DisplayFor(modelItem => item.StartDate)</dd>
+        <dd>@Html.DisplayFor(modelItem => item.EndDate)</dd>
+        <dd>@Html.ActionLink(item.Name, "Details", "Modules", new { Id = item.Id }, "")</dd>
+
+        foreach (var doc in item.Documents.Where(d => d.ActivityId == null))
+        {
+            @Html.ActionLink(" ", "Download", "Documents", new { Id = doc.Id }, new { @title = item.Description, @class = "glyphicon glyphicon-file" })
+        }
+
+        <ul class="alist@{@item.Id} ">
+            @foreach (var activity in item.Activities.OrderBy(a => a.StartDate))
+            {
+                <li>
+                    @activity.StartDate.ToString("dd/MM") >> @activity.EndDate.ToString("dd/MM")
+                    @Html.ActionLink(@activity.Name, "Details", "Activities", new { Id = activity.Id }, new { @title = item.Description, @class = "dropdown-item" })
+                    @foreach (var doc in activity.Documents)
+                    {
+                        @Html.ActionLink(" ", "Download", "Documents", new { Id = doc.Id }, new { @title = item.Description, @class = "glyphicon glyphicon-file" })
+
+                    }
+                </li>
+            }
+        </ul>
+    }
+</dl>
+

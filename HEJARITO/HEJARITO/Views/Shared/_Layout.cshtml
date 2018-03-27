@@ -90,7 +90,7 @@
         </div>
         @if (ViewBag.errorMessages != null)
         {
-            <div class="alert alert-danger alert-dismissible fade in" style="clear: both;">
+            <div class="alert alert-danger alert-dismissible fade in" style="clear: both;display:none;">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 <ul>
                     @foreach (var error in @ViewBag.errorMessages)
@@ -104,7 +104,7 @@
         }
         @if (ViewBag.successMessage != null || @ViewBag.StatusMessage != null || true)
         {
-            <div class="alert alert-success alert-dismissible fade in" style="clear: both;">
+            <div class="alert alert-success alert-dismissible fade in" style="clear: both; display:none;">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 
                 @ViewBag.successMessage

@@ -37,6 +37,7 @@
         <div>
             <span id="divCourseModules">
                 @{ Html.RenderPartial("_CourseModules", Model.Modules.OrderBy(m => m.StartDate).ToList()); }
+                
             </span>
 
             <div>

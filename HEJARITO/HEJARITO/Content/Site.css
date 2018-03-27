@@ -4,8 +4,8 @@ html {
     padding-top: 50px;
     padding-bottom: 20px;
     */
-    width:100%;
-    margin:0;
+    width: 100%;
+    margin: 0;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -16,14 +16,13 @@ html {
     */
 }
 
-.body-content 
-
-/* Override the default bootstrap behavior where horizontal description lists 
+    .body-content
+    /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
     .dl-horizontal dt {
-    white-space: normal;
-}
+        white-space: normal;
+    }
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
@@ -128,19 +127,19 @@ code {
     color: black;
 }
 
-.table .activity-listing a.listing:hover {
-    text-decoration: none;
-    text-shadow: 1px 1px black;
-}
+    .table .activity-listing a.listing:hover {
+        text-decoration: none;
+        text-shadow: 1px 1px black;
+    }
 
 .table .activity-listing:hover .btn {
     opacity: 1;
 }
 
 .listing-icon {
-   padding: 3px;
-   margin-right:5px;
-   float:right;
+    padding: 3px;
+    margin-right: 5px;
+    float: right;
 }
 
 /* //TM 2018-03-19 11:38 Alla btn-knappar lyser färgglatt upp när musen hamnar ovanför dem */
@@ -179,11 +178,27 @@ code {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
-.navbar-default .navbar-nav, .navbar-default .navbar-nav > li > a {
-color: white;
+/* //TM 2018-03-22 11:33 Se till att långa texter förkortas och visas med ... */
+tbody tr td {
+    max-width: 150px;
+    white-space: nowrap;
+    /*background-color: deeppink;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+.table tbody tr:first-of-type th.date, .table thead tr:first-of-type th.date, element.style {
+    width: 5%;
+    white-space: nowrap;
+    /*background-color: pink;*/
+    /*color: yellow;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.navbar-default .navbar-nav, .navbar-default .navbar-nav > li > a {
+    color: white;
+}
+
 .navbar-default .navbar-nav > li > a:hover {
-        color: rgb(23, 40, 67);
-        background-color: rgb(255, 255, 255);
-    }
+    color: rgb(23, 40, 67);
+    background-color: rgb(255, 255, 255);
+}

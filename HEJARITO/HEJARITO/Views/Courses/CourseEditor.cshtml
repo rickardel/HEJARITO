@@ -37,66 +37,58 @@
 
 <div id="divCourseModuleListing" class="row">
 
-    <div class="col-lg-12">
+
+    <div class="col-md-12">
         <div>
             <span id="divFormContainer"></span>
         </div>
-
-        <div id="divCourseModules">
-            @{ Html.RenderPartial("_CourseModulesEditor", Model.Course.Modules.OrderBy(m => m.StartDate).ToList()); }
+        <div class="col-md-8 col-sm-12">
+            <div id="divCourseModules">
+                @{ Html.RenderPartial("_CourseModulesEditor", Model.Course.Modules.OrderBy(m => m.StartDate).ToList()); }
+            </div>
         </div>
-        <div>
-            @Html.ActionLink("Tillbaka", null, null, null, new { @class = "btn btn-xs btn-primary", href = Request.UrlReferrer })
-        </div>
-        <hr />
-        <div class="col-md-6">
-            <div id="divCourseDocuments" width="90%">
+        <div class="col-md-4 col-sm-12">
+            <div id="divCourseDocuments">
                 @{ Html.RenderPartial("_CourseDocuments", Model.Course); }
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4 col-sm-12" ">
             <div id="">
                 @{ Html.RenderPartial("_CourseStudents", Model.Course.ApplicationUsers); }
             </div>
         </div>
-    </div>
+
+        @if (User.IsInRole("Teacher"))
+        {
+            <div class="col-md-8">
+                <div class="col-lg-12">
+
+                    @Html.ActionLink("Tillbaka", null, null, null, new { @class = "btn btn-xs btn-primary", href = Request.UrlReferrer })
+
+                    <a href="#" class="btn btn-xs btn-success" data-toggle="collapse" data-target="#divCreateCourseModule">Lägg till modul</a>
+                    <a href="#" class="btn btn-xs btn-success" data-toggle="collapse" data-target="#divCreateModuleActivity">Lägg till aktivitet</a>
+                    <a href="#" class="btn btn-xs btn-success" data-toggle="collapse" data-target="#divCreateCourseStudent">Lägg till student</a>
 
 
-
-    <div class="col-lg-12">
-        <details>
-            <summary>Lägg till modul</summary>
-            <span id="divCreateCourseModule">
-                @{ Html.RenderPartial("_CreateCourseModule", Model); }
-            </span>
-        </details>
-    </div>
-    <div class="col-lg-6">
-        <details>
-            <summary>Lägg till Aktivitet</summary>
-            <span id="divCreateModuleActivity" class="col-lg-12">
-                @{ Html.RenderPartial("_CreateModuleActivity", Model.Activity); }
-            </span>
-        </details>
-    </div>
-    <div class="col-lg-6">
-        <div id="divCourseStudents">
-            @if (User.IsInRole("Teacher"))
-            {
-                <details>
-                    <summary>Registrera ny elev</summary>
-                    <span id="divCreateCourseStudent">
+                    <div id="divCreateCourseModule" class="collapse">
+                        @{ Html.RenderPartial("_CreateCourseModule", Model); }
+                    </div>
+                    <div id="divCreateModuleActivity" class="collapse">
+                        @{ Html.RenderPartial("_CreateModuleActivity", Model.Activity); }
+                    </div>
+                    <div id="divCreateCourseStudent" class="collapse">
                         @{ Html.RenderPartial("_CreateCourseStudent", Model); }
-                    </span>
-                </details>
+                    </div>
+                </div>
+            </div>
 
-
-            }
-        </div>
+        }
     </div>
-
-
 </div>
+
+
+
+
 
 
 @section Scripts {

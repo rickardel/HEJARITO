@@ -74,7 +74,7 @@
                                     <span class="activity-listing">
                                         @Html.ActionLink(doc.Name, "Details", "Documents", new { Id = doc.Id }, new { @class = "listing" })
                                         @*@Html.ActionLink(" ", "Edit", "Documents", new { Id = doc.Id }, new { @class = "listing-icon btn btn-sm btn-warning  glyphicon glyphicon-cog" })*@
-                                        @Html.ActionLink(" ", "Delete", "Documents", new { Id = doc.Id }, new { @class = "listing-icon btn btn-sm btn-danger glyphicon glyphicon-trash" })
+                                        @Html.ActionLink(" ", "Delete", "Documents", new { Id = doc.Id, returnController = ViewContext.RouteData.Values["controller"], returnAction = ViewContext.RouteData.Values["action"], returnId = ViewContext.RouteData.Values["id"] }, new { @class = "listing-icon btn btn-sm btn-danger glyphicon glyphicon-trash" })
                                     </span>
                                 </span>
                             </td>
