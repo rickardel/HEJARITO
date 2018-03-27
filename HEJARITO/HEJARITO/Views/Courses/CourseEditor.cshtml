@@ -5,7 +5,7 @@
 }
 
 <div id="divCourseInfo" class="row">
-    <div class="row" id="divCourseModuleListing">
+    <div class="col-lg-12" id="divCourseModuleListing">
         <h1>
             @Model.Course.Name
         </h1>
@@ -32,15 +32,6 @@
             @Html.DisplayFor(model => model.Course.Description)
         </span>
         <hr />
-        @*<h2>Kursnnehåll</h2>
-            <span id="divCourseModules">
-                @{ Html.RenderPartial("_CourseModules", Model.Course.Modules.OrderBy(m => m.StartDate).ToList()); }
-            </span>
-
-            <h2>Registrerade Studenter</h2>
-            <span id="divCourseStudents">
-                @{ Html.RenderPartial("_CourseStudents", Model.Course.ApplicationUsers); }
-            </span>*@
     </div>
 </div>
 
@@ -99,7 +90,7 @@
                     </span>
                 </details>
 
-                
+
             }
         </div>
     </div>

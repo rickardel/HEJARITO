@@ -216,9 +216,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803261847470_Init.cs" />
-    <Compile Include="Migrations\201803261847470_Init.Designer.cs">
-      <DependentUpon>201803261847470_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201803271007078_Init.cs" />
+    <Compile Include="Migrations\201803271007078_Init.Designer.cs">
+      <DependentUpon>201803271007078_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -328,7 +328,7 @@
     <Content Include="Views\Courses\Details.cshtml" />
     <Content Include="Views\Courses\Edit.cshtml" />
     <Content Include="Views\Courses\Index.cshtml" />
-    <Content Include="Views\Home\TeacherTabs.cshtml" />
+    <Content Include="Views\Home\Teacher.cshtml" />
     <Content Include="Views\Home\Student.cshtml" />
     <Content Include="Views\Modules\_Activities.cshtml" />
     <Content Include="Views\Shared\_CourseModules.cshtml" />
@@ -364,7 +364,7 @@
     <Content Include="Views\Feedbacks\Edit.cshtml" />
     <Content Include="Views\Feedbacks\Index.cshtml" />
     <Content Include="Views\Shared\_BreadCrumbs.cshtml" />
-    <Content Include="Views\Home\Teacher.cshtml" />
+    <Content Include="Views\Home\TeacherAccordeon.cshtml" />
     <Content Include="Views\Home\_WeekActivities.cshtml" />
     <Content Include="Views\Home\_CurrentCourses.cshtml" />
     <Content Include="Views\Home\_Addressbook.cshtml" />
@@ -386,8 +386,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803261847470_Init.resx">
-      <DependentUpon>201803261847470_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803271007078_Init.resx">
+      <DependentUpon>201803271007078_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

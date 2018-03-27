@@ -1,0 +1,74 @@
+﻿@model HEJARITO.Models.TeacherViewModel
+
+@{
+    ViewBag.Title = "Lärare";
+}
+
+@*JG 2018-03-12: This page uses Bootstrap 3 Datatables functionality: https://datatables.net/.
+    Input comes in the form of a "TecherViewModel" with the lists Activities, Courses and Users.*@
+
+
+
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                    Aktiviteter som slutar denna vecka
+                </a>
+            </h1>
+        </div>
+        <div id="collapse1" class="panel-collapse collapse in">
+            <div class="panel-body">
+                @Html.Partial("_WeekActivities", Model)
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                    Pågående och kommande kurser
+                </a>
+            </h1>
+        </div>
+        <div id="collapse2" class="panel-collapse collapse">
+            <div class="panel-body">
+                @Html.Partial("_CurrentCourses", Model)
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                    Adressbok
+                </a>
+            </h1>
+        </div>
+        <div id="collapse3" class="panel-collapse collapse">
+            <div class="panel-body">
+                @Html.Partial("_Addressbook", Model)
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@*<div class="container">
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#weekActivities">Aktiviteter som slutar denna vecka</a></li>
+        <li><a data-toggle="tab" href="#activeCourses">Pågående och kommande kurser</a></li>
+        <li><a data-toggle="tab" href="#Addressbook">Adressbok</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="weekActivities" class="tab-pane fade in active">
+        </div>
+        <div id="activeCourses" class="tab-pane fade">
+        </div>
+        <div id="Addressbook" class="tab-pane fade">
+        </div>
+    </div>
+</div>*@

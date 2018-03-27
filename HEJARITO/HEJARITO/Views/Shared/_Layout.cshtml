@@ -85,27 +85,49 @@
 
     <div class="container" id="main-content">
         <div id="footerBreadCrumbs">
-            @Html.Partial("_BreadCrumbs")
+            @RenderSection("Breadcrumbs", required: false)
+
         </div>
-        @*<div id="ErrorMessageList" class="alert alert-danger alert-dismissible fade in" style="clear: both; display:none;">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <ul>
-                @if (ViewBag.errorMessages != null)
-                {
-                    foreach (var error in @ViewBag.errorMessages)
+        @if (ViewBag.errorMessages != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade in" style="clear: both;">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <ul>
+                    @foreach (var error in @ViewBag.errorMessages)
                     {
                         <li>
                             @error.ErrorMessage
                         </li>
                     }
-                }
-            </ul>
-        </div>*@
-        @*  //TM 2018-03-20 13:03 Kvitto/felmeddelande efter CUD *@
-        <p class="text-success" id="errorMessageContent">
+                </ul>
+            </div>
+        }
+        @if (ViewBag.successMessage != null || @ViewBag.StatusMessage != null || true)
+        {
+            <div class="alert alert-success alert-dismissible fade in" style="clear: both;">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 
-            @ViewBag.StatusMessage
-        </p>
+                @ViewBag.successMessage
+                @ViewBag.StatusMessage
+            </div>
+        }
+
+        @*<div id="ErrorMessageList" class="alert alert-danger alert-dismissible fade in" style="clear: both; display:none;">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <ul>
+                    @if (ViewBag.errorMessages != null)
+                    {
+                        foreach (var error in @ViewBag.errorMessages)
+                        {
+                            <li>
+                                @error.ErrorMessage
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>*@
+        @*  //TM 2018-03-20 13:03 Kvitto/felmeddelande efter CUD *@
+
 
         @RenderBody()
     </div>

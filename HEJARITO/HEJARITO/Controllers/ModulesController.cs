@@ -101,7 +101,7 @@ namespace HEJARITO.Controllers
                 db.SaveChanges();
 
                 //TM 2018-03-19 16-19 Ska visas i nästa vy
-                ViewBag.KvittoMeddelande = "Skapande av en ny modul genomfördes";
+                ViewBag.successMessage = "Skapande av en ny modul genomfördes";
 
                 return PartialView("_CourseModulesEditor", lm);
             }

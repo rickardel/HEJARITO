@@ -181,13 +181,13 @@ namespace HEJARITO.Controllers
                     }
                     db.Documents.Add(document);
                     db.SaveChanges();
-                    ViewBag.Message = "Filen: " + fileName.FileName + " är nu uppladdad!!";
+                    ViewBag.successMessage = "Filen: " + fileName.FileName + " är nu uppladdad!!";
                 }
                 catch
                 {
-                    ViewBag.Message = "Kunde inte ladda upp filen!!";
+                    ViewBag.errorMessages = "Kunde inte ladda upp filen!!";
                 }
-                return RedirectToAction("Index"); // Todo . return PartialView
+                return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
             }
 
             ViewBag.ActivityId = new SelectList(db.Activities, "Id", "Name", document.ActivityId);
@@ -250,12 +250,13 @@ namespace HEJARITO.Controllers
         // POST: Documents/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id, string returnController, string returnAction, string returnId)
         {
             Document document = db.Documents.Find(id);
             db.Documents.Remove(document);
             db.SaveChanges();
-            return RedirectToAction("Index");
+
+            return RedirectToAction(returnAction, returnController, new { Id = returnId });
         }
 
         protected override void Dispose(bool disposing)
