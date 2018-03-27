@@ -145,16 +145,27 @@
                             </td>
                         </tr>
                     }
-                    @foreach (var doc in Model.Documents)
+                    @if (Model.Documents.Count > 0)
+                    {
+                        foreach (var doc in Model.Documents)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink("Ladda ner", "Download", "Documents", new { Id = doc.Id }, new { @class = "btn btn-success btn-xs" })
+                                    <span>@doc.UploadDate : "@doc.Name"</span>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
                     {
                         <tr>
                             <td>
-                                @Html.ActionLink("Ladda ner", "Download", "Documents", new { Id = doc.Id }, new { @class = "btn btn-success btn-xs" })
-                                <span>@doc.UploadDate : "@doc.Name"</span>
+                                <span>- Inga uppladdade dokument -</span>
                             </td>
                         </tr>
+                        
                     }
-
                 </tbody>
             </table>
         </div>

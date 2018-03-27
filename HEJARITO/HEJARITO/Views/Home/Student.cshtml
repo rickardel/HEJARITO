@@ -8,166 +8,98 @@
 }
 
 @if (User.IsInRole("Student")) //TM 2018-03-12 16:41
-    {@*//TM 2018-03-13 13:33 - This page uses Bootstrap 3 Datatables functionality: https://datatables.net/.
-            Input comes in the form of a "StudentViewModel" with the lists of Activities, Courses and Users.*@
+{@*//TM 2018-03-13 13:33 - This page uses Bootstrap 3 Datatables functionality: https://datatables.net/.
+        Input comes in the form of a "StudentViewModel" with the lists of Activities, Courses and Users.*@
 
-    /* //TM 2018-03-14 14:01 Onödig info, ska inte visas
-    <h2>
-        Elev:
-        @User.Identity.Name
-    </h2>
-    */
+/* //TM 2018-03-14 14:01 Onödig info, ska inte visas
+<h2>
+    Elev:
+    @User.Identity.Name
+</h2>
+*/
 
-    <h2>Kurs</h2>
-    <table @*width="100%"*@ class="table table striped table-bordered"> @* id="coursestable" cellspacing="0">*@
-        <thead>
-            <tr>
-                <th class="col-md-6">Namn</th>
 
-                @* //TM 2018-03-19 11:04 Bort med beskrivningar!
-        <th>Beskrivning</th>*@
 
-                <th class="col-md-2">Startdatum</th>
-                <th class="col-md-2">Slutdatum</th>
+<h1>@Html.DisplayFor(modelItem => Model.Courses.FirstOrDefault().Name)</h1>
+<div>
+    <span>Fr.o.m.@Html.DisplayFor(modelItem => Model.Courses.FirstOrDefault().StartDate)</span>
+    <span>T.o.m. @Html.DisplayFor(modelItem => Model.Courses.FirstOrDefault().EndDate)</span>
+</div>
+<description>@Html.DisplayFor(modelItem => Model.Courses.FirstOrDefault().Description)</description>
 
-                @*//TM 2018-03-19 10:52 Ingen kolumnrubrik ska visas för detaljknapparna *@
-                <th class="col-md-2">@*Detaljer*@</th>
-            </tr>
-        </thead>
-
-        @* //TM 2018-03-19 08:53 Foten ska bort!
-            <tfoot>
-                <tr>
-                    <th>Namn</th>
-                    <th>Beskrivning</th>
-                    <th>Startdatum</th>
-                    <th>Slutdatum</th>
-                    <th>Detaljer</th>
-                </tr>
-            </tfoot>
-        *@
-
-        <tbody>
-            @foreach (var item in Model.Courses)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
-
-                    @* //TM 2018-03-19 11:04 Bort med beskrivningar!
-                        <td>@Html.DisplayFor(modelItem => item.Description)</td>*@
-
-                    <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
-                    <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
-
-                    @*//TM 2018-03-13 13:12 "Nu blir det ingen krasch *@
-                    <td>@Html.ActionLink("Detaljer", "Details", "Courses", new { id = item.Id }, new { @class = "btn btn-xs btn-success" })</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
-    <h2>Denna veckas aktiviteter</h2>
-    //TM 2018-03-21 08:58 Det konstiga modala varningsmeddelandet är borta!
-    <table @*width="100%"*@ class="table table-striped table-bordered"> @* id="activitiestable" cellspacing="0">*@
-        <thead>
-            <tr>
-                <th class="col-md-4">Namn</th>
-
-                @* //TM 2018-03-19 11:04 Bort med beskrivningar!
-                <th>Beskrivning</th>*@
-
-                <th class="col-md-2">Aktivitetstyp</th>
-                <th class="col-md-2">Startdatum</th>
-
-                @* //TM 2018-03-19 10:47 Bort med Deadlines!
-                <th>"Deadline"</th>*@
-
-                <th class="col-md-2">Slutdatum</th>
-
-                @*//TM 2018-03-19 10:52 Ingen kolumnrubrik ska visas för detaljknapparna *@
-                <th class="col-md-2">@*Detaljer*@</th>
-            </tr>
-        </thead>
-
-        @* //TM 2018-03-19 08:53 Bort med tabellfötter!
-        <tfoot>
+<h2>Denna veckas aktiviteter</h2>
+//TM 2018-03-21 08:58 Det konstiga modala varningsmeddelandet är borta!
+<table @*width="100%"*@ class="table table-striped table-bordered">
+    @* id="activitiestable" cellspacing="0">*@
+    <thead>
         <tr>
-            <th>Namn</th>
-            <th>Aktivitetstyp</th>
-            <th>Beskrivning</th>
-            <th>Startdatum</th>
-            <th>"Deadline"</th>
-            <th>Slutdatum</th>
-            <th>Detaljer</th>
+            <th class="col-md-1">Startdatum</th>
+            <th class="col-md-1">Slutdatum</th>
+            <th class="col-md-1">Aktivitetstyp</th>
+            <th class="col-md-7">Namn</th>
         </tr>
-        </tfoot>
-        *@
-
-        <tbody>
-            @foreach (var item in Model.Activities)
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Activities)
         {
-
+    
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.Name)</td>
-
-                @* //TM 2018-03-19 11:04 Bort med beskrivningar!
-                <td>@Html.DisplayFor(modelItem => item.Description)</td>*@
-
-                <td>@Html.DisplayFor(modelItem => item.ActivityType.Name)</td>
-
                 <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
-
-                @* //TM 2018-03-19 10:47 Bort med Deadlines!
-                <td>@Html.DisplayFor(modelItem => item.DeadlineDate)</td>*@
-
                 <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.ActivityType.Name)</td>
+                <td>
+                    @Html.ActionLink(item.Module.Course.Name, "Details", "Courses", new { id = item.Module.CourseId }, new { @class = "btn btn-xs btn-success" })
+                    
+                    @Html.ActionLink(item.Module.Name, "Details", "Modules", new { id = item.ModuleId }, new { @class = "btn btn-xs btn-success" })
+                    
+                    @Html.ActionLink(item.Name, "Details", "Activities", new { id = item.Id }, new { @class = "btn btn-xs btn-success" })
+                </td>
+                @* //TM 2018-03-19 10:47 Bort med Deadlines!
+                    <td>@Html.DisplayFor(modelItem => item.DeadlineDate)</td>*@
 
-                @*//TM 2018-03-13 13:12 "Nu blir det ingen krasch *@
-                <td>@Html.ActionLink("Detaljer", "Details", "Activities", new { id = item.Id }, new { @class = "btn btn-xs btn-success" })</td>
             </tr>
-    }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>
 
 
-    //TM 2018-03-14 14:05 Ordet Kontaktlista var felvalt
-    <h2>Kurskamrater</h2>
-    //TM 2018-03-21 08:58 Det konstiga modala varningsmeddelandet är borta!
-    <table @*width="100%"*@ class="table table-striped table-bordered"> @* id="activitiestable" cellspacing="0">*@
-        <thead>
+//TM 2018-03-14 14:05 Ordet Kontaktlista var felvalt
+<h2>Kurskamrater</h2>
+//TM 2018-03-21 08:58 Det konstiga modala varningsmeddelandet är borta!
+<table @*width="100%"*@ class="table table-striped table-bordered">
+    @* id="activitiestable" cellspacing="0">*@
+    <thead>
+        <tr>
+            <th class="col-md-4">Namn</th>
+            <th class="col-md-4">e-post</th>
+        </tr>
+    </thead>
+
+    @* //TM 2018-03-19 08:53 Foten ska bort!
+        <tfoot>
             <tr>
-                <th class="col-md-4">Förnamn</th>
-                <th class="col-md-4">Efternamn</th>
-                <th class="col-md-4">e-post</th>
+                <th>Förnamn</th>
+                <th>Efternamn</th>
+                <th>e-post</th>
             </tr>
-        </thead>
+        </tfoot>
+    *@
 
-        @* //TM 2018-03-19 08:53 Foten ska bort!
-            <tfoot>
-                <tr>
-                    <th>Förnamn</th>
-                    <th>Efternamn</th>
-                    <th>e-post</th>
-                </tr>
-            </tfoot>
-        *@
+    <tbody>
+        @foreach (var item in Model.Users)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</td>
 
-        <tbody>
-            @foreach (var item in Model.Users)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
-                    <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                @* //TM 2018-03-14 14:03 Nu får vi in kurskamraternas mejladresser med mailto-länk *@
+                <td><a href="mailto:@Html.DisplayFor(modelItem => item.Email)">@Html.DisplayFor(modelItem => item.Email)</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
 
-                    @* //TM 2018-03-14 14:03 Nu får vi in kurskamraternas mejladresser med mailto-länk *@
-                    <td><a href="mailto:@Html.DisplayFor(modelItem => item.Email)">@Html.DisplayFor(modelItem => item.Email)</a></td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
-    @*JG 2018-03-12: Script for rendering the tables.*@
-    @*@section Scripts
+@*JG 2018-03-12: Script for rendering the tables.*@
+@*@section Scripts
         {
         <script src="~/Scripts/teachertables.js"></script>
     }*@

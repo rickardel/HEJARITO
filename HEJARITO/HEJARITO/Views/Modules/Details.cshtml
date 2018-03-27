@@ -43,7 +43,7 @@
 
         <div>
             @Html.ActionLink("Tillbaka", null, null, null, new { @class = "btn btn-xs btn-primary", href = Request.UrlReferrer })
-            @Html.ActionLink("Till kursen", "Details", "Courses", new { id = Model.CourseId }, new { @class = "btn btn-xs btn-primary"})
+            @Html.ActionLink("Till kursen", "Details", "Courses", new { id = Model.CourseId }, new { @class = "btn btn-xs btn-primary" })
         </div>
 
     </div>
@@ -69,20 +69,30 @@
                     </tr>
                 }
 
-
-                @foreach (var doc in Model.Documents.Where(d => d.ActivityId == null))
+                @if (Model.Documents.Count > 0)
+                {
+                    foreach (var doc in Model.Documents.Where(d => d.ActivityId == null))
+                    {
+                        <tr>
+                            <td class="documentColumn">
+                                @Html.ActionLink("Ladda ner", "Download", "Documents", new { Id = doc.Id }, new { @class = "btn btn-success btn-xs" })
+                                <span class="documentLink">
+                                    @doc.UploadDate.ToShortDateString() :
+                                    <span class="activity-listing">
+                                        @Html.ActionLink(doc.Name, "Details", "Documents", new { Id = doc.Id }, new { @class = "listing" })
+                                        @*@Html.ActionLink(" ", "Edit", "Documents", new { Id = doc.Id }, new { @class = "listing-icon btn btn-sm btn-warning  glyphicon glyphicon-cog" })*@
+                                        @Html.ActionLink(" ", "Delete", "Documents", new { Id = doc.Id }, new { @class = "listing-icon btn btn-sm btn-danger glyphicon glyphicon-trash" })
+                                    </span>
+                                </span>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
                 {
                     <tr>
-                        <td class="documentColumn">
-                            @Html.ActionLink("Ladda ner", "Download", "Documents", new { Id = doc.Id }, new { @class = "btn btn-success btn-xs" })
-                            <span class="documentLink">
-                                @doc.UploadDate.ToShortDateString() :
-                                <span class="activity-listing">
-                                    @Html.ActionLink(doc.Name, "Details", "Documents", new { Id = doc.Id }, new { @class = "listing" })
-                                    @*@Html.ActionLink(" ", "Edit", "Documents", new { Id = doc.Id }, new { @class = "listing-icon btn btn-sm btn-warning  glyphicon glyphicon-cog" })*@
-                                    @Html.ActionLink(" ", "Delete", "Documents", new { Id = doc.Id }, new { @class = "listing-icon btn btn-sm btn-danger glyphicon glyphicon-trash" })
-                                </span>
-                            </span>
+                        <td>
+                            <span> -Inga uppladdade dokument -</span>
                         </td>
                     </tr>
                 }
