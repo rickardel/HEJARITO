@@ -90,8 +90,9 @@ namespace HEJARITO.Controllers
         public PartialViewResult CreateAjax([Bind(Include = "Id,Name,Description,StartDate,EndDate,CourseId")] Module module)
         {
             Course course = db.Courses.Find(module.CourseId);
+            List<Module> lm = course.Modules.OrderBy(m => m.StartDate).ToList(); ;
 
-            List<Module> lm = course.Modules.OrderBy(m => m.StartDate).ToList();
+
             if (course != null && ModelState.IsValid)
             {
                 module.Activities = new List<Activity>();
@@ -102,7 +103,7 @@ namespace HEJARITO.Controllers
 
                 //TM 2018-03-19 16-19 Ska visas i nästa vy
                 ViewBag.successMessage = "Skapande av en ny modul genomfördes";
-
+                lm = course.Modules.OrderBy(m => m.StartDate).ToList();
                 return PartialView("_CourseModulesEditor", lm);
             }
             else
@@ -187,7 +188,7 @@ namespace HEJARITO.Controllers
         [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:39
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id, string returnController, string returnAction, string returnId)
         {
             Module module = db.Modules.Find(id);
             db.Modules.Remove(module);
@@ -195,8 +196,8 @@ namespace HEJARITO.Controllers
 
             //TM 2018-03-19 16-19 Ska visas i nästa vy
             ViewBag.KvittoMeddelande = "Borttagning av en modul genomfördes";
-
-            return RedirectToAction("Index");
+            return RedirectToAction(returnAction, returnController, new { Id = returnId });
+            
         }
 
         protected override void Dispose(bool disposing)

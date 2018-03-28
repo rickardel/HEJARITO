@@ -84,7 +84,7 @@ namespace HEJARITO.Controllers
                 db.SaveChanges();
 
                 //TM 2018-03-19 16-19 Ska visas i nästa vy
-                ViewBag.KvittoMeddelande = "Skapande av en ny aktivitet genomfördes";
+                ViewBag.successMessage = "Skapande av en ny aktivitet genomfördes";
 
                 return PartialView("_CourseModulesEditor", module.Course.Modules.OrderBy(m => m.StartDate).ToList());
             }
@@ -183,7 +183,7 @@ namespace HEJARITO.Controllers
         [Authorize(Roles = "Teacher")] //TM 2018-03-12 13:37
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id, string returnController, string returnAction, string returnId)
         {
             Activity activity = db.Activities.Find(id);
             db.Activities.Remove(activity);
@@ -192,7 +192,8 @@ namespace HEJARITO.Controllers
             //TM 2018-03-19 16-19 Ska visas i nästa vy
             ViewBag.KvittoMeddelande = "Borttagning av en aktivitet genomfördes";
 
-            return RedirectToAction("Index");
+            return RedirectToAction(returnAction, returnController, new { Id = returnId
+    });
         }
 
         protected override void Dispose(bool disposing)

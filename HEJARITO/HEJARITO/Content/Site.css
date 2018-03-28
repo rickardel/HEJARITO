@@ -127,13 +127,19 @@ code {
     color: black;
 }
 
-    .table .activity-listing a.listing:hover {
-        text-decoration: none;
-        text-shadow: 1px 1px black;
-    }
+
+.table .activity-listing a.listing:hover {
+    text-decoration: none;
+    text-shadow: 1px 1px black;
+}
 
 .table .activity-listing:hover .btn {
     opacity: 1;
+}
+
+li.activity-listing , a.listing{
+    /*background-color: red;*/
+    padding: 5px;
 }
 
 .listing-icon {

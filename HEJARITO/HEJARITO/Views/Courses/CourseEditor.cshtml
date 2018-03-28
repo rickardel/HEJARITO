@@ -31,7 +31,14 @@
         <span>
             @Html.DisplayFor(model => model.Course.Description)
         </span>
-        <hr />
+
+        <div>
+            <a href="#" id="addModuleBtn" class="btn btn-xs btn-success" @*data-toggle="collapse" data-target="#divCreateCourseModule"*@>+ Modul</a>
+            <a href="#" id="addActivityBtn" class="btn btn-xs btn-success" @*data-toggle="collapse" data-target="#divCreateModuleActivity"*@>+ Aktivitet</a>
+            <a href="#" id="addStudentBtn" class="btn btn-xs btn-success" @*data-toggle="collapse" data-target="#divCreateModuleActivity"*@>+ Student</a>
+
+
+        </div>
     </div>
 </div>
 
@@ -45,44 +52,42 @@
         <div class="col-md-8 col-sm-12">
             <div id="divCourseModules">
                 @{ Html.RenderPartial("_CourseModulesEditor", Model.Course.Modules.OrderBy(m => m.StartDate).ToList()); }
+                @Html.ActionLink("Tillbaka", null, null, null, new { @class = "btn btn-xs btn-primary", href = Request.UrlReferrer })
             </div>
+
+
         </div>
         <div class="col-md-4 col-sm-12">
+            <div id="divCreateCourseStudent" s>
+                <h2>Lägg till Student</h2>
+                @{ Html.RenderPartial("_CreateCourseStudent", Model); }
+                <a href="#" class="CancelBtn btn btn-xs btn-success">Göm</a>
+                <hr />
+            </div>
+            <div id="divCreateCourseModule">
+                <h2>Lägg till Modul</h2>
+                @{ Html.RenderPartial("_CreateCourseModule", Model); }
+                <a href="#" class="CancelBtn btn btn-xs btn-success">Göm</a>
+                <hr />
+            </div>
+            <div id="divCreateModuleActivity">
+                <h2>Lägg till Aktivitet</h2>
+                @{ Html.RenderPartial("_CreateModuleActivity", Model.Activity); }
+                <a href="#" class="CancelBtn btn btn-xs btn-success">Göm</a>
+                <hr />
+            </div>
             <div id="divCourseDocuments">
                 @{ Html.RenderPartial("_CourseDocuments", Model.Course); }
             </div>
         </div>
         <div class="col-md-4 col-sm-12" ">
-            <div id="">
+            <div id="divCourseStudents">
                 @{ Html.RenderPartial("_CourseStudents", Model.Course.ApplicationUsers); }
+                <hr />
             </div>
+
         </div>
 
-        @if (User.IsInRole("Teacher"))
-        {
-            <div class="col-md-8">
-                <div class="col-lg-12">
-
-                    @Html.ActionLink("Tillbaka", null, null, null, new { @class = "btn btn-xs btn-primary", href = Request.UrlReferrer })
-
-                    <a href="#" class="btn btn-xs btn-success" data-toggle="collapse" data-target="#divCreateCourseModule">Lägg till modul</a>
-                    <a href="#" class="btn btn-xs btn-success" data-toggle="collapse" data-target="#divCreateModuleActivity">Lägg till aktivitet</a>
-                    <a href="#" class="btn btn-xs btn-success" data-toggle="collapse" data-target="#divCreateCourseStudent">Lägg till student</a>
-
-
-                    <div id="divCreateCourseModule" class="collapse">
-                        @{ Html.RenderPartial("_CreateCourseModule", Model); }
-                    </div>
-                    <div id="divCreateModuleActivity" class="collapse">
-                        @{ Html.RenderPartial("_CreateModuleActivity", Model.Activity); }
-                    </div>
-                    <div id="divCreateCourseStudent" class="collapse">
-                        @{ Html.RenderPartial("_CreateCourseStudent", Model); }
-                    </div>
-                </div>
-            </div>
-
-        }
     </div>
 </div>
 
@@ -96,6 +101,44 @@
     <script>
 
         $(document).ready(function () {
+            $("#divCreateCourseStudent").slideUp();
+            $("#divCreateModuleActivity").slideUp();
+            $("#divCourseDocuments").slideDown();
+            $("#divCourseStudents").slideDown();
+            $("#divCreateCourseModule").slideUp();
+
+            $("#addModuleBtn").on("click", function () {
+                $("#divCreateCourseStudent").slideUp();
+                $("#divCreateModuleActivity").slideUp();
+                $("#divCourseDocuments").slideUp();
+                $("#divCourseStudents").slideUp();
+                $("#divCreateCourseModule").slideDown();
+
+            });
+            $("#addActivityBtn").on("click", function () {
+                $("#divCreateCourseStudent").slideUp();
+                $("#divCreateModuleActivity").slideDown();
+                $("#divCourseDocuments").slideUp();
+                $("#divCourseStudents").slideUp();
+                $("#divCreateCourseModule").slideUp();
+
+            });
+            $("#addStudentBtn").on("click", function () {
+                $("#divCreateCourseStudent").slideDown();
+                $("#divCreateModuleActivity").slideUp();
+                $("#divCourseDocuments").slideUp();
+                $("#divCourseStudents").slideUp();
+                $("#divCreateCourseModule").slideUp();
+
+            });
+            $(".CancelBtn").on("click", function () {
+                $("#divCreateCourseModule").slideUp();
+                $("#divCreateCourseStudent").slideUp();
+                $("#divCreateModuleActivity").slideUp();
+                $("#divCourseDocuments").slideDown();
+                $("#divCourseStudents").slideDown();
+            });
+
             $("#btnCreateModule").on('click', function () {
                 let q = $("#Module_Name").val();
                 if (q.length > 1) {
@@ -111,6 +154,17 @@
                 alert("first one worked");
             })
         });
+
+        $(".activity-listing").on('click', '.btnRemove', function () {
+            $(this).closest('li').remove();
+        });
+
+        function RemoveModuleRow() {
+            alert($(this).closest('a').text());
+            var $li = $(this).closest('li');
+            $li.remove();
+        }
+
         function GetCourseDocumentForm() {
            $("#divFormContainer").load('@Html.Raw(@Url.Action("PartialCreate", "Documents", new { @courseId = Model.Course.Id, @documentType = 0}))');
         }
@@ -118,7 +172,7 @@
             var M = modelId;
             $("#divFormContainer").load(
                 '@Html.Raw(@Url.Action("PartialCreate", "Documents", new { @courseId = Model.Course.Id, @documentType = 0, @moduleId = M }))'
-            );
+            ); 
         }*@
 
         function AddErrorMessage() {
