@@ -190,14 +190,20 @@ namespace HEJARITO.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id, string returnController, string returnAction, string returnId)
         {
+            
             Module module = db.Modules.Find(id);
+            int courseId = module.CourseId;
             db.Modules.Remove(module);
             db.SaveChanges();
 
             //TM 2018-03-19 16-19 Ska visas i nästa vy
             ViewBag.KvittoMeddelande = "Borttagning av en modul genomfördes";
-            return RedirectToAction(returnAction, returnController, new { Id = returnId });
             
+            if (returnAction != "CreateAjax")
+                return RedirectToAction(returnAction, returnController, new { Id = returnId });
+            else
+                return RedirectToAction("CourseEditor", "Courses", new { id = courseId });
+
         }
 
         protected override void Dispose(bool disposing)

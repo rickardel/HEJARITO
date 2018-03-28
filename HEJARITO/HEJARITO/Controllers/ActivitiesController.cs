@@ -186,14 +186,18 @@ namespace HEJARITO.Controllers
         public ActionResult DeleteConfirmed(int id, string returnController, string returnAction, string returnId)
         {
             Activity activity = db.Activities.Find(id);
+            int courseId = activity.Module.CourseId;
             db.Activities.Remove(activity);
             db.SaveChanges();
 
             //TM 2018-03-19 16-19 Ska visas i nästa vy
             ViewBag.KvittoMeddelande = "Borttagning av en aktivitet genomfördes";
 
-            return RedirectToAction(returnAction, returnController, new { Id = returnId
-    });
+            if (returnAction != "CreateAjax")
+                return RedirectToAction(returnAction, returnController, new { Id = returnId });
+            else
+                return RedirectToAction("CourseEditor", "Courses", new { id = courseId });
+  
         }
 
         protected override void Dispose(bool disposing)
